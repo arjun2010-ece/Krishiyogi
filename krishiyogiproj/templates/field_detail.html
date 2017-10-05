@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+	
+
+{% block style %}
+
+.centr
+{
+text-align:center;
+}
+
+p{
+	margin-top:20px;
+	margin-bottom:20px;
+	border:1px solid #FFAF33;
+}
+
+p.title
+{
+width:200px;
+margin-right:auto;
+margin-left:auto;
+background-color:#FFAF33;
+}
+
+p.content
+{
+height:auto;
+}
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<h1><a href = "javascript:history.go(-1)" class="btn btn-primary">Back Button</a> </h1>
+
+<div class="col-sm-6 col-sm-offset-3 centr">
+
+<div class="well well-lg">
+<p class="title"> {{object.field_name}}<br></p>
+<p class="content">{{object.field_description}}<br></p>
+<br><br>
+
+</div>
+
+</div>
+
+{% endblock %}
+
+

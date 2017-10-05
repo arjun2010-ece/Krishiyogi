@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+	
+{% block style %}
+.centr
+{
+text-align:center;
+}
+
+p{
+	margin-top:20px;
+	margin-bottom:20px;
+	border:1px solid #FFAF33;
+}
+
+p.title
+{
+width:200px;
+margin-right:auto;
+margin-left:auto;
+background-color:#FFAF33;
+}
+
+p.id
+{
+width:100px;
+background-color:#33FFFC;
+margin-right:auto;
+margin-left:auto;
+}
+
+p.content
+{
+height:auto;
+}
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Farmers List</h1>
+
+<div class="col-sm-6 col-sm-offset-3 centr">
+
+{% for obj in objectlist   %}
+ <div class="well well-lg">
+  
+  <p class="title">{{obj.FarmerName}}<br></p>
+  <p class="id"> Farmer's id :{{obj.id}}</p>
+  <p class="content">Farming Experience :{{obj.FarmingExperience}} years farming experience <br></p>
+ 
+ <br><br><br>
+ </div>
+{% endfor %}
+
+
+</div>
+{% endblock %}

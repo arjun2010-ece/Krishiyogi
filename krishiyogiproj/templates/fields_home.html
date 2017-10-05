@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+	
+
+{% block content %}
+
+ <h1>Fields List</h1>
+{% for obj in objectlist   %}
+  <b>Id :</b> {{obj.id}}<br>
+  <b>Field Name :</b>  <a href='{{ obj.get_absolute_url }}'> {{obj.field_name}} </a> <br>
+  <b>Field Description :</b> {{obj.field_description}}<br>
+  <b>Field to Farm connecting key :</b> {{obj.farm_id_fk}}<br>
+  <b>Field to Crop connecting key :</b> {{obj.crop_id_fk}}<br>
+ 
+ <br><br><br>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app="Farmer">
+<head>
+	<meta charset="UTF-8">
+	<title>Krishiyogi</title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+	header
+	{
+        height: 200px;
+        width: 100%;
+        background-color: #343a40;
+	}
+	p{
+		text-align: center;
+	}
+	nav{
+		
+		position: relative;
+		top: 20px;
+		left: 450px;
+	}
+
+	input{
+		margin-right: 35px;
+	}
+	tr,th{
+		border: 1px solid;
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<div class="container">
+	<header>
+      
+    </header>
+
+	 <div ng-controller="FarmCtrl">
+			<h1>Farmer don't get their due in this fast pace of industrialization</h1>
+			<p><b>What people miss is that nothing can replace farming</b></p>
+	        
+	        <p><b>Please select below tabs to choose selection</b></p>
+	       <nav>
+	        <input type="button" class="btn btn-success" value="Farmers" ng-click="fetchFarmer()">
+	        <input type="button" class="btn btn-info" value="Farms">
+	        <input type="button" class="btn btn-primary" value="Fields">
+           </nav>
+
+
+
+           <h1>Farmers List</h1>
+
+           <table border-collapse="collapse" width="450px">
+            	<tr><th>Farmer pk</th>
+                <th>FarmerName</th>
+                <th>FarmingExperience</th>
+            	</tr>
+             <tr ng-repeat="item in FarmerJson">
+                <td> {{item.id}}</th>
+                <td>{{item.FarmerName}}</th>
+                <td>{{item.FarmingExperience}}</th>
+             </tr>
+            	
+            </table> 
+
+        </div>
+	</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+	<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--application js-->
+ <script src="/templates/js/app.js"></script>
+
+</body>
+</html>
