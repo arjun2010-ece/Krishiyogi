@@ -8,6 +8,11 @@ from .forms import (FarmsForm,FieldsForm)
 # Create your views here.
 
 
+def farmFrontend_home(request):
+	return render(request,"frontend.html", {})
+
+
+
 def farms_add(request):
 	form = FarmsForm(request.POST or None)
 	if form.is_valid():

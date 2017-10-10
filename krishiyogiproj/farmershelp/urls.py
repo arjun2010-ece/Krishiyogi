@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from .views import (farmers_home,farms_home,farms_detail,farms_add,farms_edit,farms_delete,
-	fields_add,fields_home,fields_detail,fields_edit,fields_delete)
+	fields_add,fields_home,fields_detail,fields_edit,fields_delete,farmFrontend_home)
 
 urlpatterns = [
     url(r'^farmers/$', farmers_home),

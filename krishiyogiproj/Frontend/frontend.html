@@ -5,6 +5,7 @@
 	<title>Krishiyogi</title>
 	<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 	header
 	{
@@ -25,8 +26,8 @@
 	input{
 		margin-right: 35px;
 	}
-	tr,th{
-		border: 1px solid;
+	td,th{
+		border: 1px solid black;
 		text-align: center;
 	}
 </style>
@@ -43,16 +44,16 @@
 	        
 	        <p><b>Please select below tabs to choose selection</b></p>
 	       <nav>
-	        <input type="button" class="btn btn-success" value="Farmers" ng-click="fetchFarmer()">
-	        <input type="button" class="btn btn-info" value="Farms" ng-click="fetchFarms()">
-	        <input type="button" class="btn btn-primary" value="Fields" ng-click="fetchFields()">
+	        <input type="button" class="btn btn-success" value="Load Farmers Details" ng-click="fetchFarmer()">
+	        <input type="button" class="btn btn-info" value="Load Farms Details" ng-click="fetchFarms()">
+	        <input type="button" class="btn btn-primary" value="Load Fields Details" ng-click="fetchFields()">
            </nav>
-
-
+              
+              
 
            <h1>Farmers List</h1>
 
-           <table border-collapse="collapse" width="450px">
+           <table border-collapse="collapse" width="650px">
             	<tr><th>Farmer pk</th>
                 <th>FarmerName</th>
                 <th>FarmingExperience</th>
@@ -64,33 +65,47 @@
              </tr>
             	
             </table> 
+             
 
 
            <h1>Farms List</h1>
 
-           <table border-collapse="collapse" width="450px">
-            	<tr><th>Farm pk</th>
+           <table border-collapse="collapse" width="650px">
+            	<tr>
+                <th>Farm_pk</th>
                 <th>farm_name</th>
                 <th>farm_description</th>
                 <th>farmers_id_fk</th>
+                <th>Edit</th>
+                <th>Delete</th>
             	</tr>
              <tr ng-repeat="item in FarmJson">
                 <td> {{item.id}}</th>
                 <td>{{item.farm_name}}</th>
                 <td>{{item.farm_description}}</th>
                 <td>{{item.farmers_id_fk}}</th>
+                <td> <a href="http://127.0.0.1:8000/api/farmershelp/farms/{{item.id}}/edit/" target="_blank"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></th>
+                <td><a href="http://127.0.0.1:8000/api/farmershelp/farms/{{item.id}}/delete/" target="_blank"><i class="fa fa-trash-o" aria-hidden="true"></i></a></th>
              </tr>
             	
             </table> 
-
+            <br>
+            <a href="http://127.0.0.1:8000/api/farmershelp/farms/create" 
+            class="btn btn-success" target="_blank">
+            Add New Farms </a>
+            
+            
             <h1>Fields List</h1>
 
-           <table border-collapse="collapse" width="450px">
-            	<tr><th>Field pk</th>
+           <table border-collapse="collapse" width="650px">
+            	<tr>
+                <th>Field pk</th>
                 <th>field_name</th>
                 <th>field_description</th>
                 <th>farm_id_fk</th>
                 <th>crop_id_fk</th>
+                <th>Edit</th>
+                <th>Delete</th>
             	</tr>
              <tr ng-repeat="item in FieldJson">
                 <td> {{item.id}}</th>
@@ -98,9 +113,15 @@
                 <td>{{item.field_description}}</th>
                 <td>{{item.farm_id_fk}}</th>
                 <td>{{item.crop_id_fk}}</th>
+                <td><a href="http://127.0.0.1:8000/api/farmershelp/fields/{{item.id}}/edit/" target="_blank"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></th>
+                <td> <a href="http://127.0.0.1:8000/api/farmershelp/fields/{{item.id}}/delete/" target="_blank"> <i class="fa fa-trash-o" aria-hidden="true"></i> </a></th>
              </tr>
             	
             </table> 
+            <br>
+            <a href="http://127.0.0.1:8000/api/farmershelp/fields/create" 
+            class="btn btn-success" target="_blank">
+            Add New Fields </a>
         </div>
 	</div>
 

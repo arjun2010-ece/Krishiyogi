@@ -9,6 +9,7 @@ class FarmsForm(forms.ModelForm):
         fields = [
          "farm_name",
          "farm_description",
+         "locationn",
          "farmers_id_fk"
         ]
 
@@ -18,7 +19,8 @@ class FieldsForm(forms.ModelForm):
         fields = [
          "field_name",
          "field_description",
+         "locationn",
          "farm_id_fk",
          "crop_id_fk"
         ]
-    
+        

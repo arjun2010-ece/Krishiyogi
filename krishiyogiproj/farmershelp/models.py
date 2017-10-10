@@ -1,6 +1,7 @@
 from django.db import models
-
 from django.core.urlresolvers import reverse
+
+from django.contrib.gis.db import models
 
 # Create your models here.
 # MVC
@@ -20,6 +21,8 @@ class Farmers(models.Model):
 class Farms(models.Model):
 	farm_name = models.CharField(max_length = 120)
 	farm_description = models.TextField()
+	locationn = models.MultiPolygonField(null=True)
+	objects = models.GeoManager()
 	farmers_id_fk = models.ForeignKey(Farmers, on_delete = models.CASCADE)
 
 	def __str__(self):
@@ -48,6 +51,8 @@ class Crops(models.Model):
 class Fields(models.Model):
 	field_name = models.CharField(max_length = 120)
 	field_description = models.TextField()
+	locationn = models.PolygonField(default='POLYGON EMPTY')
+	objects = models.GeoManager()
 	farm_id_fk = models.ForeignKey(Farms,on_delete = models.CASCADE)
 	crop_id_fk = models.ForeignKey(Crops,on_delete = models.CASCADE)
 	
@@ -56,9 +61,4 @@ class Fields(models.Model):
 
 	def get_absolute_url(self):
 		return reverse("farmershelp:fieldsdetail",kwargs={"id":self.id})
-		
-		
-        
-    
-	
 		

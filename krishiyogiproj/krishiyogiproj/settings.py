@@ -25,6 +25,9 @@ SECRET_KEY = 'zjko0i&m%g7k!i5knohy4fqbkc$45z@xt(z*tv@+*4!8d42d!='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+
+
 ALLOWED_HOSTS = []
 
 
@@ -37,12 +40,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
+    'corsheaders',
     'farmershelp',
     'rest_framework'
     
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -78,8 +85,12 @@ WSGI_APPLICATION = 'krishiyogiproj.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'agricom',
+        'USER': 'postgres',
+        'HOST': 'localhost',
+        'PASSWORD':'postgres1'
+
     }
 }
 
@@ -121,3 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Cross origin connection with frontend
+
+CORS_ORIGIN_ALLOW_ALL = True
