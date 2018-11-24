@@ -1,0 +1,4 @@
+Always position absolute will be inside position relative to work properly.
+<div class="parent"> //position relative
+  <div class="child"></div> //position absolute
+</div>
