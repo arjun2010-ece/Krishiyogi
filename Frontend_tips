@@ -13,4 +13,41 @@ If you want to override any default properties in bootstrap you have to make the
     background-color: #8064A2 !important;
 }
 
+Design a header with image,Text and menu all in the center of parent container.
+==============================================================================
+ <div class="header">
+    <img class="header-image" width="45" height="45" src="https://images.pexels.com/photos/159752/pencil-office-design-creative-159752.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+    <h3 class="header-title">WireframeSketcher</h3>
+    <ul class="header-menu">
+        <li>Tour</li>
+        <li>Install</li>
+        <li>Blog</li>
+        <li>Forum</li>
+        <li>About</li>
+    </ul>
+  </div>
+  
+  CSS:::
+  ====
+.header{
+  height:75px;
+  padding:15px; //padding is decided by header height minus image height(45) = 30px total so padding is 15px.
+}
+h3{
+  line-height:45px; //make image and text of same height,they mightnt appear same bcoz of sm hidden h3 padding.
+  display:inline-block;
+}
+img{
+  display:inline-block;
+  vertical-align:top; //also put this property too..
+}  
+
+So the process goes like this:
+we have to make the line-height of text and height of image same and vertical-align of image as top.
+Then decide padding of header container as "header height minus image height"
+
+And this will even center the menu too.Lovely.
+
+
+
 
