@@ -4,3 +4,13 @@ Always position absolute will be inside position relative to work properly.
 </div>
 
 https://codehangar.io/how-to-mockup-to-code-quickly-and-efficiently/
+
+Bootstrap Tips:
+===============
+If you want to override any default properties in bootstrap you have to make the properties as important.
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #8064A2 !important;
+}
+
+
