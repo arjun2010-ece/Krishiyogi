@@ -48,6 +48,34 @@ Then decide padding of header container as "header height minus image height"
 
 And this will even center the menu too.Lovely.
 
+=====================================================
+
+Customising menu ul list:
+-------------------------
+
+<ul class="header-menu">
+      <li>Home</li>
+      <li>Our Sources</li>
+      <li>Order Online</li>
+      <li>Contact Us</li>
+</ul>
+
+css:
+li{
+ display:inline-block; //it will make the menu in a single line but if you draw border around ul you will see that li element doesnt start from exact left
+                       //end of ul since li element has some initial left padding.
+ padding-left:0px;   // it will eliminate the left padding and li element will start from extreme left end of ul.
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
