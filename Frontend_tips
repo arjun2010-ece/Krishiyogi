@@ -68,7 +68,13 @@ li{
 }
 
 
-
+=========================================
+Vertically align text inside para tag::
+-------------------------------------
+p{
+height:40px;
+line-height:40px; //height and line height should be equal for the text to be centered vertically in the middle.
+}
 
 
 
