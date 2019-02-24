@@ -77,11 +77,47 @@ line-height:40px; //height and line height should be equal for the text to be ce
 }
 
 
+===============================================================
+list-style property should be always on li tag and text-align on ul tag
+===============================================================
 
 
+=============================
+Float and clearfix property :
+-----------------------------
+Whenever we apply float on child element,e.g li tag then the parent(e.g ul tag) 
+feels it is lost(margin and padding of parent becomes zero) and even border property doesnot work
+so we need to apply clearfix property to avoid all this mess.
+Apply clearfix on the parent(e.g ul tag):
+
+.clearfix:after{
+	content: "";
+	display: table;
+	clear: both;
+}
 
 
+==============================================
+Designing logo image on the header of website
+-------------------------------------------
+<nav>
+			<ul>
+				<li class="navbar-brand">
+					<img src="./logo.jpeg"  alt="Our company logo">
+				</li>
+				<li>Home</li>
+				<li>About</li>
+			</ul>
+		</nav>
 
+.navbar-brand{
+	width: 30px; /* give height n width to container of logo img*/
+	height: 30px;
+}
+
+.navbar-brand img{
+	width: 100%; /* to avoid image going outside the holder(li tag) container,set img width to 100%*/
+}
 
 
 
