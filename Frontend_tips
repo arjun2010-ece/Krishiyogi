@@ -119,5 +119,32 @@ Designing logo image on the header of website
 	width: 100%; /* to avoid image going outside the holder(li tag) container,set img width to 100%*/
 }
 
+===============================
+Styling input box::
+-------------------------------
+width and padding should be there.
+
+
+===============================
+Styling button ::
+-------------------------------
+width and padding should be there.
+font-size,font-family and color should be there.
+border should be none and border-radius should be there.
+
+button{
+width:120px;
+padding: 5px 6px;
+font-size: 15px;
+border: none;
+color: white;
+border-radius: 3px; 
+}
+
+==================================
+
+
+
+
 
 
