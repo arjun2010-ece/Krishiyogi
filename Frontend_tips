@@ -141,6 +141,33 @@ color: white;
 border-radius: 3px; 
 }
 
+Better way::
+use line-height and width.
+
+<div class="text">
+   	  	<h4>DESIGN * DEVELOPMENT * BRANDING</h4>
+   	  	<h1>CREATIVE & EXPERIENCED</h1>
+   	  	<h3>WE ARE ONE OF THE WORLD'S BEST CREATIVE DESIGN AGENCIES</h3>
+   	  	<button id="buttonone">like share</button>
+   	  	<button id="buttontwo">Subscribe</button>  	  
+ </div>
+ 
+ Css:
+ #buttonone{
+	background-color: white;
+	border: none;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: bold;
+	line-height: 40px; //used instead of padding
+	width: 150px;  //used to give proper size.
+}
+
+ 
+ 
+
+
+
 ==================================
 
 
