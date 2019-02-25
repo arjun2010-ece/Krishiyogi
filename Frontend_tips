@@ -163,12 +163,30 @@ use line-height and width.
 	width: 150px;  //used to give proper size.
 }
 
- 
- 
+=======================================
+ Styling anchor tag as buttons ::
+-------------------------------
+display:inline-block,padding and border needs to be remembered;
 
 
-
-==================================
+<div class="main-content-header">
+      <h1>WELCOME TO <span>THAPA CAFE</span>.<br>
+         HOUSE OF CAKE LOVER OO YES.
+      </h1>
+      <a href="#" class="btn btn-full">click to order</a>
+      <a href="#" class="btn btn-nav">show me more</a>
+   </div>
+   
+ css:
+ ====
+.btn{
+	display: inline-block; //this one very imp so that padding can be applied.
+	padding: 10px 30px; //and this one too.
+	text-decoration:none;
+	border: 1px solid white; //and border finally.
+	border-radius: 25px;
+	text-transform: uppercase;
+}
 
 
 
