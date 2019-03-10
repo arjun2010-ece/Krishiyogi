@@ -48,4 +48,14 @@ but [\W_]+ matches all non-word character completely. "+" refers to occurence of
 
 Note: Non-word character and numbers cant be replaced by single regex.
 
+alternate::
 
+function alphabetPosition(text) {
+  return text
+    .toUpperCase()
+    .match(/[a-z]/gi)
+    .map( (c) => c.charCodeAt() - 64)
+    .join(' ');
+}
+
+==========================================================
