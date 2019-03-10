@@ -1,0 +1,25 @@
+Validate a PIN::
+4/6 digits
+
+function validatePIN(pin){
+  if (pin.match(/^\d{4}$|^\d{6}$/) && (pin.length == 4 || pin.length == 6))
+  {
+    console.log("true");
+  }
+  else{
+    console.log("False");
+  }
+}
+
+"pin" is matched with js match() and the regex is doing 2 checks together(a new thing for me).
+/^\d{4}$|^\d{6}$/  -----> inside opening and closing slash(//) is "^\d{4}$" and "^\d{6}$" joined by logical OR symbol("|").
+
+=======================================================================
+Change all the digit of credit card number with # except last 4 digit::
+
+function hashCredit(str){
+  return str.slice(0,-4).replace(/./g,"#")+str.slice(-4);
+}
+
+Here replace function is used to replace all the digits with "#"
+and regex used is /./g . Here "." replaces all except newline character(/n) ;
