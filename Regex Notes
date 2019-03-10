@@ -23,3 +23,29 @@ function hashCredit(str){
 
 Here replace function is used to replace all the digits with "#"
 and regex used is /./g . Here "." replaces all except newline character(/n) ;
+
+=======================================================================
+Find the index of alphabet starting from 1 in the string::::
+---------------------------------------------------------
+
+function alphabetPosition(text) {
+  var result = [];
+  var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j","k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v","w", "x", "y", "z"] ;
+  text = text.replace(/\W*\d+/g, '').toLowerCase().split('');
+  for (var i = 0; i < text.length; i++) 
+  {
+    var j = alphabet.indexOf(text[i]) + 1;
+    if (j) result.push(j);
+  }
+  return result.join(' ');
+}
+
+here passed text can contain space and nonengish character and number that we need to filter
+and that is done by replace()::
+text = text.replace(/[\W_]+/,"").replace(/[0-9]/,"");
+             ---> [\W] matches all the non-word character(special characters,spaces except underscore)
+but [\W_]+ matches all non-word character completely. "+" refers to occurence of one or more.
+
+Note: Non-word character and numbers cant be replaced by single regex.
+
+
