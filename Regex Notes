@@ -59,3 +59,19 @@ function alphabetPosition(text) {
 }
 
 ==========================================================
+
+Converts dash/underscore delimited words into camel casing
+-----------------------------------------------------------
+
+function toCamelCase(input){
+  return input.toLowerCase().replace(/[-_](.)/g, function(match,group1) // when regex matches then "match" will be first argument and next is the character after hyphen/underscore
+  {
+    return group1.toUpperCase();
+  });
+}
+
+Here the regex used is "/[-_](.)/g" .Inside the square bracket [-_],it checks for both underscore and hyphen.And next is (.),
+it means anything that come across except newline.
+
+
+
