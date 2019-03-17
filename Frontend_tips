@@ -188,7 +188,14 @@ display:inline-block,padding and border needs to be remembered;
 	text-transform: uppercase;
 }
 
+============================================
+High font-size should have low font weight:
 
+e.g:
+h1{
+    font-size: 240%; //html{ font-size:20px;} parent has in px others have in relative units.
+    font-weight: 300;
+}
 
 
 
