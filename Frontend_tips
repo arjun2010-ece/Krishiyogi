@@ -7,6 +7,54 @@ fontawesome
 https://fonts.google.com/
 
 
+Zooming an normal image on hovering
+===================================
+img{
+    transform: scale(1.15); //by default the size is inflated on img tag
+    transition: transform 0.5s; //it will make zooming look better.
+}
+
+On hovering image scales back to normal size;
+transition just gives in a slow effect to zooming
+
+img:hover{
+    transform: scale(1);
+}
+
+
+Zooming an normal image from its dimensions
+===========================================
+transform: scale(1.15);
+
+Fix an image overflowing its parent
+==================================
+In normal scenario,
+
+.container{
+width:100%;
+}
+
+.container img{
+ max-width:100%;
+ height:auto;
+}
+
+
+But if you are zooming the image with transform property::
+Overflow:hidden will disappear the horizontal scrollbar and it shd always be applied on parent container;
+
+.container{
+  width:100%;
+  overflow:hidden; //it will fix the below issue
+}
+
+.container img{
+ max-width:100%;
+ height:auto;
+ transform: scale(1.15); //zooming 115%  with this property cause image to come outside of its container
+}
+
+
 Styling an ICONS
 =================
 
