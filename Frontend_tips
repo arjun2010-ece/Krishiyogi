@@ -7,6 +7,26 @@ fontawesome
 https://fonts.google.com/
 
 
+Centering elements by two ways
+================================
+
+text-align:center //it is one of the way
+
+other less known way is::
+define a width and put margin.
+
+Here width is 70% and margin-left is 15% so by default a margin-right comes as 15% to make it centered.
+so overall width is 100%;
+
+p{
+    width: 70%;
+    /* text-align: center; */
+    margin-left: 15%;
+}
+
+
+
+
 Pseudo selector ::after h2 element
 ==============================
 since after h2 we are creating an element with the selector ::after,so we need to give its 
