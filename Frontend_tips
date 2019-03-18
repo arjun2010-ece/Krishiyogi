@@ -7,6 +7,23 @@ fontawesome
 https://fonts.google.com/
 
 
+Pseudo selector ::after h2 element
+==============================
+since after h2 we are creating an element with the selector ::after,so we need to give its 
+width,height,display type and content property.
+
+h2::after{
+    display: block; //most imp
+    height: 2px; //most imp
+    width: 100px; //most imp
+    content: " "; //most imp
+    margin: 0 auto; // centering element,optional
+    margin-top: 30px;
+    background-color: #e67e22; //elements background-color given and it will work only when height is mentioned.
+}
+
+
+
 
 Always position absolute will be inside position relative to work properly.
 <div class="parent"> //position relative
