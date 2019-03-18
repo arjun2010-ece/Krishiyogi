@@ -7,6 +7,16 @@ fontawesome
 https://fonts.google.com/
 
 
+Styling an ICONS
+=================
+
+.icon-big{
+    font-size: 400%;
+    display: block;//optional
+    color: #e67e22;
+    margin-bottom: 10px;//optional
+}
+
 Centering elements by two ways
 ================================
 
