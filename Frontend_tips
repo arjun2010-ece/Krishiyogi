@@ -7,6 +7,21 @@ fontawesome
 https://fonts.google.com/
 
 
+To make a number inside a circle
+===============================
+<div>1</div>
+
+
+div{
+    border: 2px solid #e67e22;
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+    text-align: center;
+    padding: 5px; //upto this step it should be perfectectly center but if not then increase the font-size
+    font-size: 150%;
+}
+
 To make an image look dark
 ==========================
 SImply background image is given gradient i.e linear-gradient property which takes two colors as:
