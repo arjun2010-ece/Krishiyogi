@@ -10,6 +10,81 @@ https://www.designpieces.com/2012/12/social-media-colours-hex-and-rgb/
 https://dev.w3.org/html5/html-author/charref /// special smbols in HTMLs(HTML entities)
 
 
+
+CSS use of one absolute under parent absolute(Hamburger menu)
+=============================================
+Till now we have seen that parent is relative and child is absolute but now
+parent and child both are absolute and it behaves like relative-absolute case.
+
+child absolute will position itself with respect to parent(absolute) container::
+
+HTML::
+=====
+<nav>
+  <ul class="menu">
+    <li class="menu__item">Home</li>
+    <li class="menu__item">About</li>
+    <li class="menu__item">Produtos</li>
+    <li class="menu__item">Contact</li>
+    <li class="menu__item">Portfolios</li>
+  </ul>
+  <div class="hamburger">
+    <span class="first-bar"></span>
+    <span class="second-bar"></span>
+    <span class="third-bar"></span>
+  </div>
+</nav>
+  <main class="content">
+    <div class="container">
+      <p>Lorem ipsum............</p>
+    </div>
+  </main>
+
+CSS:::
+=====
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+nav{
+  width:250px;
+  height:100%;
+  background:#1D1E22;
+  color:white;
+  position:absolute;//parent nav is absolute
+  left:-250px; //hiding the width of hamburger menu
+}
+
+.menu{
+ list-style:none; 
+}
+
+.menu__item{
+  border-bottom: 1px solid #333;
+  padding:15px;
+  font-size:26px;
+}
+
+.hamburger{
+ position:absolute; //child hamburger div is absolute
+ top:0px;
+ right:-50px;
+}
+
+//designing the hamburger with span tags
+.hamburger span{
+  display:block; //block is set so that width and height can be mentioned
+  width:36px;
+  height:6px;
+  margin:6px 0px;//margin is given so to separate between different spans
+  background:grey;
+}
+
+
+
 To make a number inside a circle
 ===============================
 <div>1</div>
