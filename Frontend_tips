@@ -7,6 +7,9 @@ fontawesome
 https://fonts.google.com/
 https://www.designpieces.com/2012/12/social-media-colours-hex-and-rgb/
 
+https://dev.w3.org/html5/html-author/charref /// special smbols in HTMLs(HTML entities)
+
+
 To make a number inside a circle
 ===============================
 <div>1</div>
