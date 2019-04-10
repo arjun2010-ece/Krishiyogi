@@ -10,6 +10,63 @@ https://www.designpieces.com/2012/12/social-media-colours-hex-and-rgb/
 https://dev.w3.org/html5/html-author/charref /// special smbols in HTMLs(HTML entities)
 
 
+Frontend Toggle Switch only CSS
+===============================
+
+HTML::
+=====
+<label class="switch">
+  <input type="checkbox">
+  <span class="slider"></span>
+</label>
+
+CSS::
+======
+//first gv width and height to parent label container:
+.switch{
+  width:60px;
+  height:30px;
+  border:1px solid;
+  display:inline-block; //for the inline element to have width nd height
+  position:relative; //make it a contaner of relative
+}
+
+//The span tag should cover entirely(width and height) of label tag(top,left,bottom,right)
+.slider{
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background:red; //default color of span tag
+}
+
+//create toggling switch square element with its own width and height
+
+.slider::before{
+  content:"";
+  width:24px;
+  height:24px;
+  position:absolute;
+  top:3px;
+  left:4px;
+  background:white;
+}
+
+//Since input tag is covered by span tag entirely so any click on span will check the input tag
+//and when input is checked then the toggle element should be oved 30px;
+input:checked + .slider::before{
+  left:30px;
+}
+
+//when input is checked the default color of span tag needs to be changed to green.
+
+input:checked + .slider{
+  background:green;
+}
+
+
+
 To hide one block level element like p tag only 2 properties are require
 =========================================================================
 <div class="accordion__details">
