@@ -12,6 +12,44 @@ https://dev.w3.org/html5/html-author/charref /// special smbols in HTMLs(HTML en
 
 Frontend Toggle Switch only CSS
 ===============================
+A SImple approach is:
+HTML:
+<input type="checkbox">
+
+CSS:
+input{
+  -webkit-appearance:none;
+  display:inline-block;
+  border:1px solid;
+  width:60px;
+  height:20px;
+  border-radius:15px;
+  position:relative;
+}
+
+input:checked{
+  background:grey;
+  
+}
+
+input::before{
+  content:"off";
+  display:inline-block;
+  width:20px;
+  height:20px;
+  background:green;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+input:checked::before{
+  content:"on";
+  left:40px;
+}
+
+--------------------------------------
+other way::
 
 HTML::
 =====
