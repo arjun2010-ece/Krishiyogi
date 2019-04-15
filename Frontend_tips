@@ -473,6 +473,79 @@ Apply clearfix on the parent(e.g ul tag):
 	clear: both;
 }
 
+Sometimes it so happens that clearfix doesnot remove the space completely and there is a space between two divs:
+
+    <div class="wrapper">
+        <div class="header">
+            <div class="subheader">
+                <div class="container clearfix">
+                    <p>Worlds fastest online shopping place</p>
+
+                    <ul class="right__menu">
+                        <li><a href="">Help</a></li>
+                        <li><a href="">Download Ap</a></li>
+                        <li><a href="">Consumers</a></li>
+                        <li><a href="">Guests</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- main-header -->
+            <div class="main__header">
+                <div class="logo">
+                    <span class="span_1">MY</span>
+                    <span class="span_2">Shop.com</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+CSS:::
+======
+
+.subheader{    //upper div
+    width: 100%;
+    height: 30px;
+    background: #0a930a;
+    /* margin-top: -15px; */
+}
+
+.subheader p{   //first float in upper div
+    float: left;
+    margin-top: 6px;
+}
+
+.right__menu{   //second float in upper div
+    float: right; //for fix both floats we are using "clearfix class" on parent div but still there is an issue
+}
+
+.right__menu li{
+    display: inline-block;
+    line-height: 30px;
+    margin-left: 30px;
+}
+
+/* Logo styling */
+
+.main__header{
+    width: 100%;
+    height: 100px;
+    background: #1aaa1a;
+    border: 1px solid #1aaa1a;  //the issue is that there is a whitespace between upper div and lower div i.e
+                               // main__header and sub_header and putting a border property on lower div solves the issue;
+
+.logo{
+    width: 250px;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
 
 ==============================================
 Designing logo image on the header of website
