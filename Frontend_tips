@@ -12,6 +12,49 @@ SLider plugin jquery::
 https://bxslider.com/install/
 
 
+Image gets darker on hovering:::
+================================
+<div class="prod-box">
+    <img src="images/pro1.jpg" alt="Man suit">
+    <div class="prod-trans"></div> //this will completely cover the image
+</div>
+
+css:::
+=====
+.prod-box{
+    width: 235px;
+    height: 300px;
+    overflow: hidden;
+    margin: 0 20 30 0;
+    position: relative; //parent div
+}
+
+.prod-box > img{
+    max-width: 100%;
+}
+
+.prod-trans{
+    background-color: #0a500a;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute; //it will completely occupy the parent div
+    opacity: 0;
+}
+
+.prod-box:hover .prod-trans{
+    opacity: 1;
+}
+
+
+
+
+
+
+
 Zooming an image:::
 =================
 
