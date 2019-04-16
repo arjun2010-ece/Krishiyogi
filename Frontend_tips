@@ -38,11 +38,12 @@ $(document).ready(function(){
     $('.bxslider').bxSlider({
         mode: 'fade',
         captions: true,
+	auto:true //automatically changes after some time
         // slideWidth: 600
       });
   });
 
-
+mode can be "fade", "horizontal" or "vertical"
 
 Frontend Tooltips
 =================
