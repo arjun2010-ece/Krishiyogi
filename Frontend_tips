@@ -12,6 +12,30 @@ SLider plugin jquery::
 https://bxslider.com/install/
 
 
+Width vs max-width of image
+==========================
+Html:
+
+<div class="offer">
+<a href="">
+  <img src="images/offer3.JPG" alt="">
+</a>
+</div>
+
+CSS:
+====
+.offer{
+    width: 420px;
+    border: 20px solid;
+    margin-right: 10px;
+}
+
+.offer img{
+    width: 100%;//if width is 100% then image will take all the width of parent i.e 420px
+    //max-width:100%  -->if max-width is 100% then image will take less than the width of parent i.e 420px
+}
+
+
 Image gets darker on hovering:::
 ================================
 <div class="prod-box">
