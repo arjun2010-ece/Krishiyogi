@@ -12,6 +12,28 @@ SLider plugin jquery::
 https://bxslider.com/install/
 
 
+Zooming an image:::
+=================
+
+<div class="category-box">
+    <img src="images/cat5.jpg" alt="Men-fashion">
+    <span>Ladies fashion</span>
+</div>
+
+CSS:
+====
+While zooming the image first , its max-width should be set to 100%;
+
+.category-box img{
+    max-width: 100%;
+}
+
+.category-box:hover img{
+    transform: scale(1.3,1.3); //zooming of image...
+    transition: all 0.5s ease;
+}
+
+
 
 How to put slider images in your webpage
 =========================================
