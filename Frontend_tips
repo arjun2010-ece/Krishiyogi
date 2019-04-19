@@ -40,6 +40,30 @@ CSS:
 }
 
 
+--------------------
+ <ul>
+<li><a href="">Home</a></li>
+<li><a href="">About</a></li>
+<li><a href="">Portfolio</a></li>
+<li><a href="">Services</a></li>
+<li><a href="">Contact</a></li>
+</ul>
+
+CSS:
+----
+.menu ul{
+    display: flex;
+    list-style: none;
+    margin-top: 30px;
+    flex-flow: row wrap; //it tells about the direction of items
+}
+
+.menu ul li{
+    flex: 1; //it gives equal space to all child elements
+}
+
+
+
 
 
 Width vs max-width of image
