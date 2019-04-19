@@ -62,7 +62,12 @@ CSS:
     flex: 1; //it gives equal space to all child elements
     text-align: center;
 }
-
+---------------------------
+.main-content{
+    display: flex;  //
+    flex-flow: row wrap;//both property used together nullifies display:flex default but still makes it a flex container
+    padding: 5% 0;
+}
 
 
 
