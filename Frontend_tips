@@ -12,6 +12,15 @@ SLider plugin jquery::
 https://bxslider.com/install/
 
 
+Flexbox:::
+===========
+display:flex //always applied on parent container and it will make all child elements in one row or line.
+
+flex:1 //always applies on child container and it takes maximum space for that child
+
+
+
+
 Width vs max-width of image
 ==========================
 Html:
