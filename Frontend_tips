@@ -60,6 +60,7 @@ CSS:
 
 .menu ul li{
     flex: 1; //it gives equal space to all child elements
+    text-align: center;
 }
 
 
