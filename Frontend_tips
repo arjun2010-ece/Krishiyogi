@@ -12,6 +12,16 @@ SLider plugin jquery::
 https://bxslider.com/install/
 
 
+JS
+========
+
+Best function for array is forEach() which gets element as well as index;
+//where index is optional
+forEach(function(elem,index){
+))
+
+----------------------
+
 Flexbox:::
 ===========
 display:flex //always applied on parent container and it will make all child elements in one row or line.
