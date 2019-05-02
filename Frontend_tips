@@ -12,6 +12,22 @@ SLider plugin jquery::
 https://bxslider.com/install/
 
 
+Extremely important JS concept about events and stopPropagation
+===============================================================
+
+Whenever you are generating li item through loops such as map or any other and you are putting onClick 
+event on each "li" tag then the first statement in onClick() event should be event.stopPropagation().
+
+<li onClick={()=>{
+            this.props.clickHandler(this.props.index)
+        }} className={this.props.details.completed?'completed':''}>
+            {this.props.details.name}
+            <button onClick={(event)=>{
+                event.stopPropagation(); //here is the example....
+                this.props.deleteTask(this.props.index);
+            }}>Delete</button> 
+        </li>
+
 JS
 ========
 
