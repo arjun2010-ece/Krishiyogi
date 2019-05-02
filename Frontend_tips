@@ -20,6 +20,23 @@ Best function for array is forEach() which gets element as well as index;
 forEach(function(elem,index){
 ))
 
+It seems map() also gets index as second argument.Advantage here is it returns an array and above it is not.
+
+
+Purpose of using onSubmit() in form is that we dont need to put 2 onclick listener events one on input tag 
+by pressing enter there and other on button next to input.
+e.g::
+<form onSubmit={props.addTask}>
+	<input type="text" 
+	    value={props.currentTask}
+	    onChange={props.updateTask}
+	    />
+	<button type="submit">Submit</button> //button--observe type is submit.
+</form>
+
+
+
+
 ----------------------
 
 Flexbox:::
