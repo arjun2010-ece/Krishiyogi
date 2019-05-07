@@ -12,6 +12,49 @@ SLider plugin jquery::
 https://bxslider.com/install/
 
 
+===============================
+CSS Tip for putting any element on top of other
+==============================================
+
+<header>
+   <h1>Hi, I am Arjun</h1>
+</header>
+
+<article>
+   <h2>About Me</h2>
+   <p>
+     It is a long established fact that a reader will be distracted by the 
+     readable content of a page when looking at its layout.
+   </p>
+</article>
+
+css::
+header {  //header is made circle here
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  line-height: 200px;
+  background: #036;
+  color: white;
+  margin: 0 auto; 
+ }
+ header h1 {
+   font-size: 16px; 
+  }
+ 
+//article is some 760px text
+article {
+  background: white;
+  width: 760px;
+  margin: -60px auto; //-60px push it on top so that header comes down
+  padding: 40px;
+  box-sizing: border-box;
+  position: relative; //its important
+  z-index: -2; //article is pushed back
+  }
+  //we need to put header circle above article
+
+
 Extremely important JS concept about events and stopPropagation
 ===============================================================
 
