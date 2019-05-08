@@ -12,6 +12,15 @@ SLider plugin jquery::
 https://bxslider.com/install/
 
 
+
+Background-image vs Image tag
+=============================
+
+We do linear-gradient on bg-image
+vs opacity on image tag.
+
+
+
 ===============================
 CSS Tip for putting any element on top of other
 ==============================================
