@@ -1,0 +1,20 @@
+Pulling changes from local master to local branch::
+===================================================
+Once you have updated your local master with remote master then ou can propagate that chnage to other branch::
+
+git checkout <branch>
+git rebase master
+
+Now for rolling back changes or making the local branch drop those changes that came from master::
+
+$ git reflog
+
+b710729 HEAD@{0}: rebase: some commit
+5ad7c1c HEAD@{1}: rebase: another commit
+deafcbf HEAD@{2}: checkout: moving from master to my-branch //this thing is important
+...
+
+$ git reset HEAD@{2} --hard
+Now you should be back to before the rebase started.
+
+=============================================================
