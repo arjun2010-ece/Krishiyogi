@@ -12,6 +12,39 @@ SLider plugin jquery::
 https://bxslider.com/install/
 
 
+VERY IMPORTANT FLEX CONCEPT
+===========================
+
+if parent has 3 child and we apply flex on parent and justify-content as space between then all the childs are 
+equally space separated.
+But if we only want 3rd element to go extreme right then we need to appply property{margin-left: auto;}
+
+<li class="playlist__song">
+     <div class="play-pause">
+       <i class="fa fa-play pp-icon"></i>
+      </div>
+     <div class="playlist__song-details">
+       <span class="playlist__song-name">God's Plan</span><br>
+      <span class="playlist__song-artist">Drake</span><br>
+     </div>
+    <div class="playlist__song-duration">
+       03:22
+   </div>
+ </li>
+
+css:
+=====
+.playlist__song{
+    display: flex;
+    padding: 0.78rem 1rem;
+    transition: 0.3s all ease;
+}	
+
+.playlist__song-duration{
+    margin-left: auto;
+}
+
+
 
 Background-image vs Image tag
 =============================
