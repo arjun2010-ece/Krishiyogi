@@ -1,0 +1,25 @@
+Difference between parentNode vs parentElement
+===============================================
+
+
+<li class="playlist__song">
+  <div class="play-pause">
+    <i class="fa fa-play pp-icon"></i>
+  </div>
+</li>
+
+going from i tag to div tag we use "parentNode" and further to li tag we use "parentNode".
+
+BUTTTTTTTT going from li tag to ul tag(typical) we use "parentElement" property. and since ul is the ultimate parent we can have 
+all its children by "children" property.
+
+JS:::
+=====
+suppose event.target is the i tag then
+
+const listElem = event.target.parentNode.parentNode; //it gives li tag.
+console.log(listElem.parentElement);//it gives ul element
+console.log(listElem.parentElement.children);//it gives all li tags under ul tag in the form of HTMLCollection but we need in form of array
+console.log([...listElem.parentElement.children]);//it changes htmlCollection to array using es6 spread operator.
+
+
