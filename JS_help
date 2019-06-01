@@ -3,7 +3,9 @@ Run Chrome browser without CORS
 
 https://alfilatov.com/posts/run-chrome-without-cors
 
+command in chrome::::
 
+google-chrome --disable-web-security --user-data-dir="~/teste/"
 
 
 
