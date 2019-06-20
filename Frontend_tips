@@ -39,6 +39,27 @@ span {
     height: 14rem; // equals 140px
 }
 
+What's the benefit?
+If we now change html's font-size to 8px, everything setted with rem will now reevaluate to a 20% less and therefore 
+will look smaller.
+
+E.g.
+
+html {
+    font-size: 8px; //base size reduced from 10px to 8px
+}
+
+button {
+    font-size: 1rem; // now equals 8px
+}
+
+span {
+    font-size: 1.6rem; // now equals 12.8px
+    width: 20rem; // now equals 160px
+    height: 14rem; // now equals 112px
+}
+
+
 VERY IMPORTANT FLEX CONCEPT
 ===========================
 
