@@ -8,9 +8,36 @@ https://fonts.google.com/
 https://www.designpieces.com/2012/12/social-media-colours-hex-and-rgb/
 https://dev.w3.org/html5/html-author/charref /// special smbols in HTMLs(HTML entities)
 
+Best frontend Tip::
+https://dev.to/devsarmi/front-end-best-practices-featuring-vuejs-1b5p
+
 SLider plugin jquery::
 https://bxslider.com/install/
 
+================================
+VERY VERY IMPORTANT CONCEPT
+Stop using px, use rem instead
+===============================
+rem is a relative unit of measument, it means that its value directly depens on a relative (root) value 
+(commonly set with a font-size targeting the html tag). If that root value changes, the value expressed in 
+rem will change uniformly.
+
+It's a good practice to set the html's font-size to 10px. This way it'll be easier to write your css thinking 
+in px (as you're used to) but using rem for everything else.
+
+html {
+    font-size: 10px;
+}
+
+button {
+    font-size: 1rem; // equals 10px
+}
+
+span {
+    font-size: 1.6rem; // equals 16px
+    width: 20rem; // equals 200px
+    height: 14rem; // equals 140px
+}
 
 VERY IMPORTANT FLEX CONCEPT
 ===========================
