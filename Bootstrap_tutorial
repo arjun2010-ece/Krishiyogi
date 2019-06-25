@@ -64,6 +64,16 @@ Extra large ≥1200px col-xl-4
         </ul>
     </nav>
     
+    untill now the Ui is that on left side there is logo and navigation just right after it.
+    if we wrap everything inside container then logo will be on right and navigation on left.
+    =========================================================================================
+     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container"> //this class doing the magic.....
+            <a href="#" class="navbar-brand">TheFrontendNinja</a>
+            <ul class="navbar-nav ">
+            </ul>
+        </div>
+    </nav>
     
     
     
