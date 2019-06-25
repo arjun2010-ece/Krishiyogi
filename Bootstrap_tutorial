@@ -29,8 +29,8 @@ Extra large ≥1200px col-xl-4
     ============================================
     NAVIGATION
     ==========
-    
-    <nav class="navbar navbar-expand-sm bg-dark"> //nav tag will have 3 classes.bg-dark will give background dark
+                                                              //navbar-dark and bg-dark work together
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark"> //nav tag will have 3 classes.bg-dark will give background dark
     </nav>                              //this is the structure of navbar(bootstrap)
 
     //for putting text inside navbar we need ul and li and a tag
