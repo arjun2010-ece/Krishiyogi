@@ -39,8 +39,8 @@ Extra large ≥1200px col-xl-4
         <ul class="navbar-nav ">  //ul needs class navbar-nav
             <li class="nav-item"> //li needs class navbar-nav
                 <a href="#" class="nav-link text-white">Home</a> //anchor tag needs class nav-link
-            </li>                                           //nav-link class will give some padding between links
-            <li class="nav-item">
+            </li>                                           //nav-link class will give some padding between links and it will 
+            <li class="nav-item">                           //center vertically too....
                 <a href="#" class="nav-link text-white">About</a>
             </li>
             <li class="nav-item">
@@ -51,6 +51,9 @@ Extra large ≥1200px col-xl-4
             </li>
         </ul>
     </nav>
+    
+    a-->li-->ul
+    nav-link --> nav-item -->navbar-nav
     
     
     
