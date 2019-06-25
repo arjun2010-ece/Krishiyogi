@@ -55,6 +55,17 @@ Extra large ≥1200px col-xl-4
     a-->li-->ul
     nav-link --> nav-item -->navbar-nav
     
+    for putting brand or logo-text in navigation
+    =============================================
+    
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a href="#" class="navbar-brand">TheFrontendNinja</a> //given class will increase the font size and remove text-decoration.
+        <ul class="navbar-nav ">
+        </ul>
+    </nav>
+    
+    
+    
     
     
     
