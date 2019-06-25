@@ -1,3 +1,27 @@
 Important Links
 ===============
 https://www.youtube.com/watch?v=E8n2TAwUk7U&list=PLvQjNLQMdagP1lTH6SqDDd1v-hJ6e9KB8&index=25
+
+Bootstrap Grid
+===============
+Extra small <576px	col-xs-4
+Small ≥576px col-sm-4
+Medium ≥768px	col-md-4
+Large ≥992px	col-lg-4
+Extra large ≥1200px col-xl-4
+
+
+
+    <div class="container ">
+       <div class="row">
+            <p class="col-xl-4 col-lg-4 col-md-4 bg-success">col-x1-4</p> //here putting xl,lg,md will make it work on all
+            <p class="col-xl-4 col-lg-4 col-md-4 bg-danger">col-x1-4</p>//3 screens starting from 768px to 1200+ px
+            <p class="col-xl-4 col-lg-4 col-md-4 bg-info">col-x1-4</p>// and these 3 p-elements will not stack one over other.
+        </div>
+
+        <div class="row">
+            <p class="col-md-4 bg-success">col-md-</p>//here md make it work from 768px onwards on all devices
+            <p class="col-md-4 bg-danger">col-md-</p>
+            <p class="col-md-4 bg-info">col-md-4</p>
+        </div>
+    </div>
