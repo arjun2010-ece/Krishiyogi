@@ -1,0 +1,8 @@
+JS Event Listeners
+======================
+
+click,    -->triggers on html button element
+onChange,  -->triggers on html input element
+load       -->triggers when browser has finished loading the page or made an api-request got response of image urls and 
+            --->displayed/loaded the image
+              
