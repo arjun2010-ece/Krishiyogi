@@ -1,7 +1,20 @@
 React Lifecycle Methods:::
 ==========================
-
 https://www.codingame.com/playgrounds/8747/react-lifecycle-methods-render-and-componentdidmount
+
+componentDidMount() method
+==============================
+As the name suggests, after all the elements of the page is rendered correctly, this method is called. After the markup is 
+set on the page, this technique called by React itself to either fetch the data from An External API or perform some unique 
+operations which need the JSX elements.
+
+componentDidMount() method is the perfect place, where we can call the setState() method to change the state of our 
+application and render() the updated data loaded JSX. 
+
+componentWillMount() method
+===========================
+componentWillMount() method is the least used lifecycle method and called before any HTML element is rendered. 
+
 
 
 
