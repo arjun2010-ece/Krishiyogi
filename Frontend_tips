@@ -60,6 +60,45 @@ span {
 }
 
 
+Flex width and justify content concept
+=======================================
+
+<div class="top-nav container">
+            <div class="logo">CSS Grid Example</div>
+            <nav>
+                <ul>
+                    <li><a href="">Shop</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Blog</a></li>
+                    <li><a href="">Cart</a></li>
+                </ul>
+            </nav>
+ </div>
+
+css::
+====
+.top-nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 0;
+}
+
+nav{
+    width: 40%;//focus
+}
+ul{
+    display: flex;
+    text-transform: uppercase;
+    justify-content: space-between; //focus
+    list-style: none;
+    border: 1px solid;
+}
+
+whenever ul tag is wrapped inside nav tag and there is flex and justify-content applied on ul then we have to give a 
+width to nav tag so taht justify-content can be effective.
+
+
+
 VERY IMPORTANT FLEX CONCEPT
 ===========================
 
