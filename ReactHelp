@@ -24,6 +24,31 @@ https://dev.to/finallynero/react-form-using-formik-material-ui-and-yup-2e8h
 
 
 
+If there is single props then we can directly use that props name without destructuring
+=======================================================================================
+
+const SongDetail = ({song}) => {  //here input shd be props in functional component but instead name of props used
+    if(song){
+        return (
+            <div>
+                <h1>{song.title}</h1>
+                <h3>{song.duration}</h3>
+            </div>
+        )
+    }
+    return (
+        <div>
+            Song Detail
+        </div>
+    )
+}
+
+const mapStateToProps = (state) => {
+    return {
+        song: state.selectedSong   //props is song
+    }
+}
+
 
 Binding form input elements with the single onChange
 ====================================================
