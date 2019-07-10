@@ -1,3 +1,60 @@
+Embpty values of variables while making api request
+=================================================
+case 1:
+======
+componentDidMount(){
+        this.props.fetchUser(this.props.userId); //making api request here
+    }
+    render() {
+        const user = this.props.users.find(user => user.id === this.props.userId);
+        if(!user){
+            return null;
+        }
+        return <div>-{user.name}</div> 
+    }
+
+//First time render function runs, there is no user but we only have to give that conditional if the variable(user) 
+is mentioned inside render() but if we use a function outside render then we dont need to give conditionals
+
+
+case 2:
+======
+
+ componentDidMount(){
+        this.props.fetchPosts(); ///making api request here
+    }
+
+    renderList(){
+        return this.props.posts.map(post => {
+        return (
+            <div className="item" key={post.id}>
+                <i className = "large middle aligned icon user"/>
+                <div className="content">
+                    <div className="description">
+                        <h2>{post.title}</h2>
+                        <p>{post.body}</p>
+                    </div>
+                    <UserHeader userId={post.userId} />
+                </div>
+            </div>
+            );
+        });
+    }
+
+    render() { 
+        return (
+            <div className="ui relaxed divided list">
+                { this.renderList() }
+            </div>
+        );
+    }
+
+renderList() has the results of api request that is outside render() so we willnot put conditionals inside render(),although
+we are using renderList() inside render().
+
+
+
+
 React Lifecycle Methods:::
 ==========================
 https://www.codingame.com/playgrounds/8747/react-lifecycle-methods-render-and-componentdidmount
