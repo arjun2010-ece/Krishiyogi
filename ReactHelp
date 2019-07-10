@@ -1,4 +1,20 @@
-Embpty values of variables while making api request
+Class component props accessible inside mapStateToProps
+=======================================================
+class UserHeader extends Component {
+  //its props are accessed as this.props.user something lyk that
+}
+
+const mapStateToProps = (state, ownProps) => {
+    return { user: state.users.find(user => user.id === ownProps.userId) };
+}
+
+But inside mapStateToProps which is outside the scope of class component we can have access to props of class through 
+"ownProps" that is used for computation purpose since component is mostly not suited for computation.
+
+
+
+
+Empty values of variables while making api request
 =================================================
 case 1:
 ======
