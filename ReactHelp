@@ -1,6 +1,6 @@
 Memoizong function
 ==================
-Memoizong function from underscore js is helpul and avoid making an api request multiple times like for a single id, it 
+Memoizong function from underscore js is helpul and avoid making an api request multiple times(overfetching) like for a single id, it 
 will make exactly one times but the downside is that if some changes is done on the api side then it will not again make a
 request to that api.
 
