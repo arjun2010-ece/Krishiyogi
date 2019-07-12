@@ -1,0 +1,23 @@
+Lodash Help::
+==============
+npm i lodash
+
+in js file::
+import _ from 'lodash';
+
+
+[
+{ "userId": 1, "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit"},
+{ "userId": 1,"title": "qui est esse" },
+{ "userId": 1,"title": "ea molestias quasi exercitationem repellat qui ipsa sit aut" },
+{ "userId": 1, "title": "eum et est occaecati" }
+]
+
+
+fetch userId from an array of objects::
+======================================
+_.map(getState().posts,'userId') // returns new array //
+
+remove duplicate userId::
+========================
+_.uniq( _.map(getState().posts,'userId') ); //removes duplicates
