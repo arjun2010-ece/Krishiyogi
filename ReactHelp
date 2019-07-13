@@ -1,3 +1,18 @@
+Action creators has second argument getState
+============================================
+
+export const fetchPostsAndUser = ()=> async (dispatch, getState) => {
+    await dispatch(fetchPosts());
+    const userIds =  _.uniq(_.map(getState().posts,'userId'));
+    console.log(userIds);
+}
+
+// getState gets all the store data in action creators
+// getState().posts gets posts reducers data.
+
+//One action creator if need to call other then it should be called inside dispatch() otherwise it will not work.
+
+
 Memoizong function
 ==================
 Memoizong function from underscore js is helpul and avoid making an api request multiple times(overfetching) like for a single id, it 
