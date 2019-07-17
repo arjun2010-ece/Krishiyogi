@@ -10,6 +10,12 @@ Convert arrays of objects into Objects for react purpose
 _.mapKeys( action.payload, 'id') // takes each object of action.payload and covert into objects
 //finally is object creation.
 
+========================================================================
+Browser Router internally creates history object which looks for address change in browser address bar'which is good for 
+normal navigation but for programmatic navigation or redirection  its not good.
+
+For that we need to use normal Router and give it a prop history and we need to create a history.js file too.
+
 
 Action creators has second argument getState
 ============================================
