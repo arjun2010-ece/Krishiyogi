@@ -16,6 +16,13 @@ normal navigation but for programmatic navigation or redirection  its not good.
 
 For that we need to use normal Router and give it a prop history and we need to create a history.js file too.
 
+history.js
+=========
+import { createBrowserHistory } from 'history'; 
+export default createBrowserHistory();
+
+
+
 
 Action creators has second argument getState
 ============================================
