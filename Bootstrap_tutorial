@@ -25,6 +25,15 @@ By default buttons will take as much is reqd but not all.
 But but if we apply "btn-block" class then it will take all the space available of parent div.
 In above case, all 6-column will be covered by btn.
 
+So story goes like that::
+
+<div class="col-md-6 col-lg-3">
+ <a href="#" class="btn btn-outline-danger">press here</a> //default
+ <a href="#" class="btn btn-outline-danger btn-block">press here</a> //whole parent width
+ <a href="#" class="btn btn-outline-danger w-75">press here</a>  //75% of parent width
+</div>
+
+
 
 =============================================
 same is diff metwn col-sm vs col-md
