@@ -10,7 +10,54 @@ Medium ≥768px	col-md-4
 Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
 
+==========================================================================
+Horizontal centering of content.
+-------------------------------
+Since bootstrap class of row is a flexbox container so we can apply flexbox properties on it.
+If we give a width to class col such as col-9(horizontal width) then it will not occupy whole 12 column layout
+and upon applying class of "justify-content-center" on row-div, we can horizontally center the entire content.
 
+
+<div class="container">
+    <div class="row height align-items-center">
+      <div class="col-9">
+      </div>
+    </div>
+ </div>
+
+
+
+=============================================================================
+
+Vertical centering of content.
+
+Since bootstrap class of row is a flexbox container so we can apply flexbox properties on it.
+If we give a custom class height on row and apply bootstrap class "align-items-center" then the entire content will be 
+on the center of the given custom height.
+
+.height{
+  min-height:100vh
+}
+
+
+<div class="container">
+    <div class="row height align-items-center">
+      <div class="col">
+      </div>
+    </div>
+ </div>
+
+================================================================================
+<section class="bg-light">
+  <div class="container">
+  
+  </div>
+  </div>
+
+Putting container inside section gives best of the both world of container and container-fluid bootstrap classes
+as it gives some padding inside section on right and left.
+
+===================================================================================
 
     <div class="container ">
        <div class="row">
