@@ -9,6 +9,22 @@ Small ≥576px col-sm-4
 Medium ≥768px	col-md-4
 Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
+============================================
+Usage of d-flex and align-self-center flex class
+------------------------------------------------
+bootstrap class "row" is by default equal to display:flex or flex container BUT BUT BUT
+for other div to behave as flex container we have to use "d-flex" class.
+
+If flex container has 2 items and one item is big and other is small then we can put small items in the mid of height of first item
+by using class "align-self-center" .
+
+ <div class="checkbox-item d-flex">
+    <i class="fas fa-check fa-3x p-2 bg-warning mr-3 align-self-center"></i>
+    <p class="text-light lead">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis, beatae?</p>
+ </div>
+
+
+
 =============================================
 Button class::
 btn-primary vs btn-outline-primary:::
