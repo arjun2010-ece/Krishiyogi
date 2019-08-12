@@ -10,6 +10,23 @@ Medium ≥768px	col-md-4
 Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
 =============================================
+Button class::
+btn-primary vs btn-outline-primary:::
+
+btn-primary gives blue bckground color.
+While btn-outline-primary will have outline or btn borders as blue color by default but on hovering entire bckground comes 
+as blue color.
+
+<div class="col-md-6 col-lg-3">
+ <a href="#" class="btn btn-outline-danger btn-block">press here</a>
+</div>
+
+By default buttons will take as much is reqd but not all.
+But but if we apply "btn-block" class then it will take all the space available of parent div.
+In above case, all 6-column will be covered by btn.
+
+
+=============================================
 same is diff metwn col-sm vs col-md
 ---------------------------------
 if col-md is applied then from medium screen width and beyond,everything will be on single row but less than medium width 
