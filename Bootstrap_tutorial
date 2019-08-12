@@ -11,6 +11,15 @@ Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
 ============================================
 
+Make image border red::
+<div class="col-sm-6 col-md-4 my-3">
+  <img src="img/projects-2.jpeg" alt="project" class="img-fluid img-thumbnail bg-danger border border-danger">
+</div>
+
+First apply img-thumbnail bg-danger.
+Then apply fix of "border border-danger".
+
+-------------------------------------------
 Image classes  - image shd always be enclosed inside a div
 ---------------
 <div class="col-sm-6 col-md-4 my-3">
@@ -20,6 +29,7 @@ Image classes  - image shd always be enclosed inside a div
 img-fluid -- make img responsive or keep it inside parent container
 rounded -- make image slightly rounded on the edges.
 rounded-circle-- make the image circular
+img-thumbnail -- make thick white borders on image
 ===========================================
 Image parallax
 ===============
