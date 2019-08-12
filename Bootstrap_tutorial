@@ -10,6 +10,22 @@ Medium ≥768px	col-md-4
 Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
 ============================================
+
+Image parallax
+===============
+.about-picture{
+ background: url(../img/about-bcg.jpeg);
+ background-size: cover;
+ background-position: center;
+ background-repeat: no-repeat;
+ background-attachment: fixed; //his one creates parallax
+}
+
+background-attachment: fixed
+This will make image fixed even if webpage is scrolled up or down.
+Without this property image will move with webpage scroll.
+
+===========================================
 Usage of d-flex and align-self-center flex class
 ------------------------------------------------
 bootstrap class "row" is by default equal to display:flex or flex container BUT BUT BUT
