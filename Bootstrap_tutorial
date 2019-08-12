@@ -9,6 +9,24 @@ Small ≥576px col-sm-4
 Medium ≥768px	col-md-4
 Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
+=============================================
+diff between col-4 vs col-sm-4:::
+
+<div class="container">
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4"></div>
+      <div class="col-4"></div>
+    </div>
+ </div>
+
+For bigger screens both works fine.The problem of col-4 in smaller screens is fixed by col-sm-4.
+
+On bigger screens and till space is sufficient col-4 will work perfectly but on smaller screens when space is not good
+then the UI will not look good.
+Whereas the fix is to use col-sm-4 that will make the content look good on smaller screen as well by putting diff col-sm-4 
+in different lines.
+
 
 +++++++++++++++++++++=++++++++++++++++++++++++
 Nasic concept of col::
