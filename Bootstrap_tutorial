@@ -11,6 +11,16 @@ Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
 ============================================
 
+Image classes  - image shd always be enclosed inside a div
+---------------
+<div class="col-sm-6 col-md-4 my-3">
+        <img src="img/projects-3.jpeg" alt="project" class="img-fluid rounded-circle">
+</div>
+
+img-fluid -- make img responsive or keep it inside parent container
+rounded -- make image slightly rounded on the edges.
+rounded-circle-- make the image circular
+===========================================
 Image parallax
 ===============
 .about-picture{
