@@ -10,7 +10,29 @@ Medium ≥768px	col-md-4
 Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
 ============================================
+Remove and space between images and place it side by side
+---------------------------------------------------------
 
+Apply the super parent div a class of "no-gutters".
+This super parent div will have 3/4 divs which contain images.
+
+    <div class="row py-3 no-gutters">
+      <!-- single project -->
+      <div class="col-sm-6 col-md-4 my-3">
+        <img src="img/projects-4.jpeg" alt="project" class="img-fluid">
+      </div>
+      <!--end of single project -->
+      <div class="col-sm-6 col-md-4 my-3">
+        <img src="img/projects-5.jpeg" alt="project" class="img-fluid">
+      </div>
+      <!--end of single project -->
+      <div class="col-sm-6 col-md-4 my-3 mx-auto">
+        <img src="img/projects-6.jpeg" alt="project" class="img-fluid">
+      </div>
+      <!--end of single project -->
+    </div>
+
+===========================================
 Make image border red::
 <div class="col-sm-6 col-md-4 my-3">
   <img src="img/projects-2.jpeg" alt="project" class="img-fluid img-thumbnail bg-danger border border-danger">
