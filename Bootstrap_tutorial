@@ -10,6 +10,29 @@ Medium ≥768px	col-md-4
 Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
 
++++++++++++++++++++++=++++++++++++++++++++++++
+Nasic concept of col::
+
+Col by default gives 12 column layout only if no other col is inside row or only one col is there
+
+<div class="container">
+    <div class="row">
+      <div class="col">
+      </div>
+    </div>
+ </div>
+
+But if there are more than one col inside row then it will dynamically takes equal width inside a single row.
+
+<div class="container">   // each col will take 6 column width.
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col">
+      </div>
+    </div>
+ </div>
+
 ==========================================================================
 Horizontal centering of content.
 -------------------------------
