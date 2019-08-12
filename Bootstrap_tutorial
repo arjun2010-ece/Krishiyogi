@@ -10,6 +10,13 @@ Medium ≥768px	col-md-4
 Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
 =============================================
+same is diff metwn col-sm vs col-md
+---------------------------------
+if col-md is applied then from medium screen width and beyond,everything will be on single row but less than medium width 
+everything will be on multiple lines or rows.
+
+
+
 diff between col-4 vs col-sm-4:::
 
 <div class="container">
