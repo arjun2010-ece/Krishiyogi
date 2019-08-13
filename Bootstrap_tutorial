@@ -11,19 +11,41 @@ Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
 ============================================
 
-Card images
------------
+Bootstrap Card
+==============
+Body of card:
+card has an child "card-body" div inside and another div "card-footer".
 
+card-body div has a heading "card-title" and sub-body "card-text".
 
-<div class="card">   //bootstrap class card in parent div
-  <img src="img/team-1.jpg" 
-      alt="member" class="card-img-top"> // in image class is card-img-top
+<div class="card">
+          <img src="img/team-1.jpg" 
+            alt="member" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title text-capitalize">team member</h5>
+            <p class="card-text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius veritatis distinctio dolorum!
+            </p>
+            <a href="" class="btn btn-outline-warning text-uppercase">
+              press here
+            </a>
+          </div>
+          // card footer
+          <div class="card-footer bg-secondary d-flex justify-content-around">
+          </div>
 </div>
 
 
 
 
+============================================
+Card images
+-----------
 
+<div class="card">   //bootstrap class card in parent div
+  <img src="img/team-1.jpg" 
+      alt="member" class="card-img-top"> // in image class is card-img-top
+</div>
 
 ---------------------------------------------------
 Remove and space between images and place it side by side
