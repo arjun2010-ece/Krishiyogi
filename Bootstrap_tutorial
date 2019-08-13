@@ -10,6 +10,22 @@ Medium ≥768px	col-md-4
 Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
 ============================================
+
+Card images
+-----------
+
+
+<div class="card">   //bootstrap class card in parent div
+  <img src="img/team-1.jpg" 
+      alt="member" class="card-img-top"> // in image class is card-img-top
+</div>
+
+
+
+
+
+
+---------------------------------------------------
 Remove and space between images and place it side by side
 ---------------------------------------------------------
 
