@@ -10,7 +10,55 @@ Medium ≥768px	col-md-4
 Large ≥992px	col-lg-4
 Extra large ≥1200px col-xl-4
 ============================================
+Form Styling in bootstrap
+=========================
 
+for simple elements :
+we use form-group div and form-control element or input.
+<form>
+    <div class="form-group mt-3">
+      <input type="text" class="form-control" id="name">
+    </div>
+    <!-- email -->
+    <div class="form-group mt-3">
+      <input type="email" class="form-control" id="email" placeholder="email">
+    </div>
+</form>
+
+For appending or prepending divs
+================================
+for prepend::
+a div of class "input-group-prepend" contain a span tag(class="input-group-text") with the appended text.
+
+ <!-- input group -->
+<div class="input-group my-3">
+   <div class="input-group-prepend">
+     <span class="input-group-text">username</span>
+    </div>
+    <input type="text" class="form-control" id="group-username">
+</div>
+
+For append and prepend both::
+============================
+
+<!-- prepend -->
+<div class="input-group my-3">
+ <div class="input-group-prepend">
+   <span class="input-group-text">
+     <i class="fas fa-user"></i>
+  </span>
+ </div>
+<!-- end of prepend -->
+<input type="text" class="form-control" id="group-user"
+placeholder="username">
+<!-- append -->
+<div class="input-group-append">
+  <button type="button" class="btn btn-primary">submit</button>
+</div>
+</div>
+
+
+===========================================
 Bootstrap Carousel::::
 -------------------
 Parent div will have a class of "carousel" and "slide" first and property data-ride="carousel".
