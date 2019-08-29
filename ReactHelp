@@ -1,3 +1,12 @@
+
+
+==============================================================================
+To read from input tags ,we can either use ref only or value and onChange together
+BUTTTTTTT we can use "defaultValue"
+
+For edit purpose we can use ref and defaultValue together on input tags
+===============================================================================
+
 Convert Objects into arrays for react purpose
 ============================================
 
