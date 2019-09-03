@@ -1,4 +1,30 @@
+When to use React “componentDidUpdate” lifecycle method?
+==========================================================
 
+whenever the setState() is called and if it looks like something below:
+
+this.setState({
+      firstName: this.props.profile.firstName, ///if there is this.props in setState()
+      lastName: this.props.profile.lastName,
+      emailId: this.props.profile.emailId
+   })
+
+Then componentDidUpdate() is used as below:
+
+ updateState(){
+   this.setState({
+      firstName: this.props.profile.firstName,
+      lastName: this.props.profile.lastName,
+      emailId: this.props.profile.emailId
+   })
+  }
+  componentDidUpdate(prevProps) {
+   // Typical usage (don't forget to compare props):
+   if (this.props.profile !== prevProps.profile) {
+     // Do stuff
+     this.updateState();
+   }
+ }
 
 ==============================================================================
 To read from input tags ,we can either use ref only or value and onChange together
