@@ -1,3 +1,14 @@
+HTML COLLECTION TO ARRAY::
+=========================
+const  track = document.querySelector("ul"); //take a ul tag.it has childrens which is html collection
+track.children // it gives all the li tag as HTML collection,which is array-like structure but not array
+---------------
+HTMLCollection(4) [li.carousal__slide, li.carousal__slide, li.carousal__slide, li.carousal__slide]
+--------------
+const slides = Array.from(track.children); //it gives array
+
+While a NodeList can contain any node type, an HTMLCollection is supposed to only contain Element nodes.
+
 simple Array to JS objects
 =====================
 { ...['a', 'b', 'c'] }
