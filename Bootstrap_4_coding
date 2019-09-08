@@ -102,3 +102,70 @@ we can additionally put "text-center" to center the contents too on both small a
    </div>
  </div>
 </section>
+
+
+4. Putting some 200px line below above h1.title 
+
+
+<section id="services">
+ <div class="container text-center">
+   <h1 class="title">WHAT WE DO ? </h1> //we will put 200px liine below it.
+   <div class="row">
+     <div class="col-10  col-md-4 mx-auto "></div>
+     <div class="col-10  col-md-4 mx-auto "></div>
+     <div class="col-10 col-md-4 mx-auto "></div>
+   </div>
+ </div>
+</section>
+
+General css:
+
+.title::after{   // if given "before" selector then create on top and "after" then on bottom of h1
+  content: '';
+  display: block; //if block then we hv to gv width and height
+  width: 200px;
+  height: 5px;
+  margin-left: auto;  //centering from left
+  margin-right: auto; //centering from right
+  background: #000;   // to make it visible
+}
+
+If we use "before" pseudo selector then we need to put one additional property "transform: translateY" in above.
+ 
+ this will create on top till now.
+.title::before{ 
+  content: '';
+  display: block; 
+  width: 200px;
+  height: 5px;
+  margin-left: auto;  
+  margin-right: auto;
+  background: #000;
+  transform: translateY(63px); //it will take top bar and move 63px in y direction downwards thereby putting it downwards
+}
+
+For our case::
+we will create before and after pseudo class.
+
+.title::before{
+  content: '';
+  display: block;
+  width: 200px;
+  height: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #7b1798;
+  transform: translateY(63px);
+}
+
+.title::after{
+ content: '';
+ display: block;
+ width: 50px;
+ height: 10px;
+ margin-left: auto;
+ margin-right: auto;
+ background: #7b1798;
+ transform: translateY(8px); //its playing a big role here.
+}
+
