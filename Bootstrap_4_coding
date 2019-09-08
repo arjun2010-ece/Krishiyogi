@@ -33,7 +33,8 @@ for small screens it will take 12 olumns
 example2:
 for the above example if we want to design "for small screens specifically too" along with >=medium screens.
 We will add "col-10". If we add "col-10" for small screens then we need to center that DIV blcok with "mx-auto" 
-only on small screen and "text-center" to center the contents too
+only on small screen .
+we can additionally put "text-center" to center the contents too on both small and medium screens.
 
 <section id="services">
  <div class="container">
