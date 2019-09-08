@@ -1,0 +1,55 @@
+1. Creating for medium screen small screen
+===========================================
+
+Note:
+1. Mentioning "col-md-6 or col-md-4" means it is for medium and large and extra large screen only 
+and for small screens it will take 12 columns grid by default but if we specify col-10/col-8 
+then it will take that much and we can center that on small screens.
+
+example1:
+Since bootstrap has 12 grids, we are designing fonly for  medium and large screen specifically.
+for small screens it will take 12 olumns
+
+<section id="services">
+ <div class="container">
+   <div class="row">
+     <div class="col-md-4"> //on >=medium screen it'll take 4 grids but on small screen it will take 12 column grids
+       <h3>Title</h3>
+       <p>Description....</p>
+     </div>
+     <div class="col-md-4"> //on >=medium screen it'll take 4 grids
+       <h3>Title</h3>
+       <p>Description....</p>
+     </div>
+     <div class="col-md-4"> //on >=medium screen it'll take 4 grids
+       <h3>Title</h3>
+       <p>Description....</p>
+     </div>
+   </div>
+ </div>
+</section>
+
+
+example2:
+for the above example if we want to design "for small screens specifically too" along with >=medium screens.
+We will add "col-10". If we add "col-10" for small screens then we need to center that DIV blcok with "mx-auto" 
+only on small screen and "text-center" to center the contents too
+
+<section id="services">
+ <div class="container">
+   <div class="row">
+     <div class="col-10  col-md-4 mx-auto text-center"> //on >=medium screen it'll take 4 grids but on small screen it will take 12 column grids
+       <h3>Title</h3>
+       <p>Description....</p>
+     </div>
+     <div class="col-10  col-md-4 mx-auto text-center"> //on >=medium screen it'll take 4 grids
+       <h3>Title</h3>
+       <p>Description....</p>
+     </div>
+     <div class="col-10 col-md-4 mx-auto text-center"> //on >=medium screen it'll take 4 grids
+       <h3>Title</h3>
+       <p>Description....</p>
+     </div>
+   </div>
+ </div>
+</section>
