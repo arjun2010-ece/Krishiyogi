@@ -79,3 +79,26 @@ we can additionally put "text-center" to center the contents too on both small a
    </div>
  </div>
 </section>
+
+
+3. Giving "text-center" class on container eliminates the need to put it anywhere on any columns or any element.
+
+<section id="services">
+ <div class="container text-center">
+   <h1>WHAT WE DO ? </h1>  //even h1 will be centered too.
+   <div class="row">
+     <div class="col-10  col-md-4 mx-auto "> //removed "text-center" from here and put on container
+       <h3>Title</h3>
+       <p>Description....</p>
+     </div>
+     <div class="col-10  col-md-4 mx-auto "> //removed "text-center" from here and put on container
+       <h3>Title</h3>
+       <p>Description....</p>
+     </div>
+     <div class="col-10 col-md-4 mx-auto "> //removed "text-center" from here and put on container
+       <h3>Title</h3>
+       <p>Description....</p>
+     </div>
+   </div>
+ </div>
+</section>
