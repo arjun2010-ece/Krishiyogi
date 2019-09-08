@@ -54,3 +54,28 @@ we can additionally put "text-center" to center the contents too on both small a
    </div>
  </div>
 </section>
+
+===============================================================================
+
+2. Creating title for above scenario: 
+===========================================
+
+<section id="services">
+ <div class="container">
+   <h1>WHAT WE DO ? </h1>  //title should be given between "container div" and "row div".
+   <div class="row">
+     <div class="col-10  col-md-4 mx-auto text-center"> //on >=medium screen it'll take 4 grids but on small screen it will take 12 column grids
+       <h3>Title</h3>
+       <p>Description....</p>
+     </div>
+     <div class="col-10  col-md-4 mx-auto text-center"> //on >=medium screen it'll take 4 grids
+       <h3>Title</h3>
+       <p>Description....</p>
+     </div>
+     <div class="col-10 col-md-4 mx-auto text-center"> //on >=medium screen it'll take 4 grids
+       <h3>Title</h3>
+       <p>Description....</p>
+     </div>
+   </div>
+ </div>
+</section>
