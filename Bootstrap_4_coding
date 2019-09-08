@@ -185,5 +185,52 @@ we will create before and after pseudo class.
  </div>
 
 
+====================================================
+
+Note:: There can be instances where there is only "container" class but no "row div" or any "col div" inside it.
+
+SO only a container div and one other div.
+
+ex:::
+
+<section id="social-media">
+  <div class="container text-center"> //centering the content
+   <p>FIND US ON SOCIAL MEDIA</p>
+   <div class="social-icons">
+     <a><img src="./img/fb-icon.png"></a>
+     <a><img src="./img/insta-icons.jpeg"></a>
+     <a><img src="./img/twitter-icons.jpeg"></a>
+     <a><img src="./img/whatsapp-icons.png"></a>
+     <a><img src="./img/linkedin-icons.png"></a>
+     <a><img src="./img/snapchat-icons.png"></a>
+   </div>
+  </div>
+</section>
+
+
+css::
+.social-icons img{
+ width: 60px;
+ transition: 0.5s;
+}
+
+
+THIS ONE IS AMAZING THING::::
+=========================
+On hovering on anchor tag move image upward 10px:
+
+.social-icons a:hover img{
+  transform: translateY(-10px); //this one will move upward 10px
+}
+
+
+
+
+
+
+
+
+
+
 
 
