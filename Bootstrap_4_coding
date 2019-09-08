@@ -173,7 +173,7 @@ we will create before and after pseudo class.
 
 5. If we are using 2 columns of "col-md-5" then it start from left side but 2 grid columns are left out.
    SO we can center our columns using "offset-1"  on "row" div//one on each side so total 2
-   
+   This "offset" will center even on small screen.
    
 
  <div class="container">
