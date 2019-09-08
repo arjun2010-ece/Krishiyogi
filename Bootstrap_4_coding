@@ -169,3 +169,21 @@ we will create before and after pseudo class.
  transform: translateY(8px); //its playing a big role here.
 }
 
+---------------------------------------------------------
+
+5. If we are using 2 columns of "col-md-5" then it start from left side but 2 grid columns are left out.
+   SO we can center our columns using "offset-1"  on "row" div//one on each side so total 2
+   
+   
+
+ <div class="container">
+   <h1 class="title text-center">WHAT CLIENTS SAY</h1>
+   <div class="row offset-1"> //offset used here
+     <div class="col-md-5 testimonials"></div>
+     <div class="col-md-5 testimonials"></div>
+   </div>
+ </div>
+
+
+
+
