@@ -1,0 +1,101 @@
+for (int i = 1; i <= 5; i++) {
+for (int j = 1; j <= 10; j++) {
+System.out.print((i * j) + " ");
+}
+S t t i tl () // t d th System.out.println(); // to end the
+line
+}
+Output:
+1 2 3 4 5 6 7 8 9 10
+2 4 6 8 10 12 14 16 18 20
+3 6 9 12 15 18 21 24 27 30
+CS305j Introduction to Computing Nested For Loops 3
+4 8 12 16 20 24 28 32 36 40
+5 10 15 20 25 30 35 40 45 50
+
+==========================================
+
+for (int i = 1; i <= 4; i++) {
+for (int j = 1; j <= 5; j++) {
+  System.out.print("*");
+}
+System.out.println();
+}
+
+==================================
+
+
+for (int i = 1; i <= 6; i++) {
+for (int j = 1; j <= i; j++) {
+System.out.print("*");
+}
+System.out.println();
+}
+Output:
+*
+**
+***
+****
+*****
+******
+
+====================================
+
+for (int i = 1; i <= 6; i++) {
+for (int j = 1; j <= i; j++) {
+  System.out.print(i);
+}
+System.out.println();
+}
+
+==========================
+
+
+for (int i = 1; i <= 5; i++) {
+   for (int j = 1; j <= (5 - i) j ) { i); j++) {
+        System.out.print(" ");
+        }
+    for (int k = 1; k <= i; k++) {
+      System.out.print(i);
+    }
+    System.out.println();
+}
+
+Answer:
+    1
+   22
+  333
+ 4444
+55555
+
+======================================================
+
+for (int i = 1; i <= 5; i++) {
+   for (int j = 1; j <= (5 - i) j ) { i); j++) {
+        System.out.print(".");
+        }
+    for (int k = 1; k <= i; k++) {
+      System.out.print(i);
+    }
+    System.out.println();
+}
+
+
+
+....1
+...22
+..333
+.4444
+55555
+
+
+
+
+
+
+
+
+
+
+
+
