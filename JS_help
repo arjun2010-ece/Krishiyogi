@@ -1,3 +1,40 @@
+JS Sort()::
+===========
+
+Array.sort(comparator);
+ it takes a comparator as callback where we could write our own login like::
+ 
+ let prod = [{ "id": 1,"price": 10 },
+        {"id": 1,"price": 11},
+        {"id": 1,"price": 12 },
+        { "id": 1,"price": 13},
+        {"id": 1,"price": 14}
+      ];
+
+comparator::
+ function(a, b){
+  return (a.price - b.price );
+}
+//It the "a-b" is -ve then "a" will be first then "b". And if its +ve then "b" will be first then "a";
+// Logic for ascending order
+
+other logic for ascending order is::
+ function(a, b){
+  return (a.price > b.price ? 1:-1 );
+}
+
+
+Descending order logic:::
+========================
+ function(a, b){
+  return (b.price - a.price );
+}
+
+other logic for Descending order is::
+ function(a, b){
+  return (b.price > a.price ? 1:-1 );
+}
+
 HTML COLLECTION TO ARRAY::
 =========================
 const  track = document.querySelector("ul"); //take a ul tag.it has childrens which is html collection
