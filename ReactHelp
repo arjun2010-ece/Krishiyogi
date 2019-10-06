@@ -1,3 +1,17 @@
+
+CONDITIONALLY APPLYING CSS IN REACT COMPONENT:::
+===============================================
+
+<div className={'card-answer ' + (this.state.reveal ? 'text-revealed':'text-hidden')}>
+
+.text-hidden{
+ visibility: hidden;
+}
+
+.text-revealed{
+ visibility: visible;
+}
+
 When to use React “componentDidUpdate” lifecycle method?
 ==========================================================
 
