@@ -1,0 +1,10 @@
+Sending custom headers
+===========================
+Sending custom headers with Axios is very straightforward. Simply pass an object containing the headers as the last argument. For example:
+
+const options = {
+  headers: {'X-Custom-Header': 'value'}
+};
+
+axios.post('/save', { a: 10 }, options);
+
