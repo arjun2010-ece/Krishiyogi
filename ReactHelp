@@ -1,3 +1,12 @@
+Generate Id in React::
+=====================
+
+Use uuid library 
+
+or
+
+maxId = + new Date() // + sign gives numeric values of Date e.g 1571594550970(epoch value) i.e hour minute second millisecond.
+
 REACT CONTROLLED AND UNCTROLLED ISSUE:::
 =========================================
 issue is resolved by using //instead of value use defaultValue in input or select tag.
