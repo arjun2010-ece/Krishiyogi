@@ -52,9 +52,20 @@ this.state={
 
 
 
-CONDITIONALLY APPLYING CSS IN REACT COMPONENT:::
-===============================================
+CONDITIONALLY APPLYING CSS IN REACT COMPONENT or JS:::
+======================================================
+Ex1:
 
+let completeClass = project.completed ? 'project-completed' : ''; //conditionall class
+
+<li className={"project-item " + completeClass}>
+       Conditionally apply css
+</li>
+
+Within curly brace {}, put one class within double quote(e.g "project-item ")
+and add the variable (used for conditional class).
+
+Ex2:
 <div className={'card-answer ' + (this.state.reveal ? 'text-revealed':'text-hidden')}>
 
 .text-hidden{
