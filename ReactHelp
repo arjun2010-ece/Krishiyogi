@@ -1,3 +1,56 @@
+Datalist kind of project::
+========================
+
+//Text highlighting is left.
+
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import Hello from './Hello';
+import './style.css';
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      name: 'React',
+      filterArray: []
+    };
+  }
+  onChange=(e)=>{
+    let inpText = e.target.value.toLowerCase();
+    let FixedArray = ["Arjun","Joao","Arjan","Arpun","Joala","joinkl"];
+    let filterArray = FixedArray.filter(elem => {
+      if(elem.toLowerCase().includes(inpText)){
+        return elem;
+      };
+    });
+    this.setState({filterArray})
+    console.log(filterArray);
+  }
+
+  render() {
+    return (
+      <div>
+        <Hello name={this.state.name} />
+        <p>
+          Start editing to see some magic happen :)
+        </p>
+        <input type="text" name="lists" onChange={this.onChange}/>
+        {
+          this.state.filterArray.map(elem => (
+            <p>{elem}</p>
+          ))
+        }
+      </div>
+    );
+  }
+}
+
+render(<App />, document.getElementById('root'));
+
+
+
+
 Generate Id in React::
 =====================
 
