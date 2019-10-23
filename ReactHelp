@@ -29,6 +29,9 @@ class App extends Component {
   }
 
   render() {
+  let arrayContent = this.state.filterArray.map(elem => (
+            <p>{elem}</p>
+          ));
     return (
       <div>
         <Hello name={this.state.name} />
@@ -37,9 +40,7 @@ class App extends Component {
         </p>
         <input type="text" name="lists" onChange={this.onChange}/>
         {
-          this.state.filterArray.map(elem => (
-            <p>{elem}</p>
-          ))
+          this.state.filterArray.length > 0 ? arrayContent: <p>"No reccords found"</p>
         }
       </div>
     );
