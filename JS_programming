@@ -26,7 +26,18 @@ console.log(obj);
 
 wordsCount("You can try, but you'll never catch me.\nBazinga!")
 
+Best Solution::::
+================
 
+function countOccurences(str) {
+  return {
+    lineCount: str.split('\n').length,
+    characterCount: str.split('').filter((strArr) => strArr     !== '\n').length,
+    wordCount: str.split(/[" "\n]/).length
+  };
+};
+
+countOccurences("You can try, but you'll never catch me.Bazinga!");
 
 
 Sum of Pairs
