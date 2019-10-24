@@ -1,6 +1,34 @@
 https://github.com/railsstudent/codewars/tree/master/js
             ------javascript list of questions
 
+Questions::
+https://www.codewars.com/kata/word-char-and-line-count/train/javascript
+
+Solution:::
+function wordsCount(str){
+ var charArr1 = str.split("");
+ var charArr = charArr1.filter(e => e !== "\n");
+ var wordsArr = str.split(/[" ".]/);
+ charLength = charArr.length;
+ wordsLength = wordsArr.length;
+ var count = 1,lineLength;
+ for(let i = 0; i< charArr1.length; i++){
+   if(charArr1[i] === "\n")
+   count+=1;
+ }
+ var obj = {
+   charLength,
+   wordsLength,
+   lineLength: count
+ }
+console.log(obj);
+}
+
+wordsCount("You can try, but you'll never catch me.\nBazinga!")
+
+
+
+
 Sum of Pairs
 Given a list of integers and a single sum value, return the first two values (parse from the left please) in order of 
 appearance that add up to form the sum.
