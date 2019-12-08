@@ -17,8 +17,10 @@ make 10 mockups coding first.
 purchase of 5 mockups from frontendmasters website and then code in mobile first.
 tell them about autofixer and minifier to increase their knowledge.
 easy to digest coding.
-
-
+then 3 websites in other frameworks::
+  Bootstrap, Foundation, materialize css,Semantic UI, Bulma, Tailwind, Picnic CSS,PaperCSS
+  
+  
 HTML:::
 =====
 <div class="home-container">
