@@ -13,6 +13,8 @@ https://testing-library.com/docs/learning
 further kent c todd codesandbox tutorial::
 https://codesandbox.io/s/github/kentcdodds/react-testing-library-examples
 
+https://react-testing-library-examples.netlify.com/
+
 checking for two conditions in className::
 =========================================
 <h3 data-testid="item" className={ selected && selected.title === todo.title ? 'selected' :'' }>
