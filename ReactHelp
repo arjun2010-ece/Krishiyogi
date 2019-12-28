@@ -16,6 +16,10 @@ https://codesandbox.io/s/github/kentcdodds/react-testing-library-examples
 https://react-testing-library-examples.netlify.com/
 https://rafaelquintanilha.com/react-testing-library-common-scenarios/
 
+setting up react testing library::
+==================================
+https://dev.to/aromanarguello/getting-started-with-jest-react-testing-library-4nga
+
 checking for two conditions in className::
 =========================================
 <h3 data-testid="item" className={ selected && selected.title === todo.title ? 'selected' :'' }>
