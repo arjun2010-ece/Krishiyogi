@@ -38,6 +38,12 @@ checking for two conditions in className::
 when selected exists then and then only check for selected.title === todo.title
 and if its true then we have 'selected' classname else ''.
 
+===============================
+REACT_INTERNATIONALISATION
+===============================
+https://dev.to/ksushiva/how-to-translate-your-react-js-app-with-i18next-12mn
+
+
 
 Datalist kind of project::
 ========================
