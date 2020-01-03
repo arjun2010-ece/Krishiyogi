@@ -75,6 +75,7 @@ box.addEventListener('click', function() {
     this.classList.toggle('opening');
   console.log(this);
     setTimeout(function(){  // inside function i.e normal function
+      this.classList.toggle('open') //  Cannot read property 'toggle' of undefined as 'this' keyword refers to windows here.
       console.log(this);   // returns windows object.
     });
 });
