@@ -3,6 +3,98 @@ List of JS projects for study::
 https://code-projects.org/c/languages/project/jsprojects/
 
 
+
+USAGE OF "THIS" KEYWORD ONCE AND FINAL FOR ALL
+================================================
+Mostly it depends on whether we are using it on "normal functions or arrow functions".
+
+Normal function::
+================
+in normal function/objects it refers to the element itself.
+
+e.g:
+<style>
+button {font-size: 100px; }
+.on {background: #ffc600;}
+</style>
+
+<button id="pushy">Push me</button>
+
+const button = document.querySelector('#pushy');
+button.addEventListener('click', function(){
+    this.classList.toggle('on');
+    console.log(this) // this refers to 'button' element on whose event listener is applied.
+});
+
+
+objects:
+const person = {
+    points: 23,
+    score: function(){
+        this.points++;
+        console.log(this) // since its a normal fn and its defined inside an object so "this" refers to 'person' object.
+    }
+}
+
+
+Arrow function
+==============
+const button = document.querySelector('#pushy');
+button.addEventListener('click', () =>{
+    this.classList.toggle('on'); // undefined
+    console.log(this) // "this" refers to 'window' object as it is defined inside arrow function
+});
+
+
+objects:
+const person = {
+    points: 23,
+    score: () => {
+        this.points++;
+        console.log(this) // "this" refers to 'window' object as it is defined inside arrow function
+        console.log(this.points) // its called NaN
+        console.log(points) //its called NaN
+        console.log(this.points++) //its called NaN
+        console.log(points++) //its called NaN
+    }
+}
+
+person.score();
+
+
+NOW COMPLICATED CASE OF "THIS" keyword:::
+=========================================
+
+when we have a function defined inside another function and then inside function if we console log 'this' keyword
+and if inside function is normal function then it will give 'window' object
+
+Inner functions this keyword is not bound to the parent function for normal function.
+
+const box = document.querySelector('.box');
+box.addEventListener('click', function() {
+    this.classList.toggle('opening');
+  console.log(this);
+    setTimeout(function(){  // inside function i.e normal function
+      console.log(this);   // returns windows object.
+    });
+});
+
+
+If inner function is arrow function then it is bound to the parent function or scope and its not window here.
+
+ex::
+const box = document.querySelector('.box');
+box.addEventListener('click', function() {
+    this.classList.toggle('opening');
+  console.log(this);
+    setTimeout(() => {
+       this.classList.toggle('open'); 
+      console.log(this); // refers to 'box' element bcoz in its parent function 'this' refers to 'box' element.
+    });
+});
+
+
+
 USAGE OF FETCH() AND AXIOS AS 'RETURN' STATEMENT OF A FUNCTION
 ==============================================================
 
