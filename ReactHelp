@@ -2,6 +2,8 @@ Very important link of a simple classy project built with react and react-bootst
 https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-in-react-38f3686b3388
 
 
+
+
 React-testing-library end to end tutorial::
 ==========================================
 https://github.com/kentcdodds/react-testing-library-course/blob/master/src/api.js
@@ -20,6 +22,13 @@ https://github.com/rkotze/react-testing-library/tree/master/examples/__tests__
 https://www.richardkotze.com/coding/
 https://codesandbox.io/s/rl0wj028pp
 https://github.com/testing-library/react-testing-library/issues/93
+
+============================================================================
+react testing library project video on hackernews api and styled components
+============================================================================
+https://www.youtube.com/watch?v=7DLRJj1YjvQ&t=6823s
+
+
 
 form testing::
 ==============
