@@ -59,6 +59,56 @@ REACT_INTERNATIONALISATION
 ===============================
 https://dev.to/ksushiva/how-to-translate-your-react-js-app-with-i18next-12mn
 
+==========================================================
+mimic setState() callback in react hooks
+----------------------------------------
+
+Stackoverflow link for better explanation::
+
+https://stackoverflow.com/questions/60213779/replace-of-setstate-callback-in-react-hook-with-useeffect-hooks-for-complicated/60218834#60218834
+
+
+If Else condn inside useEffect can help to mimic.
+One of condition with default state will run for first time but with the condition we want our callback to occur usually with
+flag variable helps to execute this scenario.
+
+useEffect with something in dependency array will first run with default state conditions and everytime depency array 
+variable changes but will execute only the code when particular condions inside ELSE block matches.
+
+
+const App = () => {
+  const [age, setAge] = useState(0);
+  const [ageFlag, setAgeFlag] = useState(false);
+  
+  const updateAge = ()=>{
+    setAgeFlag(false);
+    setAge(age+1);
+    setAgeFlag(true);
+  };
+
+  useEffect(() => {
+    if(!ageFlag){
+      console.log('effect called without change - by default');
+    }
+    else{
+      console.log('effect called with change ');
+    }
+  }, [ageFlag,age]);
+ 
+  return (
+    <form>
+      <h2>hooks demo.....</h2>
+      <p>Drinking Age Checker</p>
+      {age}
+      {/* <input
+        type="number"
+        value={age} 
+        onChange={updateAge}
+      /> */}
+      <button onClick={updateAge}>Text</button>
+    </form>
+  );
+}
 
 
 Datalist kind of project::
