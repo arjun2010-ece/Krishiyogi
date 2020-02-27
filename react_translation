@@ -1,0 +1,60 @@
+For translating react apps we can use "react-i18next" package.
+
+install below packages::
+
+npm install react-i18next i18next --save
+npm install i18next-xhr-backend i18next-browser-languagedetector --save
+
+Create a new file i18n.js beside your index.js containing following content:
+
+==================
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+
+import Backend from "i18next-xhr-backend";
+import LanguageDetector from "i18next-browser-languagedetector";
+
+i18n
+  .use(Backend)
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    fallbackLng: "de",
+    debug: true,
+
+    interpolation: {
+      escapeValue: false
+    }
+  });
+
+export default i18n;
+====================
+
+Then import that in index.js:
+
+========
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import App from './App';
+
+// import i18n (needs to be bundled ;)) 
+import './i18n';
+
+ReactDOM.render(
+  <App />,
+  document.getElementById("root")
+);
+========
+
+Inside the functional component use useTranslation hook and inside class component use withTranslation HOC
+////check for their usage in below docs
+https://react.i18next.com/latest/using-with-hooks
+
+
+inside the public folder and in locales/en/translation.json, put the json, do same for locales/de/translation.json
+
+
+Now everything is okay and working fine.
+Just change the browser language and it will detect and change the language in apps.
+
+
