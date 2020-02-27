@@ -57,4 +57,5 @@ inside the public folder and in locales/en/translation.json, put the json, do sa
 Now everything is okay and working fine.
 Just change the browser language and it will detect and change the language in apps.
 
-
+Note:: whenever you change your browser language ensure you restart your project otherwise it will not 
+reflect the change in projects.
