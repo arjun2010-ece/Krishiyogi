@@ -1,0 +1,60 @@
+React Dates library::
+=====================
+=> react-dates
+
+official link: https://github.com/airbnb/react-dates
+
+Popular libraries to use for dates particularly date-range as in travel websites for forward and onward journey.
+
+How to use::
+============
+
+import React, { useState, useEffect } from "react";
+import "react-dates/initialize";
+import { DateRangePicker } from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
+import moment from "moment";
+import { getChartData } from "../middleware/api";
+
+const DatePicker = () => {
+  const [startDate, setStartDate] = useState(moment()); // putting moment() is very important here
+  const [endDate, setEndDate] = useState(moment());
+  const [focusedInput, setFocusedInput] = useState(null);
+  const handleDatesChange = ({ startDate, endDate }) => {
+    setStartDate(startDate);
+    const sdate = startDate._d;
+    console.log("Start date :", sdate);
+    console.log("Formatted Start date :", moment(sdate).format("dddd"));
+    if (endDate) {
+      setEndDate(endDate);
+      const edate = endDate._d;
+      console.log("end date :", edate);
+      console.log("Formatted end date :", moment(edate).format("dddd"));
+    }
+    if (startDate && endDate) {
+      console.log("both exists...");
+    }
+  };
+  useEffect(() => {
+    getChartData();
+  }, []);
+  const handleFocusChange = focusedInput => {
+    setFocusedInput(focusedInput);
+    console.log("focussed input :", focusedInput);
+  };
+  return (
+    <DateRangePicker
+      startDate={startDate}
+      startDateId="Start"
+      endDate={endDate}
+      endDateId="End"
+      onDatesChange={handleDatesChange}
+      focusedInput={focusedInput}
+      onFocusChange={handleFocusChange}
+    />
+  );
+};
+
+export default DatePicker;
+
+==============================
