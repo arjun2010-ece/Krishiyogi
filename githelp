@@ -1,0 +1,2 @@
+git log --graph --all  --decorate --oneline 
+// this is important to check commits on recent branch
