@@ -6,3 +6,54 @@
  
  And running the below command will regenerate the database and create table from your migration files::
     rails db:migrate
+ 
+=======================================================================
+2. CRUD Operation in rails console:
+   
+   rails c --> for interacting with database tables
+   Article.all  --> for checking Rails Model connection with database table,"Article" is model checking connection 
+                     with "articles" table
+
+   POST
+   ====
+   Article.create(title: "First title", description: "First description")  // create method is for POST
+ 
+   or
+   
+   a = Article.new(title: "First title", description: "First description")
+   a.save
+   
+   or
+   
+   a = Article.new
+   a.title = "First article edited"
+   a.description = "First description edited"
+   a.save
+   
+   GET Request
+   ===========
+   Article.all   // for all the items
+   
+   Article.find(1)  // for getting items by id
+   Article.find(4)
+   
+   EDIT/PATCH
+   =========
+   
+   a = Article.find(3)
+   a.title = "First article edited"
+   a.description = "First description edited"
+   a.save  // commit to the database
+   
+   DELETE 
+  ========
+  Article.find(4).destroy
+  
+  =======================================================================
+  
+   
+   ==============================================================
+   3. C
+   
+   
+   
