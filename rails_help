@@ -65,4 +65,16 @@
   
    empty title and description not allowed to be saved in table
    
-  =============================================================== 
+ =============================================================== 
+
+   4. Checking validation errors messsages on an model object.
+   
+   a = Article.new    // empty object
+   a.save     //if it returns false becoz model restriction doesnot allow entry of empty object
+   a.errors  //will give general error messages
+   a.errors.full_messages  // will give specific error messages/ validation errors
+   
+   
+   
+   
+   
