@@ -1,0 +1,5 @@
+1. whenever in same project if you want to reset by deleting all the files, still you need to drop the tables from the database
+   and the below command wipe out the database completely::
+   
+   rake db:drop:all   --> for dropping all test, development and production databases
+   bundle exec rake db:drop RAILS_ENV=test   ---> for dropping only test database
