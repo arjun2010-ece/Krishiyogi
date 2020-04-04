@@ -52,8 +52,17 @@
   =======================================================================
   
    
-   ==============================================================
-   3. C
+  ==============================================================
+   3. Models are for validation/restrictions on database fields/columns of a table
+   
+   e,g
+    article.rb
+    
+  class Article < ApplicationRecord
+    validates :title, presence: true   // title fields presence need to be true
+    validates :description, presence: true  // description fields presence need to be true
+  end
+  
    
    
-   
+  =============================================================== 
