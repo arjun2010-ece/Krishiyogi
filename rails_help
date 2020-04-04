@@ -63,6 +63,6 @@
     validates :description, presence: true  // description fields presence need to be true
   end
   
-   
+   empty title and description not allowed to be saved in table
    
   =============================================================== 
