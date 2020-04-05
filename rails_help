@@ -112,6 +112,11 @@
        </p>
   <% end %>
    
+   actions new and create work together for model-centric form
+   new -->GET request  --> it will have templates
+   create -->POST request  --> it will have logic to post into database and validation check too.
+   
+   
   ======================================================================
   
   
