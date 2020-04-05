@@ -77,4 +77,50 @@
    
    
    
+====================================================================
+   
+   5. Model centric form, saving data to a model like doing by rails console
+   
+   
+      <%= form_with do %>  // since form_with is an ajax based form we need local:true props
+         Form contents  // since its a model-centric form, we need scope: model in small letter
+                        //since we need a plcace to post ,we need url props
+      <% end %>
+   
+  final::
+    
+   <%= form_with scope: :article, url: articles_path, local: true do  %>
+      Form contents
+   <% end %>
+   
+   More improved::
+   =============
+   
+  <%= form_with scope: :article, url: articles_path, local: true do |f|  %>
+       <p>
+         <%= f.label :title %>
+         <%= f.text_field :title %>
+       </p>
+       
+       <p>
+         <%= f.label :description %>
+         <%= f.text_area :description %>
+       </p>
+       
+       <p>
+          <%= f.submit "Create" %>
+       </p>
+  <% end %>
+   
+  ======================================================================
+  
+  
+  
+  
+  
+  
+  
+
+   
+   
    
