@@ -1,0 +1,36 @@
+case 1:
+=======
+
+If i want the date to be in this format like "Apr 12" from a edate object
+then i simply need to do below::
+
+
+var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+var today  = new Date();
+
+console.log(today.toLocaleDateString("en-US")); // 9/17/2016
+console.log(today.toLocaleDateString("en-US", options)); // Saturday, September 17, 2016
+console.log(today.toLocaleDateString("hi-IN", options)); // शनिवार, 17 सितंबर 2016
+
+
+"April 12 format"
+=================
+var options = {  month: 'long', day: 'numeric' };
+
+console.log(today.toLocaleDateString("en-US", options)); // September 17
+
+
+i can do further manipulation based on options value.
+
+===============================================
+
+case 2:::
+ from epoch timestamp to date object
+
+const dateObj = new Date(unixTimestamp * 1000);
+
+
+
+
+
+
