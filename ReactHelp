@@ -41,8 +41,9 @@ form testing::
 ==============
 https://kula.blog/posts/test_on_submit_in_react_testing_library/
 
-aync destructuring when api called inside useEffect
-===================================================
+Aync destructuring when api called inside useEffect(BEST PRACTICES):
+===================================================================
+
 We cant do destructuring  for async api call inside udeEffect and particularly when promise is resolved inside useEffect,
 then there is a diff way to achieve it inside useEffect.
 
@@ -55,21 +56,73 @@ const WeatherComponent = props =>  {
     }
     loadContent();
   }, [today, props]);
+  
+  // the above useeffect can be broken down to an easy way like below(updated answer)::
+  // its like calling an IIFE with async await(more classy)
+   useEffect(() => {
+    (async () => {
+      await getCachedWeather(today, props).then(data => setWeatherInfo(data) ); // weatherInfo is set here
+    })();
+  },[]);
 
-  const todaysWeather = (
-    <ul className="no-bullets weather">
-      <li><i className="grey fa fa-info"></i> <span> {weatherdata && weatherdata.current && weatherdata.current.weather[0].description}</span></li>
-	    <li><i className="grey fa fa-info"></i>wind speed <span>  {weatherdata && weatherdata.current && weatherdata.current.wind_speed}  m/s</span></li>
-	    <li><i className="grey fa fa-info"></i>wind degrees <span> {weatherdata && weatherdata.current && weatherdata.current.wind_deg}</span></li>
-    </ul>
-  )
+//setting state inside above useEffect
+const [weatherInfo, setWeatherInfo] = useState(null);  
+
+  // incase of api requests or props dependency use IF-ELSE condition to reduce rerender and improve app.
+ if(weatherInfo){
  return (
     <div>
-        {todaysWeather}
+        <ul className="no-bullets weather">
+      	    <li><i className="grey fa fa-info"></i> <span> {weatherInfo.current.weather[0].description}</span></li>
+	    <li><i className="grey fa fa-info"></i>wind speed <span>  { weatherInfo.current.wind_speed}  m/s</span></li>
+	    <li><i className="grey fa fa-info"></i>wind degrees <span> { weatherInfo.current.wind_deg}</span></li>
+        </ul>
     </div>
   );
+ }
+ else{
+    return ''
+  }
 }
 
+
+Note for below code:::
+--------------------
+const todaysWeather = (
+    	<ul className="no-bullets weather">
+      	    <li><i className="grey fa fa-info"></i> <span> {weatherdata && weatherdata.current && weatherdata.current.weather[0].description}</span></li>
+	    <li><i className="grey fa fa-info"></i>wind speed <span>  {weatherdata && weatherdata.current && weatherdata.current.wind_speed}  m/s</span></li>
+	    <li><i className="grey fa fa-info"></i>wind degrees <span> {weatherdata && weatherdata.current && weatherdata.current.wind_deg}</span></li>
+        </ul>
+      );
+the above code can be replaced by below: usage of Safe Navigation Operator (?.) or async operator
+
+	const todaysWeather = (
+    	<ul className="no-bullets weather">
+      	    <li><i className="grey fa fa-info"></i> <span> { weatherdata?.current?.weather[0]?.description}</span></li>
+	    <li><i className="grey fa fa-info"></i>wind speed <span>  { weatherdata?.current?.wind_speed}  m/s</span></li>
+	    <li><i className="grey fa fa-info"></i>wind degrees <span> { weatherdata?.current?.wind_deg}</span></li>
+        </ul>
+      );
+ or a better if else condition like below(ideal)::
+ // here there is no need to check for individual conditions or safe navigations
+if(weatherInfo){
+ return (
+    <div>
+        <ul className="no-bullets weather">
+      	    <li><i className="grey fa fa-info"></i> <span> {weatherInfo.current.weather[0].description}</span></li>
+	    <li><i className="grey fa fa-info"></i>wind speed <span>  { weatherInfo.current.wind_speed}  m/s</span></li>
+	    <li><i className="grey fa fa-info"></i>wind degrees <span> { weatherInfo.current.wind_deg}</span></li>
+        </ul>
+    </div>
+  );
+ }
+ else{
+    return ''
+  }
+ 
+ 
+ 
 Note:: 
 since we cant destructure becoz of async nature so we need to check for conditions and then use it inside todaysWeather
 condition.
