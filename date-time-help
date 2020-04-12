@@ -30,6 +30,26 @@ case 2:::
 const dateObj = new Date(unixTimestamp * 1000);
 
 
+================================================
+
+case 3:
+If we want to have JAN, FEB or Marcg in date then we can something like below::
+
+let a = new Date(); // date object
+let year = a.getFullYear(); // picking year from date Object.
+let day = a.getDate(); // picking day or date like 10/11 from 1 to 30 from date object.
+
+Now converting months from 0,1,2,3....11 to jan,feb,mar,....nov,dec ::::::
+____________________________________________________________________
+BEST Trickkkkkkkk::::
+getMonth() gives you month from 0 to 11 so can act as index of an array of month.
+let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+let month = months[a.getMonth()];
+
+return year + ' ' + month + ' ' + day; // 2020 Apr 12
+
+
+
 
 
 
