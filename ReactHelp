@@ -41,7 +41,33 @@ form testing::
 ==============
 https://kula.blog/posts/test_on_submit_in_react_testing_library/
 
-------------
+
+variable utilisation--memory efficient using array
+===================================================
+ instead of using a function returning different things
+ like below::
+ 
+ Here function is allocating space for 4 variables every time function is called and its not good.
+ function dateManipulation(){
+ let a = new Date();
+ let a = dateObject.getFullYear();
+ let b = String(dateObject.getMonth() + 1).padStart(2, '0');
+ let c = String(dateObject.getDate()).padStart(2, '0');
+ return b;
+ }
+ 
+ the more optimised way in react is using array ::
+ ----------------------------------------------------------------------
+ put all the statements of above function inside an array like below::
+  
+ const dateObject = new Date(); // allocated only once and used multiple times like inside below array
+ 
+ // here all those statments inside array are joined by empty space : ".join('')" to separate all those.
+ const today = [dateObject.getFullYear(), String(dateObject.getMonth() + 1).padStart(2, '0'), String(dateObject.getDate()).padStart(2, '0')].join('');
+
+its like result is YYYYMMDD or 20200823
+
+
 
 Promise resolved inside useeffect
 =================================
