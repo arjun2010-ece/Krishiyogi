@@ -41,6 +41,77 @@ form testing::
 ==============
 https://kula.blog/posts/test_on_submit_in_react_testing_library/
 
+aync destructuring when api called inside useEffect
+===================================================
+We cant do destructuring  for async api call inside udeEffect and particularly when promise is resolved inside useEffect,
+then there is a diff way to achieve it inside useEffect.
+
+const WeatherComponent = props =>  {  
+  useEffect(() => { 
+    //  CALL API---we need to resolve promise inside loadContent fn and then call it and use async-await like below,only way to
+    // do it
+    async function loadContent() {
+      await getCachedWeather(today, props).then(data => setWeatherdata(data) );
+    }
+    loadContent();
+  }, [today, props]);
+
+  const todaysWeather = (
+    <ul className="no-bullets weather">
+      <li><i className="grey fa fa-info"></i> <span> {weatherdata && weatherdata.current && weatherdata.current.weather[0].description}</span></li>
+	    <li><i className="grey fa fa-info"></i>wind speed <span>  {weatherdata && weatherdata.current && weatherdata.current.wind_speed}  m/s</span></li>
+	    <li><i className="grey fa fa-info"></i>wind degrees <span> {weatherdata && weatherdata.current && weatherdata.current.wind_deg}</span></li>
+    </ul>
+  )
+ return (
+    <div>
+        {todaysWeather}
+    </div>
+  );
+}
+
+Note:: 
+since we cant destructure becoz of async nature so we need to check for conditions and then use it inside todaysWeather
+condition.
+
+inside api.js file
+--------------------
+it returns a promise to be resolved inside .then function done inside above useEffect.
+
+
+import axios from "axios";
+
+export const getCachedWeather = async ( today, props) => {
+    // const resp = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${props.center.lat}&lon=${props.center.lng}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`);    
+    const cached_data = await getCache(today, props.trail_token)    
+    if (cached_data) {        
+        return cached_data
+    } else {        
+        const weather_data = await axios.get(`//api.openweathermap.org/data/2.5/weather/?lat=${props.center.lat}&lon=${props.center.lng}&cnt=5&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`);
+        setCache(weather_data.data, props.trail_token)        
+        return weather_data.data;
+    }
+}
+
+const getCache = async (today, token) => {
+    try {
+        const response = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/gb/storage/weather/${today}/${token}`);                
+        return response.data
+    } catch (error) {
+        return false
+    }
+}
+
+const setCache = ( weather_data, token) => {
+    try {        
+        axios.post(`${process.env.REACT_APP_API_ENDPOINT}/gb/storage/weather`, { weather: weather_data, trail_token: token });    
+    } catch (error) {
+        console.error("error caching data:")
+    }
+}
+==============================================================
+
+
 setting up react testing library::
 ==================================
 https://dev.to/aromanarguello/getting-started-with-jest-react-testing-library-4nga
