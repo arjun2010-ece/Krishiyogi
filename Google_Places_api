@@ -162,7 +162,8 @@ function fillInAddress() {
   const latitude = place.geometry.location.lat();
   const longitude = place.geometry.location.lng();
   console.log(`${latitude}-${longitude}`);
-  // console.log(place.geometry.location.lat());
+  // here we are getting latitude-longitude bcoz we setField() above "geometry"
+  // and thats why we are accessing place.geometry.location.lat();
 
   for (var component in componentForm) {
     document.getElementById(component).value = '';
