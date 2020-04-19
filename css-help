@@ -1,0 +1,19 @@
+use font awesome icons in css::
+
+ <p>paragraph text</p>
+    p:before {
+            content: "\f007";
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: 26px;
+            text-rendering: auto;
+            padding-right: 8px;
+            vertical-align: bottom;
+        }
+        p{
+            width: 360px;
+            height: 60px;
+            border: 1px solid;
+            font-size: 26px;
+            margin: 30px auto;
+        }
++======================================+
