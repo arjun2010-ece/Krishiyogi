@@ -1,0 +1,23 @@
+Basic js programming
+====================
+
+1. convert two arrays into one array of object with merged values::
+
+const labels = ["Orders Total", "Pending Payments", "Visits"];
+const colors = ["red", "green", "yellow"];
+
+let mg=[];
+let obj;
+for(let i = 0; i < labels.length; i++){
+  obj = {"labels" : labels[i], "color": colors[i]};
+  mg.push(obj);
+}
+ console.log(mg);
+
+[
+  { labels: 'Orders Total', color: 'red' },
+  { labels: 'Pending Payments', color: 'green' },
+  { labels: 'Visits', color: 'yellow' }
+]
+===================================================================================
+
