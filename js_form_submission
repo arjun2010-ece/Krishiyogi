@@ -1,0 +1,9 @@
+SOmetimes a form frontend needs to send additional data to backend apart from what is present in form..::::
+
+$('#myform').submit(function(){        
+var hiddenInput = $('<input data-role="none"/>').attr({type:'hidden',name:'myname',value: 'somevalue'});
+ $('#myform').append(hiddenInput);
+});
+
+// additional data sent through hidden field apart from normal field...
+
