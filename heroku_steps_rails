@@ -42,5 +42,9 @@
      "heroku rename blog-alphy"
      
      depending on availability "blog-alphy.herokuapp.com" will be our url.
+     
+ 8. Since our migration files have been pushed to heroku but tables are not created on postgres.
+      heroku run rails db:migrate
+      
     
     
