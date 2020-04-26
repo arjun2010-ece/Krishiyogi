@@ -1,0 +1,46 @@
+1. install heroku in terminal if not there. test heroku by typing "heroku"
+2. login on heroku
+      heroku login
+3. create a shell of applications on heroku
+      heroku create
+      
+4. Then go to gem file:
+    Since locally we are using sqlite database but in production we cannot use it so need to make some changes in "Gemfile"
+    
+    cut below statement from global file:
+        # Use sqlite3 as the database for Active Record
+        gem 'sqlite3', '~> 1.4'
+        
+    and paste it inside "group :development, :test" as below::
+    
+    group :development, :test do
+      gem 'sqlite3', '~> 1.4' // added sqlite for development and testing
+    end
+    
+  5. Add group production and add gem pg(postgres) in Gemfile as below::
+        // in the end of file
+        group :production do
+           gem "pg"
+        end
+        
+        This will ready for production deploy.
+        
+  6. Fire below commands in terminal since we made changes in Gemfile.
+      
+      bundle install --without production
+      
+ 7. Fire below commands for final deploy::
+  
+    git add .
+    git commit -m "readying for deploy"
+    // pushing code on heroku master
+    git push heroku master
+    
+    So now an address appears for opening on server but we can fire "heroku open" also for directly opening on other tab.
+    
+    The name of url will not be very nice so need to we can change it depending on availability by typing::
+     "heroku rename blog-alphy"
+     
+     depending on availability "blog-alphy.herokuapp.com" will be our url.
+    
+    
