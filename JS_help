@@ -3,6 +3,31 @@ List of JS projects for study::
 https://code-projects.org/c/languages/project/jsprojects/
 
 
+How to trigger event when event is not triggered by brower::
+===========================================================
+In pure javascript::
+
+element.value = 23. // after setting value trigger events
+element.onchange();
+
+
+In jquery::
+
+("#order_shipping_address_country").val(2);
+("#order_shipping_address_country").change();
+   or 
+("#order_shipping_address_country").trigger("change");
+
+
+In many cases all these same trype of event doesnot work and we need to manually create the event and trigger it.
+
+Jumpseller.getRegions("#order_shipping_address_region", "CL", "05");
+let element = document.getElementById('order_shipping_address_region');
+let evt = document.createEvent("HTMLEvents");
+evt.initEvent("change", false, true);
+element.dispatchEvent(evt);
+
+================================
 
 USAGE OF "THIS" KEYWORD ONCE AND FINAL FOR ALL
 ================================================
