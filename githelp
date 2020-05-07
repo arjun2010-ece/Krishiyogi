@@ -6,3 +6,15 @@ Both cmds can be used together or only reset commands
 =====================================================
 git reset --hard // remove any changes made
 git clean -df. // to delete any files made by you
+
+
+
+Check master at a particular time may be 1 week back from current date or 20 days back in a DETACHED HEAD
+=========================================================================================================
+we can see all the files on that date and using file comparision tool find the changes.
+
+//create a detached head and checkout to 3rd may 2020 at 6.30pm in the evening.
+
+git checkout 'master@{2020-05-03 18:30:00}'
+
+
