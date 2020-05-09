@@ -2,6 +2,44 @@ Very important link of a simple classy project built with react and react-bootst
 https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-in-react-38f3686b3388
 
 
+REACT LAZY AND SUSPENSE IMPORTANT READ
+========================================
+https://blog.bitsrc.io/react-rendering-using-concurrent-mode-and-suspense-1600c574f996
+
+App.js
+import React, { Component, Suspense } from 'react';
+const Hello = React.lazy(() => import("./components/Hello"));
+
+function Wait() {
+  return <div> Wait till it load... </div>;
+}
+
+class App extends Component {
+  render() {
+    return (
+      <div className="container">
+        <p>Its Application load....</p>
+        <Suspense fallback={<Wait />}>
+            <Hello val="Its lazy amigo" />
+        </Suspense>
+      </div>
+    )
+  }
+}
+export default App;
+
+
+Hello.js
+--------
+import React from "react";
+ 
+function Hello({ val }) {
+  return <div>{val}</div>;
+}
+ 
+export default Hello;
+==================================================
+
 
 react-testing help:
 ===================
