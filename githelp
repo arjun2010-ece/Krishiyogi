@@ -18,3 +18,31 @@ we can see all the files on that date and using file comparision tool find the c
 git checkout 'master@{2020-05-03 18:30:00}'
 
 
+
+GIT AMEND
+==========
+suppose i pushed some commits and even made a MR which is not merged yet to the master and i discovered that some console 
+statements or comments are there whic h needs to be removed from the existing commits(instead of making new commit)
+so the way is::
+
+remove the comments or console from files and::
+
+git add . && git commit --amend
+git push
+
+In normal scenario it will work but there might be times when it will not work then we need to fire below commands::
+
+ls -a
+cd .git
+
+if you fine a file like this "COMMIT_EDITMSG.swp" then go to "finder" and press command + shift + .(dot)
+and it will show hidden files and we can manually delete this.
+
+
+
+
+
+
+
+
+
