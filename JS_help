@@ -3,7 +3,16 @@ List of JS projects for study::
 https://code-projects.org/c/languages/project/jsprojects/
 
 
-How to trigger event when event is not triggered by brower::
+
+Sometimes a HTML SELECT is populating options from api/backend and there is no way of knowing when that data is being 
+populated and we dont have acccess of API request like axios/fetch in frontend then  we completely blind and lost.
+That time we have only one thing for our help and that is : "Mutation Observer"
+
+https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+
+
+
+How to trigger event when event is not triggered by browser::
 ===========================================================
 In pure javascript::
 
