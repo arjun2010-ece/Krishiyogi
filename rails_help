@@ -1,3 +1,44 @@
+RAILS API ONLY COURSES::
+=======================
+https://www.simplify.ba/articles/2016/06/18/creating-rails5-api-only-application-following-jsonapi-specification/
+https://medium.com/@oliver.seq/creating-a-rest-api-with-rails-2a07f548e5dc
+https://code.tutsplus.com/articles/crafting-apis-with-rails--cms-27695
+
+
+https://onebitcode.com/api-completa-rails/
+https://levelup.gitconnected.com/building-a-small-rails-api-with-serializers-32e3e69a078
+
+https://www.nopio.com/blog/rails-api-active-model-serializers/
+https://yos.io/2015/04/12/building-restful-apis-rails/
+
+https://www.cookieshq.co.uk/posts/how-to-use-the-new-rails-5-api-feature
+
+
+
+https://rollout.io/blog/building-a-json-api-with-rails-5/
+https://sourcey.com/articles/building-the-perfect-rails-api
+https://www.chrisjmendez.com/2016/07/05/rails-5-api-only-app/
+https://www.evernote.com/shard/s733/client/snv?noteGuid=8ef958b4-f8ec-4d4b-ba48-46f2f8e5d6cd&noteKey=0f6e6eaa774b6aff037b9e724f59302c&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs733%2Fsh%2F8ef958b4-f8ec-4d4b-ba48-46f2f8e5d6cd%2F0f6e6eaa774b6aff037b9e724f59302c&title=Creating%2Bsimple%2BREST%2BAPI
+https://blog.heroku.com/a-rock-solid-modern-web-stack
+https://codeburst.io/how-to-build-a-good-api-using-rubyonrails-ef7eadfa3078
+
+https://www.zweitag.de/en/blog/active-storage-rails-api-apps
+https://www.dailysmarty.com/posts/recipe-for-adding-authentication-to-a-rails-api-only-application-with-an-http-only-cookie
+https://pragmaticstudio.com/tutorials/rails-session-cookies-for-api-authentication
+https://www.thegreatcodeadventure.com/building-a-super-simple-rails-api/
+
+
+
+
+
+
+
+RAILS FULL STACK COURSES::
+=========================
+https://rapidapi.com/blog/how-to-use-an-api-with-ruby/
+
+
+
 1. whenever in same project if you want to reset by deleting all the files, still you need to drop the tables from the database
    and the below command wipe out the database completely::
    
