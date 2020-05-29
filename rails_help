@@ -119,6 +119,12 @@
    
   ======================================================================
   
+  Finding the routes in rails APplication::
+  +++++++++++++++++++++++++++++++++++++++
+  
+  rake routes | grep articles     -----> display only 6 routes with default methods.
+  
+  
   
   
   
