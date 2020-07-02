@@ -1,0 +1,10 @@
+1. React search in frontend(Get all)
+2. React search in frontend-(Get individual product based on id)
+3. React search based on query parameter and display on frontend and debounce the requests.
+
+1. React delete an product on frontend and in API
+2. React Post request on backend from frontend.
+3. React EDIT/UPDATE request from frontend on endpoint
+
+1. React Infinite loading of data on frontend
+2. React 3 step Modal displayed on frontend
