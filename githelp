@@ -35,13 +35,41 @@ In normal scenario it will work but there might be times when it will not work t
 ls -a
 cd .git
 
+
 if you fine a file like this "COMMIT_EDITMSG.swp" then go to "finder" and press command + shift + .(dot)
 and it will show hidden files and we can manually delete this.
 
+===========
+UPDATE A OUTDATED BRANCH WITH MASTER
 
 
+When we start working on a branch that is outdated because of continous merge on remote origin then if we complete our work on local
+branch and push it then there may be conflicts and pipeline may fail.
+For that we need to pull the lastest origin/master in our local branch and then push it for it to be merged.
+
+for example:
+when we are on below branch
+4806/enhancement-of-addcreditmodal-input-box
+
+we need to fire :
+git pull origin master
 
 
+or second way or long way::
+
+go back to local master as:
+git checkout master
+git pull
+git checkout 4806/enhancement-of-addcreditmodal-input-box
+git rebase master
+
+=============================
+
+PIPELINE INFORMATION:
+There is a pipeline associated with each github/gitlab so we need to run pipeline or check that when a "git push" of a local branch 
+then a pipeline runs which make it GREEN or eligible to MERGE.
+
+=============================
 
 
 
