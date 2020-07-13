@@ -2,6 +2,17 @@ Very important link of a simple classy project built with react and react-bootst
 https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-in-react-38f3686b3388
 
 
+CHECK WIDTH OF BROWSER OR DEVICE THROUGH JAVASCRIPT
+====================================================
+
+Sure shot way of finding width of device be it mobile or laptop or desktop is::
+
+var width = Math.max(window.screen.width, window.innerWidth);
+
+
+
+
+
 REACT LAZY AND SUSPENSE IMPORTANT READ
 ========================================
 https://blog.bitsrc.io/react-rendering-using-concurrent-mode-and-suspense-1600c574f996
