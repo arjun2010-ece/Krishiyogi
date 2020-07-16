@@ -2,6 +2,30 @@ Very important link of a simple classy project built with react and react-bootst
 https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-in-react-38f3686b3388
 
 
+
+
+CHECK OBJECT COMPARISION WITH USE-EFFECT::
+========================================
+
+ useEffect(() => {
+   if (startFlag && endFlag) {
+      console.log("Both dated working...");
+    }
+  }, [startFlag,endFlag]);
+
+
+ const handleDatesChanged = ({ startDate, endDate }) => {
+    if (JSON.stringify(startDate) !== JSON.stringify(startDated)) {
+      setStartFlag(true);
+      setStartDated(startDate);
+    }
+    if (JSON.stringify(endDate) !== JSON.stringify(endDated)) {
+      setEndFlag(true);
+      setEndDated(endDate);
+    }
+  };
+
+
 CHECK WIDTH OF BROWSER OR DEVICE THROUGH JAVASCRIPT
 ====================================================
 
