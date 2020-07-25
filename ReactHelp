@@ -2,6 +2,75 @@ Very important link of a simple classy project built with react and react-bootst
 https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-in-react-38f3686b3388
 
 
+POST request to server with images along with check field data
+==============================================================
+
+credit_amount is from a text fields.
+payment_type is radiobox data sending as name and value.
+supportFiles is uploading images.
+
+this.state = {
+data: {
+        credit_amount: 0,
+        payment_type: {
+          name: "bank_transfer",
+          value: true
+        },
+        supportFiles: null
+      },
+}
+
+
+
+handleSubmit() {
+    const {
+      credit_amount,
+      payment_type: { name, value },
+      supportFiles
+    } = this.state.data;
+
+    var fd = new FormData();
+    fd.set("credit_amount", credit_amount);
+    fd.set(name, value);
+    fd.append("support_files", supportFiles);
+    this.setState({ loading: true });
+    axios
+      .post("/admin/en/subscription/add_credit", fd, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      })
+      .then(res => {
+        this.setState({ loading: false });
+        if (res.data.success) {
+          this.props.displayAlertMessage(true, "credit");
+          this.setState(
+            {
+              addCreditModalOpen: false
+            },
+            () => {
+              window.scrollTo(0, 0);
+            }
+          );
+        } else {
+          this.setState(
+            {
+              addCreditModalOpen: true,
+              largeFileSize: true
+            },
+            () => {
+              this.props.displayAlertMessage(false, "credit");
+            }
+          );
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ addCreditModalOpen: false });
+        this.props.displayAlertMessage(true, "support");
+      });
+  }
+
 
 
 CHECK OBJECT COMPARISION WITH USE-EFFECT::
