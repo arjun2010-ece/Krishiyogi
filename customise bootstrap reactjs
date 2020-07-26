@@ -1,4 +1,9 @@
+1. add only this line in index.js
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+2.
 //put this in app.css , and then add custom css
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
