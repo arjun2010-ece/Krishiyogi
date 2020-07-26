@@ -1,0 +1,122 @@
+
+//put this in app.css , and then add custom css
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+/* CSS Document */
+/* common--------------------
+----------------------------------- */
+
+
+//custome css or adding separate colors, backgroound color for default bootstrap class.
+.homepage .container .table {
+    width: auto;
+}
+
+.btn-primary {
+    background: #fdac35;
+}
+
+#content header {
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+
+/*.container .row {
+    margin: 0 0 0 0;
+}*/
+
+.topcontainer .container {
+    margin-top: -100px;
+    background: #fff;
+       padding: 30px 0px;
+    box-shadow: 0px 0 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+#newsitem.container {
+    margin-top: -100px;
+    background: #fff;
+    box-shadow: 0px 0 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+.login-form {
+    text-align: center;
+    /*padding-top: 30px !important;*/
+}
+
+    .login-form .group {
+        margin-top: 30px;
+    }
+
+
+    .gallery > div > .container {
+    margin-top: 40px;
+}
+
+
+.rem-check {
+    display: inline !important;
+}
+
+.login_item label {
+    position: relative !important;
+    top: 2px !important;
+    font-weight: 600;
+}
+
+.login-form .group {
+    margin-bottom: 30px !important;
+}
+
+.group {
+    margin-bottom: 0px !important;
+}
+
+#carousel-example .overlay {
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, #fdac35 0%, #784ba0 50%,#fa709a 100%); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #fdac35 0%, #784ba0 50%,#fa709a 100%); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #fdac35 0%, #784ba0 50%,#fa709a 100%); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #fdac35 0%, #784ba0 50%,#fa709a 100%); /* Standard syntax */
+    bottom: 0;
+    left: 0;
+    opacity: 0.8;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+/*.main > div > .container {
+    margin-top: 40px;
+}*/
+
+
+
+/*Remove this when implement slider*/
+
+.bg-image img
+{
+    position: relative !important;
+}
+
+.search input {
+        color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+}
+
+.login-form label
+{
+    top: -15px !important;
+
+}
+
+.login_item label {
+    top: 5px !important;
+
+}
