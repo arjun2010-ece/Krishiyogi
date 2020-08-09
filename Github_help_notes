@@ -18,3 +18,9 @@ $ git reset HEAD@{2} --hard
 Now you should be back to before the rebase started.
 
 =============================================================
+
+REMOVE NODE_MODULES FROM GITHUB REPOS::
+
+https://stackoverflow.com/questions/50675829/remove-node-modules-from-git-in-vscode
+
+By mistake if you post node_modules in your github repos then doing this command will remove from repos.
