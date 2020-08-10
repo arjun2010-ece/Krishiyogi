@@ -18,6 +18,8 @@ HOW TO CONNECT MYSQL WITH EXPRESS JS
 // FLUSH PRIVILEGES;
 
 
+https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/#apt-repo-fresh-install
+
 //check the status
 sudo service mysql status
 
@@ -62,4 +64,18 @@ app.post("/post", (req, res) => {
     }
   }
 })
+
+
+
+Note::
+in the mysql console entered by "sudo mysql" :
+
+show databases;
+
+create database market;
+use market;
+show tables;
+create table users (username varchar(255), password varchar(255));
+select * from users; // please focus on uppercase and capitalize tables names
+
 
