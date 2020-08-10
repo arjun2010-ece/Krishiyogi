@@ -1,0 +1,65 @@
+HOW TO CONNECT MYSQL WITH EXPRESS JS
+====================================
+
+1. INSTALL MYSQL GLOBALLY
+   sudo apt-get install mysql-server
+   
+   sudo mysql_secure_installation  // these will ask for various options where you can set passwords
+   
+   then fire "sudo mysql" to enter into console.
+   
+   
+// 123456789a  --pwd
+
+ setup a new user "arjun" and pwd "123456789a", very important and thais configuration needed in connection requests
+ and grant all privelages in consoles.
+// CREATE USER 'arjun'@'localhost' IDENTIFIED BY '123456789a#';
+// GRANT ALL PRIVILEGES ON * . * TO 'arjun'@'localhost';
+// FLUSH PRIVILEGES;
+
+
+//check the status
+sudo service mysql status
+
+//stop the server
+sudo service mysql stop
+
+//start the server
+sudo service mysql start
+
+2. IN THE PROJECT, INSTALL A WRAPPER OF MYSQL
+    
+  npm instal mysql2
+  
+In the database.js file in root folders::
+
+const mysql = require("mysql2");
+
+module.exports = mysql.createConnection({
+    host: "localhost",
+    user: "arjun",
+    password: "123456789a#",
+    database: "market"
+})
+
+// these configurations are given by below commands::
+// CREATE USER 'arjun'@'localhost' IDENTIFIED BY '123456789a#';
+// GRANT ALL PRIVILEGES ON * . * TO 'arjun'@'localhost';
+// FLUSH PRIVILEGES;
+
+then in the app.js file::
+
+const db = require("./database");
+
+app.post("/post", (req, res) => {
+  const {username, password} = req.body;
+  if(username && password){
+    try {
+      db.promise().query(`INSERT INTO users VALUES('${username}', '${password}')`);
+      res.status(201).send({ msg: "Created user."});
+    } catch (error) {
+      console.log("error is ", error);
+    }
+  }
+})
+
