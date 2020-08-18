@@ -20,3 +20,13 @@ This application is primarily to help farmers.
  Note::
  if setstate is in no diff functins then they has no dependency with each other
  and can be consoled in each others scope.
+
+
+
+=======================================================================
+
+on onclick listeners you can definately pass ids such as::
+
+<span className="fa fa-close cursor" onClick={()=>deleteCategory(id)}></span>
+
+and while deleting only use "FILTER" based on id by onClick
