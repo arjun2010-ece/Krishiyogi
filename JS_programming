@@ -23,7 +23,7 @@ const peoples = [
 
 function unique(ppl){
   const uniquepeople = [...new Set(ppl.map(el =>  el.id))].map(pid => 
-    peoples.find(el => el.id === pid )
+    ppl.find(el => el.id === pid )
   )
   return uniquepeople;
 }
