@@ -8,8 +8,62 @@ Most used logics(Must practice)
 3. get all the repeated numbers in array in other array
 
 
+2. Answers::
+
+const peoples = [
+  {id: 1, name:"Arjun"},
+  {id: 1, name:"Arjun"},
+  {id: 1, name:"Arjun"},
+  {id: 2, name:"quinze"},
+  {id: 2, name:"quinze"},
+  {id: 3, name:"catorze"},
+  {id: 3, name:"catorzee"},
+  {id: 4, name:"dezesseis"},
+]
+
+function unique(ppl){
+  const uniquepeople = [...new Set(ppl.map(el =>  el.id))].map(pid => 
+    peoples.find(el => el.id === pid )
+  )
+  return uniquepeople;
+}
+
+unique(peoples);
 
 
+3. Answer::
+
+const peoples = [
+  {id: 1, name:"Arjun"},
+  {id: 2, name:"quinze"},
+  {id: 3, name:"catorze"},
+  {id: 1, name:"Arjun"},
+  {id: 4, name:"dezesseis"},
+  {id: 1, name:"Arjun"},
+  {id: 2, name:"quinze"},
+  {id: 3, name:"catorzee"}
+]
+
+
+function repeated(ppl){
+
+  const newppl = ppl.slice().sort((a,b) => a.id -b.id);
+
+  let rept = [];
+  for(let i = 0; i < newppl.length-1 ; i++){
+    if (newppl[i+1].id == newppl[i].id){
+      rept.push(newppl[i+1]);
+    }
+  }
+
+  return [...new Set(rept.map(el => el.id))].map(rid => 
+    rept.find(el => el.id === rid)
+  );
+
+}
+
+repeated(peoples);
+==========================================================
 
 
 Questions::
