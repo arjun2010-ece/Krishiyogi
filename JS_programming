@@ -1,6 +1,17 @@
 https://github.com/railsstudent/codewars/tree/master/js
             ------javascript list of questions
 
+Most used logics(Must practice)
+================================
+1. sort an array of objects(obviously based on some field like price or id)
+2. make the array of object unique(same as make array of numbers unique)
+3. get all the repeated numbers in array in other array
+
+
+
+
+
+
 Questions::
 https://www.codewars.com/kata/word-char-and-line-count/train/javascript
 
