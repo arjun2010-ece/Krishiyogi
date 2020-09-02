@@ -56,4 +56,24 @@ First you make a request to payment backend(stripe/brainstree/credit card etc) t
       
       Note:: $push is used for putting data into an array later point of time.
  ============================================================================
-      
+ 
+ 
+ 1. when you create a product then 2 most important fields you keep i.e: quantity and sold field.
+        quantity ---> total quantity that the product has
+        sold --------> how many products are sold.
+        
+        
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
