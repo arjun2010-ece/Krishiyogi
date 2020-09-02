@@ -1,0 +1,59 @@
+For creating order:::
+=======================
+
+First you make a request to payment backend(stripe/brainstree/credit card etc) to process it and when succesfull then inside the request or .then() callback you do 2 tasks::
+
+1. empty the cart
+2. and you make a request to an endpoint to populate ORDER table with some fields such as::
+    products --->  coming from frontend
+    transaction_id ----> coming from payment backend response
+    amount ------->  coming from payment backend response
+    address ------>  coming from frontend
+    
+    e.g: 
+      const createdOrderData = {
+        products: products,   --> observe this, used for users purchase history
+        transaction_id: response.transaction.id,
+        amount: response.transaction.amount,
+        address: data.address  (coming from data state)
+      }
+      
+      in the fn where u r making fetch request inside body: JSON.stringify({order: createdOrderData})
+    
+    and in the backend when you "create orders" then in the function you need to assign user also like::
+      req.body.order.user = req.profile (since the path willl contain userId so req.profile attached there.) and then save it.
+      
+      While updating the Order table you also need to populate the USER model's "purchase history" field so that you can you can later see 
+      the users purchase history in the profile.
+      --------------------------------------------------------
+      
+      create a new middleware in users controller and use it in the route when creating orders::
+      
+      exports.addOrderToUserHistory = (req, res, next) => {
+        let history = [];
+        // req.body.order.products  ---> order sent for creation has products as array of product(check above)
+        req.body.order.products.forEach(item => {
+            history.push({
+              _id: item.id,
+              name: item.name,
+              description: item.description,
+              category: item.category,
+              quantity: item.quantity,
+              transaction_id:  req.body.order.transaction_id,
+              amount: req.body.order.amount
+            });
+        })
+        
+        User.findOneAndUpdate({_id: req.profile._id}, { $push: {history: history} }, {new: true}, (err, data) => {
+            if(err){
+              return res.status(400).json({ error: "Could not update user purchase history" });
+            }
+            next();
+        
+        }  );
+        
+      }
+      
+      Note:: $push is used for putting data into an array later point of time.
+ ============================================================================
+      
