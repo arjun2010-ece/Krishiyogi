@@ -1,5 +1,8 @@
 frontend validation for reactjs:::
 ===================================
+This validation can be used for both signup and signin purposes::
+
+
 On clicking submit button we need to call "validateFields" which will validate the fields and this function in there in 
 "../utils/common".
 
