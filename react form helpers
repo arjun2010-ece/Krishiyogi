@@ -38,7 +38,27 @@ utils/common :
 export const validateFields = (fieldsToValidate) => {
     return fieldsToValidate.every((field) => Object.values(field)[0] !== ''); // every function returns true if every condition is satisfied defined in callback.
 };
-  
+
+HTML::
+
+<form>
+{errorMsg && errorMsg.signin_error && (
+              <p className="errorMsg centered-message">
+                {errorMsg.signin_error}
+              </p>
+ )}
+ -----------
+ -----------
+ -------------
+ ------------
+ -------------
+ 
+</form>
+
+
+
+
+
 ===================================================================================================
 
 
