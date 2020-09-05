@@ -1,0 +1,64 @@
+frontend validation for reactjs:::
+===================================
+On clicking submit button we need to call "validateFields" which will validate the fields and this function in there in 
+"../utils/common".
+
+handleLogin = (event) => {
+    event.preventDefault();
+    const { email, password } = this.state;
+    const fieldsToValidate = [{ email }, { password }];
+
+    // this is frontend validation with validateFields
+    const allFieldsEntered = validateFields(fieldsToValidate);
+
+    if (!allFieldsEntered) {
+      this.setState({
+        errorMsg: {
+          signin_error: 'Please enter all the fields.'
+        }
+      });
+    } else {
+      this.setState({
+        errorMsg: {
+          signin_error: ''
+        }
+      }); 
+      // login successful
+    }
+  };
+  
+  
+  
+utils/common :
+==============
+  
+export const validateFields = (fieldsToValidate) => {
+    return fieldsToValidate.every((field) => Object.values(field)[0] !== ''); // every function returns true if every condition is satisfied defined in callback.
+};
+  
+===================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
