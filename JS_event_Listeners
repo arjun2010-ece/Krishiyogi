@@ -6,3 +6,29 @@ onChange,  -->triggers on html input element
 load       -->triggers when browser has finished loading the page or made an api-request got response of image urls and 
             --->displayed/loaded the image
               
+
+
+EVENT LOOP
+===========
+
+https://www.youtube.com/watch?v=rUpxAeoR7PU
+
+JS is synchronous but now it has grown so much that it contains browser APIs like axios, setTimeout, setTimeInterval, which are asynchronous.
+
+Js runtime has stack and heap both. Heap is for storing variables.
+
+We will talk 2 parallel environments here. one is Stack/callstack and other is WebAPI environment.
+
+All the synchronous tasks is directly pushed and executed in STACK. Once it finished execution it comes out of stack and result is displayed on console or JS.
+
+JS Asynchronous tasks are also pushed into Stack but since it will take more time and JS is single threaded so it will take more time and block further execution.
+That is why it is delegated to a parallel WEBAPI environment where it is executed and since every Async thing has a callback so once execution is completed then
+its callback is pushed to TASK Queue. Once all the sync tasks is finished in STACK then event loop moves the callback to STACK and once execution finished 
+then it comes out of there and displays on browser or whatever.
+
+There are 3 variables here::
+STACK/CALLSTACK, WEB API environment, TASK QUEUE
+and finally event loop.
+
+
+
