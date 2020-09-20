@@ -60,8 +60,17 @@ HTML::
 
 
 ===================================================================================================
+SHOWING ALL THE NUMBERS EXCEPT THE LAST 4 DIGITS:::
+=================================================
 
+Use case is displaying account number or credit and debit card numbers only last 4 digits.
+rest of the digits willbe hidden except last 4 digits.
 
+export const maskNumber = (number) => {
+  return number.slice(-4).padStart(number.length, '*');
+};
+
+-------------------------------------------
 
 
 
