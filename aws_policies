@@ -1,0 +1,79 @@
+S3 policies::
+=============
+go to IAM and then select user. In the permissions tab , go to "Add inline policy" and click on JSON::
+
+and paste the below JSON there::
+
+in the resource: "react-node-awss" is the bucket name associated with s3. Only change that in case of s3 bucket configurations.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllBucket",
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::react-node-awss/*"
+            ]
+        }
+    ]
+}
+```
+
+
+Before that go to S3 and create a bucket and go to permissions tab and then in BUcket Policy and paste the below policies:
+Just observe the "Principal", here you need to have the user ARN from user tab, when you create user
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AddCannedAcl",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::132024055586:user/reactcinema"
+            },
+            "Action": [
+                "s3:PutObject",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": "arn:aws:s3:::react-node-awss/*",
+            "Condition": {
+                "StringEquals": {
+                    "s3:x-amz-acl": "public-read"
+                }
+            }
+        }
+    ]
+}
+```
+
+And then go to CORS configuration and paste this:::
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+<CORSRule>
+    <AllowedOrigin>*</AllowedOrigin>
+    <AllowedMethod>GET</AllowedMethod>
+    <AllowedMethod>PUT</AllowedMethod>
+    <AllowedMethod>POST</AllowedMethod>
+    <MaxAgeSeconds>3000</MaxAgeSeconds>
+    <AllowedHeader>Authorization</AllowedHeader>
+</CORSRule>
+</CORSConfiguration>
+
+```
+
+For above two policies you can google::
+
+Aws s3 bucket policy example,
+Aws s3 cors example,
+
