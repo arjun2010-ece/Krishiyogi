@@ -63,3 +63,66 @@ exports.create = (req, res) => {
 }
 
 ============================================================================
+
+BASE 64 IMAGE DATA UPLOAD to S3::
+-------------------------------
+Not all the time we upload the image as it is, many time to speed up page performance we upload base 64 image.
+base 64 converts images into a sequence of letters and numbers and thus make it a part of html so we dont need to make a separate request to
+images, it will come as part of html and css, so one requests less and speed up page.
+
+
+```
+//uploading base 64 image data
+exports.create = (req, res) => {
+    const {name, content, image} = req.body;
+
+    //base64 image data
+    const base64data = new Buffer.from(image.replace(/^data:image\/\w+;base64,/, ""), "base64");
+    const type = image.split(";")[0].split("/")[1];
+
+    //   upload image to s3
+        const params = {
+            Bucket: "react-node-awss",
+            Key: `category/${uuid()}.${type}`,
+            Body: base64data,
+            ACL: "public-read",
+            ContentEncoding: "base64",
+            ContentType:  `image/${type}`
+        }
+
+        const slug = slugify(name);
+        let category = new Category({name, content, slug});
+
+            s3.upload(params, (err, data) => {
+            if(err){
+                console.log(err);
+                return res.status(400).json({ error: "Upload to s3 failed"});
+            }
+            console.log("AWS UPLOAD RES DATA", data);
+            category.image.url = data.Location;
+            category.image.key = data.Key;
+
+            // save to db
+            category.save((err, success) => {
+                if(err){
+                    return res.status(400).json({ error: "Error saving category to database"});
+                }
+                return res.json(success);
+            });
+        })
+
+}
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
