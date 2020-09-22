@@ -1,5 +1,9 @@
 S3 policies::
 =============
+--> create bucket, add cors and bucket policies
+---> go to user and add inline policies for S3
+
+
 go to IAM and then select user. In the permissions tab , go to "Add inline policy" and click on JSON::
 
 and paste the below JSON there::
