@@ -2,6 +2,55 @@ Very important link of a simple classy project built with react and react-bootst
 https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-in-react-38f3686b3388
 
 
+LIST OF MEDIUM WITH RADIOBOX
+============================
+ALL THE INPUT TYPE RADIO should have the same name if we want to select only one radio box.
+and the condition for checked should be specific:
+	checked={medium === 'book'} &  checked={medium === 'video'}
+input will be checked only when states medium value === video.
+Initial value is defined video here.
+
+HTML:
+    const showMedium = () => (
+        <React.Fragment>
+            <div className="form-check ml-3">
+                <label className="form-check-label">
+                    <input
+                        type="radio"
+                        onClick={handleMediumClick}
+                        checked={medium === 'video'}
+                        value="video"
+                        className="from-check-input"
+                        name="medium"
+                    />{' '}
+                    Video
+                </label>
+            </div>
+
+            <div className="form-check ml-3">
+                <label className="form-check-label">
+                    <input
+                        type="radio"
+                        onClick={handleMediumClick}
+                        checked={medium === 'book'}
+                        value="book"
+                        className="from-check-input"
+                        name="medium"
+                    />{' '}
+                    Book
+                </label>
+            </div>
+        </React.Fragment>
+    );
+
+Handler::
+
+   const handleMediumClick = e => {
+        setState({ ...state, medium: e.target.value, success: '', error: '' });
+    };
+
+
+
 LIST OF CATEGORIES WITH CHECKBOX
 ================================
 Mostly with checkbox and its handlers:
