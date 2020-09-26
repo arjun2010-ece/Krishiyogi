@@ -9,6 +9,7 @@ and the condition for checked should be specific:
 	checked={medium === 'book'} &  checked={medium === 'video'}
 input will be checked only when states medium value === video.
 Initial value is defined video here.
+Here the imp variable is "medium" whose initial value is set to "".
 
 HTML:
     const showMedium = () => (
