@@ -10,6 +10,7 @@ and the condition for checked should be specific:
 input will be checked only when states medium value === video.
 Initial value is defined video here.
 Here the imp variable is "medium" whose initial value is set to "".
+Since its initial value is "" so no checked condn is satisfied and hence nothing checked.
 
 HTML:
     const showMedium = () => (
