@@ -2,6 +2,44 @@ Very important link of a simple classy project built with react and react-bootst
 https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-in-react-38f3686b3388
 
 
+LIST OF CATEGORIES WITH CHECKBOX
+================================
+Mostly with checkbox and its handlers:
+
+Html:
+   // show categories > checkbox
+    const showCategories = () => {
+        return (
+            loadedCategories &&
+            loadedCategories.map((c, i) => (
+                <li className="list-unstyled" key={c._id}>
+                    <input type="checkbox" onChange={handleToggle(c._id)} className="mr-2 " />
+                    <label className="form-check-label">{c.name}</label>
+                </li>
+            ))
+        );
+    };
+    
+Handler:
+    // check if cid is present in empty array
+    // if present then splice it, if not then push it.
+    // check for the presence by indexOf() fn
+    const handleToggle = c => () => {
+        // return the first index or -1
+        const clickedCategory = categories.indexOf(c);
+        const all = [...categories];
+
+        if (clickedCategory === -1) {
+            all.push(c);
+        } else {
+            all.splice(clickedCategory, 1);
+        }
+        console.log('all >> categories', all);
+        setState({ ...state, categories: all, success: '', error: '' });
+    };
+
+
+
 POST request to server with images along with check field data
 ==============================================================
 
