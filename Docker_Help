@@ -51,6 +51,38 @@ it cannot use the cache memory also.
 
 
 
+=========================================
+Dockerfile has some basic configs and commands which docker issues to docker client and then to server and fetches images from docker hub and installs it.
+For it has 2 steps::
+
+--> sudo docker build .       // give you the <containerId>
+--> sudo docker run <containerID>   // use the <containerID> from above.
+
+In the above case you might need to keep track/remember of <containerId> and only with this you can run your code in that container.
+And that is not very effient.
+So better way is to tag that <ContainerID> to a name for easy manipulation and remembering.
+The above 2 commands change little bit to give ID to a name like this ::
+
+sudo docker build -t arjundocker/redis:latest .       // <arjundocker>--> name of the repos ideally, can be given anything  
+                                                      // <redis> is the name of the project that you want to give.
+                                                      // :latest is the convention to put
+
+sudo docker run arjundocker/redis
+// In above we have tagged ID with a name so now here we are running with that name.
+// We just dont put ":latest" there.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
