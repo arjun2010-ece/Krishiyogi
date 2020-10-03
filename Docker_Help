@@ -3,6 +3,13 @@ https://docs.docker.com/engine/install/ubuntu/
 -> checking running currently active docker containers:
 sudo docker ps
 
--> Checking all the container ever run:
+-> Checking all the container ever run and its ID too:
 sudo docker ps --all
  
+-> Run a stopped container::
+sudo docker start -a ae59735bbd2e    // container id  is ae59735bbd2e.
+
+
+
+
+
