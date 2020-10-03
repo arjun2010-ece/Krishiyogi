@@ -15,3 +15,11 @@ sudo docker system prune
 
 
 
+DEBUGGING A CONTAINER FOR LOGS::
+===============================
+sudo docker logs ad638ff0b0b3f8ca46ee1dad58c1d6f7f2396e217b2f5d1ec35a6a260c929   // containerID
+
+
+
+
+
