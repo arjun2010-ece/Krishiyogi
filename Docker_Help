@@ -41,6 +41,16 @@ In other terminal
  --> sudo docker exec -it 447a63ec2569 redis-cli  // container id is given and "redis-cli" is the command for entering inside redis CLI to manipulate redis.
 
 
+TIP::
+=====
+
+Changing the docker file can be very expensive and if we change the sequence of CMDs then it will start from fresh installation and can
+take more time.
+If any new cmd added then it should be added in the end not in the middle or top bcoz docker re runs everything from changed line and
+it cannot use the cache memory also.
+
+
+
 
 
 
