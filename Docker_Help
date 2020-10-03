@@ -21,5 +21,9 @@ sudo docker logs ad638ff0b0b3f8ca46ee1dad58c1d6f7f2396e217b2f5d1ec35a6a260c929  
 
 
 
+STOP A DOCKER CONTAINER::
+========================
 
+sudo docker stop <container id>  // get container id with "sudo docker ps" or "sudo docker ps --all"
 
+sudo docker kill <container id>
