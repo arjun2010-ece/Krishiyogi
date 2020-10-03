@@ -9,7 +9,9 @@ sudo docker ps --all
 -> Run a stopped container::
 sudo docker start -a ae59735bbd2e    // container id  is ae59735bbd2e.
 
-
+-> Remove all the stopped containers from system::
+sudo docker system prune
+   After this if you fire "sudo docker ps --all", you get 0 containers shown.
 
 
 
