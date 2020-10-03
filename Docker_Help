@@ -27,3 +27,23 @@ STOP A DOCKER CONTAINER::
 sudo docker stop <container id>  // get container id with "sudo docker ps" or "sudo docker ps --all"
 
 sudo docker kill <container id>
+
+
+EXECUTING COMMANDS IN A RUNNING CONTAINERS::
+===========================================
+in one terminal you fetch and run docker image like ::
+   docker run redis.
+   
+In other terminal 
+ get the container_id:
+   -> sudo docker ps 
+ Now run command isnide the container created from image installed in terminal 1.
+ --> sudo docker exec -it 447a63ec2569 redis-cli  // container id is given and "redis-cli" is the command for entering inside redis CLI to manipulate redis.
+
+
+
+
+
+
+
+
