@@ -143,9 +143,22 @@ open another terminal.
     // the 2nd command willl take us directtly to /usr/app.
 --> ls   // it will show us all the application code and files.
 
+==============================================================================================
+Every time making changes in the code should not build everything from scratch but use cache
+========================================================================================
+# Base image
+FROM node:alpine
 
+# Working directory
+WORKDIR /usr/app
 
+# Install dependencies
+COPY ./package.json ./         // copy package.json into docker container
+RUN npm install                // install dependencies
+COPY ./ ./                     // copy all files
 
+#   Default command
+CMD ["npm", "start"]
 
 
 
