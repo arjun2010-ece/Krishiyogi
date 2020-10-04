@@ -109,4 +109,49 @@ Then open browser in localhost:5000.
 SInce you tagged <container> with a name so you can go inside the container and check its content with below command::
 sudo docker run -it arjundocker/simpleweb sh     //sh open shell and inside it do "ls" to see the results.
 
+============================================================================================
+
+Updated Dockerfile with a working directory inside dockerfile::
+
+# Base image
+FROM node:alpine
+
+# Working directory
+WORKDIR /usr/app      // working directory mentioned inside docker container
+                      // purpose of workdir is to separate the application code separately.
+
+# Install dependencies
+COPY ./ ./
+RUN npm install
+
+
+#   Default command
+CMD ["npm", "start"]
+
+
+sudo docker build -t arjundocker/simpleweb .
+ -->tagging the container with a name.
+ 
+sudo docker run  -p 5000:8080 arjundocker/simpleweb
+  --> run the docker container and forward the req on a port.
+  
+we will run a second process inside a docker container with "docker exec" command.
+open another terminal.
+
+--> sudo docker ps  // get the <container Id" out of it.
+--> sudo docker exec -it 47169dcb116c sh  // runs shell on the docker container with ID "47169dcb116c".
+    // the 2nd command willl take us directtly to /usr/app.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
