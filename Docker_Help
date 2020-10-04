@@ -98,9 +98,12 @@ sudo docker run  -p 8080:8080 arjundocker/simpleweb    // -p for port and redire
 
 Open localhost:8080 on browser to see the result.
 
+if you change the port like this::
 
-
-
+sudo docker run  -p 5000:8080 arjundocker/simpleweb
+Then open browser in localhost:5000.
+5000 is the port for browser
+8080 is the port defined in the node application.
 
 
 
