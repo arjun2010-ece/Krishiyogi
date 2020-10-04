@@ -106,6 +106,7 @@ Then open browser in localhost:5000.
 8080 is the port defined in the node application.
 
 
-
+SInce you tagged <container> with a name so you can go inside the container and check its content with below command::
+sudo docker run -it arjundocker/simpleweb sh     //sh open shell and inside it do "ls" to see the results.
 
 
