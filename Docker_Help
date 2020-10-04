@@ -89,9 +89,14 @@ CMD ["npm", "start"]
 
 
 
+Build docker commands::
+sudo docker build -t arjundocker/simpleweb .    // tagging docker image to "arjundocker/simpleweb"
 
+Run docker on a particular port:
+sudo docker run  -p 8080:8080 arjundocker/simpleweb    // -p for port and redirect 8080 incoming request to port 8080
+                                                       // 8080:8080
 
-
+Open localhost:8080 on browser to see the result.
 
 
 
