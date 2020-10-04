@@ -72,8 +72,20 @@ sudo docker run arjundocker/redis
 // We just dont put ":latest" there.
 
 
+===============================================================================================
+
+SImple docker file for a NODEJS application
+
+# Base image
+FROM node:alpine
+
+# Install dependencies
+COPY ./ ./                             // node:alpine base image has node and npm installed but not the package.json file of a nodejs application
+RUN npm install                        // COPY cmd copies package.json file inside docker container and then only it installs dependencies.
 
 
+#   Default command
+CMD ["npm", "start"]
 
 
 
