@@ -141,7 +141,7 @@ open another terminal.
 --> sudo docker ps  // get the <container Id" out of it.
 --> sudo docker exec -it 47169dcb116c sh  // runs shell on the docker container with ID "47169dcb116c".
     // the 2nd command willl take us directtly to /usr/app.
-
+--> ls   // it will show us all the application code and files.
 
 
 
