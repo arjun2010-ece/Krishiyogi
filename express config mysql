@@ -88,8 +88,9 @@ select * from users; // please focus on uppercase and capitalize tables names
       -> sequelize-cli
 
 
-
-
+3. In the project root folder, fire the beow cmd:
+      npx sequelize-cli init    // it will generate config folder where database credentials are given
+                                // and models/index.js file are generated for base model configurations.
 
 
 
