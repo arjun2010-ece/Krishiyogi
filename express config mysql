@@ -1,5 +1,7 @@
 HOW TO CONNECT MYSQL WITH EXPRESS JS
 ====================================
+We need the base mysql-server installed globally but we need a wrapper package mysql2 inside express application for it to be able to connect.
+
 
 1. INSTALL MYSQL GLOBALLY
    sudo apt-get install mysql-server
