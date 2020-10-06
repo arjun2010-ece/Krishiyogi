@@ -80,4 +80,18 @@ show tables;
 create table users (username varchar(255), password varchar(255));
 select * from users; // please focus on uppercase and capitalize tables names
 
+=========================================================================
+2. With mysql we use Sequelize ORM.
+
+      two packages are installed here:
+      -> sequelize
+      -> sequelize-cli
+
+
+
+
+
+
+
+
 
