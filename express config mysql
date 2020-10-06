@@ -166,7 +166,10 @@ static associate(models) {
       },
  
  
- 
+ ==================
+ Migration using sequelize:::
+ -------------------------
+ npx sequelize db:migrate
 
 
  
