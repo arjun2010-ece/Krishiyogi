@@ -113,6 +113,69 @@ isDeleted: DataTypes.BOOLEAN
 and enum is used when you want to have only one value out of two defined values.
 
 
+5. For setting uprelationship between models: Product, Brand and category.
+
+in the model/Product/Brand.js, add association property for many to many relation
+
+static associate(models) {
+      // define association here for brand and product
+      Brand.belongsToMany(models.Product, { through: models.ProductBrand }); 
+    }
+
+in the model/Product/Category.js, add association property for many to many relation
+
+   static associate(models) {
+      // define association here for Category and Product.
+      Category.belongsToMany(models.Product, { through: models.ProductCategory });
+    }
+    
+ 
+ In the model/Product/Product.js, add association property for many to many relation.
+ Since product has many to many relation to Brand and Category so its mentioned below::
+ 
+static associate(models) {
+      // define association here
+      Product.belongsToMany(models.Category, { through: models.ProductCategory });
+      Product.belongsToMany(models.Brand, { through: models.ProductBrand });
+ }
+ 
+ Once you make changes in the relevant models/product/** file then now you need to make changes in the migration file of ProductBrand and ProductCategory as::
+ 
+ Just observe that we are using model: "Products" as plural bcoz its referring from product migration file where "Products" is mentioned.
+ ProductBrand::->
+ 
+ productId: {
+        type: Sequelize.INTEGER,
+        //add these for associating with Product table
+        references:{     
+          model: "Products",
+          key: "id"
+        },
+        onDelete: "cascade",
+        onUpdate: "cascade"
+      },
+ brandId: {
+        type: Sequelize.INTEGER,
+        //add these for associating with Brand table
+        references:{
+          model: "Brands",
+          key: "id"
+      }
+        onDelete: "cascade",
+        onUpdate: "cascade"
+      },
+ 
+ 
+ 
+
+
+ 
+ 
+ 
+
+
+
+
 
 
 
