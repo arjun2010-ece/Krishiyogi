@@ -104,6 +104,15 @@ npx sequelize-cli model:generate --models-path models/product --name Category --
 metaKeywords:string,categoryStatus:enum,isDeleted:boolean
 
 
+When you generate a model with attribute enum then you need to go to that model file ex Brand.js and change it to below:
+
+metaKeywords: DataTypes.STRING,
+brandStatus: {type: DataTypes.ENUM, values: ["active", "inactive"]}, //make this an object with type and values
+isDeleted: DataTypes.BOOLEAN
+
+and enum is used when you want to have only one value out of two defined values.
+
+
 
 
 
