@@ -96,8 +96,9 @@ select * from users; // please focus on uppercase and capitalize tables names
 4. Sequelize CLI models generation::
          --> First model generation command takes models-path, then models name then attributes (comma separated).
          here cmd is "model:generate"
-         npx sequelize-cli model:generate --models-path  "..."  --name "modelname"  --attributes "tyudh, aeyd"
-
+         npx sequelize-cli model:generate --models-path  "..."  --name "modelname in capitalised"  --attributes "tyudh, aeyd"
+      
+      Model name should be like Product, Category or Brand.
 Example::
 npx sequelize-cli model:generate --models-path models/product --name Category --attributes name:string,slug:string,description:string,metaDescription:string,
 metaKeywords:string,categoryStatus:enum,isDeleted:boolean
