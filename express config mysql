@@ -172,7 +172,13 @@ static associate(models) {
  npx sequelize db:migrate
 
 
+ RERUNNING MIGRATION AFTER CHANGES IN MODAL AND MIGRATION FILE::
+ ==============================================================
+ You need to delete migration file from sequelizeMeta from mysql database:
+ ex:
+ DELETE FROM online_exam_db.`sequelizemeta` WHERE (name = '20201009200546-create-quiz.js')
  
+ and delete tables also.
  
  
 
