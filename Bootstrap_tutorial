@@ -2,6 +2,63 @@ Important Links
 ===============
 https://www.youtube.com/watch?v=E8n2TAwUk7U&list=PLvQjNLQMdagP1lTH6SqDDd1v-hJ6e9KB8&index=25
 
+
+Bootstrap Navigation basic setup
+================================
+
+//navbar-expand-md tells from what screen size the below ul list needs to be visible oderwise hidden.
+// collapse navbar-collapse makes the div and ul hidden.
+// enable the toggler on medium screen.
+
+ <nav class="navbar navbar-expand-md bg-success navbar-light">
+        //here bg-success or anything is really important & navbar-light is also important.
+        // bckground color and forground color needed if toggler button needs to be visible.
+        <!-- brand -->
+        <a href="#" class="navbar-brand text-uppercase">
+          <h1>Admin Theme</h1>
+        </a>
+
+        <!-- toggler -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#myNavbar"
+        >
+          <span class="navbar-toggler-icon text-primary"></span>
+        </button>
+        
+        <!-- navbar links -->
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">
+                <i class="fa fa-home text-muted mr-3"></i>
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-list text-muted mr-3"></i>
+                App
+              </a>
+            </li>
+           </ul>
+         </div>
+</nav>
+
+
+If you want something to be visible only one medium and above screen otherwise hidden then use a mix of "d-none d-md-flex" classes.
+d-none will hide on all screen sizes.
+d-md-flex will enable it on medium and above screens only.
+
+
+
+
+
+
+
+
 Bootstrap Grid
 ===============
 Extra small <576px	col-xs-4
