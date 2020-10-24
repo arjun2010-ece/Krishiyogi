@@ -3,6 +3,35 @@ Important Links
 https://www.youtube.com/watch?v=E8n2TAwUk7U&list=PLvQjNLQMdagP1lTH6SqDDd1v-hJ6e9KB8&index=25
 
 
+
+Difference between containers and container fluids
+================================================
+
+Containers are smaller on screens and that is why we needs to see the UI and be able to tell that it is going to be container.
+Container-fluid is full width screen.
+
+In normal scenarios we use container-fluid with a width property .
+
+<div class="container-fluid width"></div>
+
+.width{
+    width: 98%;
+}
+there will be little whitespace on both sides of screen.
+
+-------------------
+And row class is used with height class oderwise your div will have height equal to the content height.
+<div class="row height mt-3">
+          <div class="col-12 col-md-4 col-lg-4 bg-success">
+            This is going to be amazing brow.
+          </div>
+</div>
+
+.height{
+    height: 100vh;
+}
+
+
 Bootstrap Navigation basic setup
 ================================
 
