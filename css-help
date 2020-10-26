@@ -17,7 +17,7 @@ div{
     width: 100%;
     max-width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; // it will fix the stretch in image when you give height to img tag or img container.
   }
 
 =============================================================================
