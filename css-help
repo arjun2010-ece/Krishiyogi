@@ -1,4 +1,33 @@
+MAKE THE IMAGE RESPONSIVE OF ANY SIZE::
+==========================================
+when the image is of big width than required then the img tag need to be wrapped with a container and give it width and height as::
+
+html:
+  <div>
+        <img src="https://images.pexels.com/photos/5292884/pexels-photo-5292884.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="jon doe">
+    </div>
+
+css:
+div{
+    width: 250px;
+    height: 250px;
+  }
+  
+  img{
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+=============================================================================
+
+
+
+
 use font awesome icons in css::
+
+
 
  <p>paragraph text</p>
     p:before {
