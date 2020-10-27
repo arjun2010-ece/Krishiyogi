@@ -4,6 +4,20 @@ https://www.youtube.com/watch?v=E8n2TAwUk7U&list=PLvQjNLQMdagP1lTH6SqDDd1v-hJ6e9
 
 
 
+Bootstrap flex and margin relation
+====================================
+By default we have a margin/padding of 10px on every block element and it becomes more prominent when using flex property in bootstrap.
+
+<div class="d-flex justify-content-between">
+  <span>Arjun</span>
+  <p class="mb-0">This is a para and by default it will have a margin of 10px</p>
+</div>
+
+
+both span and p tag will not be on the same level horizontally to make them on same level we need to give mb-0 class on p tag.
+
+
+
 Difference between containers and container fluids
 ================================================
 
