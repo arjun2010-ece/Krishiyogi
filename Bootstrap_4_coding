@@ -1,3 +1,9 @@
+Align self center::
+=================
+inside a flex containe some elements are not verticallly centered so align-self-center will center it plus if needed m-0 also.
+
+
+
 1. Creating for medium screen small screen
 ===========================================
 
