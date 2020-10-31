@@ -1,0 +1,26 @@
+In react we dont need to memoize the whole functions but only the network requests:
+
+solution:: memoize fn of lodash.
+
+The following function is called multiple times::
+
+export const fetchUsers = (id) => {
+    return async (dispatch) => {
+        const response = await jsonPlaceholder.get("/users"+id);
+
+        dispatch({ type: "FETCH_POSTS", payload: response.data });
+    }
+};
+
+and the solution is to use lodash "memoize".
+The major thing to NOTICS is that WE NEED TO EXTRACT NETWORK REQUESTS IN A SEPARATE FUNCTION AND THEN MEMOIZE IT like below::
+
+export const fetchUser = (userId) =>  dispatch => {
+        _fetchUser(userId, dispatch);
+};
+
+const _fetchUser = _.memoize(async (userId, dispatch) => {
+    const response = await jsonPlaceholder.get("/users/"+ userId);
+    dispatch({ type: "FETCH_USER", payload: response.data });
+
+});
