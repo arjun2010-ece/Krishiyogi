@@ -1,6 +1,12 @@
 JS CONVERT FILES INTO BASE64::
 =============================
 
+Note::
+files can be converted into base64 either in frontend or backend.
+
+The below is an example of conversion in frontend.
+
+
 BASE64 format is the most optimised format and it is a string of alphanumeric characters.
 
 in frontend on upload of a file its shown like this::
