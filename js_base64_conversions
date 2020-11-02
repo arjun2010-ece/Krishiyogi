@@ -1,0 +1,39 @@
+JS CONVERT FILES INTO BASE64::
+=============================
+
+BASE64 format is the most optimised format and it is a string of alphanumeric characters.
+
+in frontend on upload of a file its shown like this::
+
+html:
+<input type="file" id="file">
+
+
+
+JS::
+--
+// fn to convert into base 64 format
+const getBase64 = (file) => new Promise(function (resolve, reject) {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = (error) => reject('Error: ', error);
+})
+
+
+
+let fileEl = document.getElementById("file");
+
+fileEl.addEventListener("change", function(e){
+  const file = e.target.files[0];
+  let encoded;
+  // base 64 function call
+  getBase64(file)
+      .then((result) => {
+            encoded = result;
+            let x = encoded.replace(/^data:image\/\w+;base64,/, ""); // this removes the unnecessary characters from base64 strings.
+            console.log(x); // base 64 data
+       })
+      .catch(e => console.log(e))
+})
+
