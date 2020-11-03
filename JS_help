@@ -3,6 +3,51 @@ List of JS projects for study::
 https://code-projects.org/c/languages/project/jsprojects/
 
 
+DIFFERENCE BETWEEN PRE-INCREMENT AND POST INCREMENT:
+==================================================
+e.g b++ /++b
+
+In general both are same but diff exists during assignment.
+var b=3
+b++ / ++b
+console.log(b)  //4
+
+there is no assignment so console gives 4.
+
+Next scenario:
+
+var b=3
+var c = b++ // c gives 3 bcoz first b is assigned to C and then b incremented but not assigned to C.
+console.log(c)  //3
+
+-------
+
+var b=3
+var c = ++b // b incremented and assigned to C and c equals to 4.
+console.log(c)  //4
+
+
+var b=3 equals to :
+var b;
+b=3
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+var b=3;
+var c = b++;
+
+equal to::
+var b;
+b=3;
+var c;
+c=b++;
+
+
+During assignment they are different but without it same same...
+
+VERY VERY IMPORTANT
+ExTREMEMLY IMPORTANT....
+=======================
+
+
 
 Sometimes a HTML SELECT is populating options from api/backend and there is no way of knowing when that data is being 
 populated and we dont have acccess of API request like axios/fetch in frontend then  we completely blind and lost.
