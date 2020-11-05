@@ -1,3 +1,24 @@
+CSS Media queries::
+==================
+Although there are varied breakpoints in screen sizes but the most popular screens 
+has widths are::
+
+320px
+480px
+600px
+768px
+
+900px
+1024px
+1200px
+
+
+https://www.toptal.com/responsive-web/introduction-to-responsive-web-design-pseudo-elements-media-queries
+
+Most popular youtube videos to practise::
+https://www.youtube.com/watch?v=WzLuTCRpvag&list=PL5e68lK9hEzciaR-CFduKDww_AVVUw66y&index=2
+
+
 MAKE THE IMAGE RESPONSIVE OF ANY SIZE::
 ==========================================
 when the image is of big width than required then the img tag need to be wrapped with a container and give it width and height as::
