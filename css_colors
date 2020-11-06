@@ -13,3 +13,13 @@ centered  div block background-color: #FAFAFA;
 
 inspiration:: 
 https://neotalent.kyloe.plus/viewer/1603878088434ae20e81112ab8f4a7dfcefcc488de177673b2d8b
+
+
+Another combination is::
+
+body bg: #ccc;
+container tag(80%): #fff;
+.col-7, col-3: bg: #f1f1f1;(very light bluish)
+inspiration: 
+https://www.youtube.com/watch?v=WzLuTCRpvag&list=PL5e68lK9hEzebKqqREULz07nwesT2tJxG&index=2
+
