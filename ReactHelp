@@ -7,7 +7,17 @@ ReactJS Pagination library::
 
 https://www.npmjs.com/package/react-paginate
 
-Note: in github for edirectInsure also implemented and its very simple.
+Note: in github for huub challenge also implemented and its very simple.
+
+Note:
+This package does not have a css so for having css in this, we need to either write css or use bootstrap css of pagination component.
+Or install bootstrap in some random project and take the css from there and paste it for your projects css file.
+
+This package is not responsive. To make it responsive either manipulate "marginPagesDisplayed" and "pageRangeDisplayed"
+based on resize event in reactJS.
+Entire thing is displayed in :
+https://github.com/arjun2010-ece/huub_challenge_react_pagination/blob/master/src/components/ProductList.js
+
 
 Modal/Popup help
 ================
