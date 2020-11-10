@@ -2,6 +2,17 @@ Very important link of a simple classy project built with react and react-bootst
 https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-in-react-38f3686b3388
 
 
+Modal/Popup help
+================
+
+-> It is very very easy to use in any UI framework.
+
+https://www.npmjs.com/package/react-responsive-modal
+https://codesandbox.io/s/9jxp669j2o?file=/index.js:499-514
+
+
+
+
 LIST OF MEDIUM WITH RADIOBOX
 ============================
 ALL THE INPUT TYPE RADIO should have the same name if we want to select only one radio box.
