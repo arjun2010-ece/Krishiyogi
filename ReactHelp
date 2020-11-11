@@ -646,6 +646,9 @@ this.state={
 
 CONDITIONALLY APPLYING CSS IN REACT COMPONENT or JS:::
 ======================================================
+One more way is to use like this in className::
+className={"form-control" + (conditionalClass ? ` ${conditionalClass}`: "")};
+
 Ex1:
 
 let completeClass = project.completed ? 'project-completed' : ''; //conditionall class
