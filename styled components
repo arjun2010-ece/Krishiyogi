@@ -1,0 +1,29 @@
+<SlideItem>
+          <div
+            dangerouslySetInnerHTML={{ __html: text.childMarkdownRemark.html }}
+          />
+</SlideItem>
+
+With media queries:::
+
+const SlideItem = styled.div`
+    font-family: Roboto, sans-serif;
+    line-height: 1.25;
+    font-size: 22px;
+    color: #170f4f;
+    user-select: none;
+    margin-top: 2rem;
+    max-width: 75vw;
+    @media (min-width: 768px) {
+      width: 40vw;
+      min-width: 280px;
+      max-width: 450px;
+      margin-top: 3rem;
+      font-size: 32px;
+      line-height: 1.25;
+    }
+    @media (min-width: 1024px) {
+      width: 40vw;
+      margin-top: 3rem;
+    }
+`==========================================================
