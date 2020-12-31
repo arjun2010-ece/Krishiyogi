@@ -2,6 +2,16 @@ Very important link of a simple classy project built with react and react-bootst
 https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-in-react-38f3686b3388
 
 
+Scroll event from any nested down level component
+=================================================
+
+In case of nested component of any level ex: if a section div has header and mid section and footer component and 
+we need to do something on scroll events even on footer component.  We need to understand that even though the footer component size on
+webpage may be small but still we need to implement scroll on footer bcoz we are implementing scroll on WINDOW object that can be access from 
+anywhere so we can do our stuff on footer based on scroll and the scroll refers to global scroll on the webpage not on footer component.
+
+
+
 ReactJS Pagination library::
 ==========================
 
