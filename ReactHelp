@@ -101,9 +101,94 @@ const App = () => {
 export default App;
 
 
+==================================================
 
+HOW TO MAKE A NUMBER COUNT UP FROM ZERO TO SAID AMOUNT LIKE 45/345 etc.
+======================================================================
+Here if the text is like "3 Minutes" then also the number will move from 0 to 3 but text will remain static.
+"react-countup"  is used for moving the number from zero to 10/5.5/36000/3 as is shown in below phrases or texts.
+"use-is-in-viewport" is a library that is used for tracking the DIV when its in view upon scrolling. Yoou just need to put "ref" there on that DIV.
+usage:
+  const [isInViewport, targetRef] = useIsInViewport();
 
+<div ref={targetRef}>
+this div is present somewhere very bottom in the webpage which is not in view currently.
+</div>
 
+Whenever this DIV is in viewport upon scroll then a flag variable "isInViewport" becomes true and based on this flag variable you can do anything 
+like render a text.
+
+sample code::
+============
+
+import React, {useState} from 'react'
+import CountUp from 'react-countup';
+import useIsInViewport from 'use-is-in-viewport';
+
+const App = () => {
+  const [statistics,] = useState(
+    ["10", "5.5 million", "36000", "every 3 minutes"]
+  )
+
+  const [isInViewport, targetRef] = useIsInViewport();
+
+  const checkInteger = (num) => {
+    return Number.isInteger(num);
+  }
+
+  const getValue = (value) => {
+    if(isNaN(value)){
+      const extractedNumber = Number(value.replace(/[^0-9\.]+/g,""));
+      const text = value;
+      const txtArray = text.split(extractedNumber).map(el => el.trim()).filter(el => el.trim() !== "");
+      // check for float number
+      return txtArray.length === 1 ? (
+        checkInteger(extractedNumber) ? (
+          <CountUp start={0} end={extractedNumber} duration={2} suffix={` ${txtArray[0]}`} />
+        ):(
+          <CountUp start={0} end={extractedNumber} duration={2} suffix={` ${txtArray[0]}`} decimals={1} decimal="." />
+        )
+      ):(
+        checkInteger(extractedNumber) ? (
+          <CountUp start={0} end={extractedNumber} duration={2} prefix={`${txtArray[0]} `} suffix={` ${txtArray[1]}`} />
+        ):(
+          <CountUp start={0} end={extractedNumber} duration={2} prefix={`${txtArray[0]} `} suffix={` ${txtArray[1]}`} />
+        )
+      )      
+    }
+    else{
+      return checkInteger(Number(value)) ? (
+        <CountUp start={0} end={Number(value)} duration={2} />
+      ):(
+        <CountUp start={0} end={Number(value)} duration={2} decimals={1} decimal="." />
+      )
+    }
+  }
+
+  return (
+    <div className="container">
+       <h3>Application.........</h3>
+       <div className="scroll-element">
+       </div>
+        
+       <div className="scroll-container"  ref={targetRef}>
+         {
+           isInViewport && <div className="scrolx">
+             {
+               statistics?.map((stat, i) => {
+                 return <p key={i}>{getValue(stat)} </p>;
+               })
+             }
+           </div>
+         }
+          
+       </div>
+
+       <hr />
+        
+    </div>
+  )
+}
 
 
 Scroll event from any nested down level component
