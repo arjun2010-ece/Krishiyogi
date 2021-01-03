@@ -2,6 +2,110 @@ Very important link of a simple classy project built with react and react-bootst
 https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-in-react-38f3686b3388
 
 
+VERY VERY IMPORTANT USE OF "Key" ATTRIBUTE IN REACTJS NOT IN A MAP FNS::
+=======================================================================
+
+Here in this code  a MODAL is called multiple times but not inside a MAP FN but a modal receives a STATE variable which keeps on changing based on NEXT/PREVIOUS
+BUTTON state variable changes and so its data too changes.
+
+In normal scenario without a key will work inside a modal whose value changes based on state variable.
+but if you use animation library like reavt-reveal then animation will not work based on NEXT/PREVIOUS click and state variablle change.
+For animation to work we need to use "Key" prop whenever state variable is mentioned.
+
+
+import React, {useState, useEffect} from 'react';
+import {Fade} from 'react-reveal';
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+  const [effect, setEffect] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [profile, setProfile] = useState({});
+
+  const [profiles] = useState([
+    {title: "First title", description: "It is first description"},
+    {title: "Second title", description: "It is second description"},
+    {title: "third title", description: "It is third description"},
+  ]);
+
+  const onOpenModal = (item) => {
+    setProfile(item);
+    setOpen(true);
+  }
+
+  const onCloseModal = () => setOpen(false);
+  const handlePrev = () => {
+    if(index > 0){
+      let i = index - 1;
+      setIndex(i);
+      setProfile(profiles[i]);
+    }
+  }
+
+  const handleNext = () => {
+    if(index < profiles.length - 1){
+      let i = index + 1;
+      setIndex(i);
+      setProfile(profiles[i]);
+    }
+  }
+
+  return (
+    <div>
+      <h1>Application..............</h1>
+      <div className="container">
+        {
+          profiles.map((p, i) => (
+            <div key={i} className="item" onClick={() => onOpenModal(p)}>
+              <h1>{p.title}</h1>
+            </div>
+          ))
+        }
+      </div>
+
+      <Modal open={open} onClose={onCloseModal} center
+        classNames={{
+          overlay: 'customOverlay',
+          modal: 'customModal',
+        }}>
+          <h2>Simple centered modal</h2>
+            
+              <Fade bottom delay={700} key={profile.title}> // based on this "key" attribute it forces animation from next/previous btn click
+	      						    // as profile.title is used here.
+                <h5>
+                    {profile.title}
+                </h5>
+              </Fade>
+
+            
+              <Fade bottom delay={800} key={profile.description}> // based on this "key" attribute it forces animation from next/previous btn click
+	      							// as profile.description is used here.
+                <p>
+                  {profile.description}
+                </p>
+              </Fade> 
+            
+
+          <div className="btn-group">
+            <button className="btn" onClick={handlePrev}>Prev</button>
+            <button className="btn" onClick={handleNext}>Next</button>
+          </div>
+          
+      </Modal>
+
+    </div>
+  )
+}
+export default App;
+
+
+
+
+
+
+
 Scroll event from any nested down level component
 =================================================
 
@@ -9,6 +113,32 @@ In case of nested component of any level ex: if a section div has header and mid
 we need to do something on scroll events even on footer component.  We need to understand that even though the footer component size on
 webpage may be small but still we need to implement scroll on footer bcoz we are implementing scroll on WINDOW object that can be access from 
 anywhere so we can do our stuff on footer based on scroll and the scroll refers to global scroll on the webpage not on footer component.
+
+e.g:
+
+<main>
+	<header />
+	<middleSection />
+	<footer />
+</main>
+
+we can have scroll events from top to bottom defined in either header or middleSection or footer component and all will ensure full webpage scroll and if we have
+to do something  in any particular component like changing background color or font size or changing the UI then we can easily do that. Only one thing that 
+we need to define scroll events in that particular component only not any parent component.
+
+const [detectScroll, setDetectScroll] = useState(false);
+useEffect(() => {
+   const handleScroll = () => {
+	setDetectScroll(true);
+   }
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+}, []);
+
+
+Now we are DETECTING THE SCROLL based on a flag variable or state variable and we can do anything on the component based on this flag variable.
 
 
 
