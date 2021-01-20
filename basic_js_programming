@@ -21,3 +21,41 @@ for(let i = 0; i < labels.length; i++){
 ]
 ===================================================================================
 
+2. Compare array of objects with array of array and add the missing value in second array based on first array.
+
+
+const businessMediaObject = [{
+    "id": 264,
+    "mediaId": 10390,
+    "caption": "Merchant_455_StoreBIRCertificate"
+  },
+  {
+    "id": 265,
+    "mediaId": 10391,
+    "caption": "Merchant_455_BusinessIDProof"
+  },
+  {
+    "id": 266,
+    "mediaId": 10394,
+    "caption": "Merchant_455_BusinessIDProof janu"
+  },
+  {
+    "id": 268,
+    "mediaId": 10394,
+    "caption": "Merchant_455_BusinessIDProof janu"
+  }
+];
+
+let toggleData = [[264, 3], [265, 3]];
+
+
+businessMediaObject.map(data => {
+  const dataFil = toggleData.filter(el => el[0] === data.id);
+  if (dataFil.length < 1) {
+    toggleData.push([data.id, 4]);
+  }
+});
+
+console.log('toggleData....', toggleData);
+
+=========================================================
