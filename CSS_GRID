@@ -1,0 +1,37 @@
+CSS GRID IS FOR 2 DIMENSIONAL STRUCTURE. AN ENHANCEMENT OF CSS FLEXBOX.
+
+display: grid
+
+It makes the parent DIV as container GRID and then we can manipulate its direct childrens with other 2 major properties like::
+    grid-template-columns and grid-template-rows. Out of two grid-template-columns will always take priorities meaning first elements willl be always 
+    converted to columns beore rows.
+   
+grid-template-columns : It will be always applied to parent DIV and it puts all the GRID childrens into columns side by side in first row. If more element 
+                        exists than the columns mentioned then it goes to the second row.
+                        
+                        grid-template-columns: repeat(6, 1fr); // create 6 columns of equal width.
+                        This property is concerned with width. While below is concerned with height(rows).
+                        
+
+grid-template-rows : The formed rows after the above columns property can be given height based on this.
+
+                     grid-template-rows: repeat(4, minmax(100px, auto)); // create 4 equal rows with min-height of 100px and max height of auto.
+                     // If all the childrens are adjusted in first row then also it will create 4 rows, obviously other rows will be empty.
+
+
+grid-gap: This can create space/margin between rows and columns.
+          e.g: grid-gap: 10px 20px; // margin 10px between rows and 20px between columns (rows * columns).
+          
+          
+Now we are left with GRID LINES properties::
+
+It can remove the usage of positioning as this one helps in positioning of grid childs.
+
+There is a line say 2 different corners of a column in a box, called grid line for both rows and columns.
+
+grid-column: 1/3; // from first line to 3rd line in columns section.
+grid-row: 3/5;  // from 3rd line to 5th line in rows section
+
+
+These 2 properties are used on each direct child elements of PARENT GRID DIVS.
+
