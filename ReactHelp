@@ -2,6 +2,38 @@ Very important link of a simple classy project built with react and react-bootst
 https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-in-react-38f3686b3388
 
 
+
+
+
+
+CHECK FOR SCROLL IN A REACT APPLICATION:: TOGGLE BACKGROUND COLOR ON SCROLL
+========================================
+
+ITS MAJOR APPLICATION IS WHEN WE SCROLL DOWN THEN "NAVBAR" BACKGROUND COLOR CHANGES AND AS WE SCROLL UP TO THE TOP THEN IT AGAIN CHANGES.
+OR IT TOGGLES THE BG COLOR ON SCROLL.
+
+As scroll events are attached to window object so we can keep this code anywhere in any component, wherever we need, either in nested cor parent component.
+
+  const [detectScroll, setDetectScroll] = useState(false)
+
+  const handleScroll = (e) => {
+    if(window.pageYOffset === 0) {
+      setDetectScroll(false);
+    }
+    else{
+      setDetectScroll(true);
+    }    
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
+
 VERY VERY IMPORTANT USE OF "Key" ATTRIBUTE IN REACTJS NOT IN A MAP FNS::
 =======================================================================
 
