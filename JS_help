@@ -3,6 +3,107 @@ List of JS projects for study::
 https://code-projects.org/c/languages/project/jsprojects/
 
 
+ARRAY.FROM
+==========
+It makes an array from any iterable elements.
+
+Case 1: Array of objects:
+-------------------------
+
+let desktopGroups = [
+    { "format": "svg", "url": "https://www.datocms-assets.com/42599/1613471449-chubb.svg" },
+    { "format": "svg", "url": "https://www.datocms-assets.com/42599/1613471451-liberty-mutual.svg" },
+    { "format": "svg", "url": "https://www.datocms-assets.com/42599/1613471452-national-general.svg" },
+    { "format": "svg", "url": "https://www.datocms-assets.com/42599/1613471454-progressive.svg" }
+  ]
+
+Array.from({ length: desktopLoops }, () => group); // "length" tells length of array to produce and callback tells each element manipulation.
+
+let desktopLoops = 2;
+
+desktopGroups.map((group, i) => {
+  let y = Array.from({ length: desktopLoops }, () => group);
+  console.log(y);
+} )
+-----------
+The above code (Array.from) generates 4 arrays as "desktopGroups" contains 4 elements with each array from (Array.from) has 2 elements decided by () => group(same element 2 times)
+-----------
+result::
+[
+  { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471449-chubb.svg' },
+  { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471449-chubb.svg' }
+]
+
+[
+  { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471451-liberty-mutual.svg' },
+  { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471451-liberty-mutual.svg' }
+]
+
+[
+  { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471452-national-general.svg' },
+  { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471452-national-general.svg' }
+]
+
+[
+  { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471454-progressive.svg' },
+  { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471454-progressive.svg' }
+]
+
+
+
+Case 2: Array of Array of objects:
+---------------------------------
+
+Since desktopGroups is array of array so looping over array with each element represents the internal array.
+
+
+
+let desktopGroups = [
+  [
+    {
+      "format": "svg",
+      "url": "https://www.datocms-assets.com/42599/1613471449-chubb.svg"
+    },
+    {
+      "format": "svg",
+      "url": "https://www.datocms-assets.com/42599/1613471451-liberty-mutual.svg"
+    },
+    {
+      "format": "svg",
+      "url": "https://www.datocms-assets.com/42599/1613471452-national-general.svg"
+    },
+    {
+      "format": "svg",
+      "url": "https://www.datocms-assets.com/42599/1613471454-progressive.svg"
+    }
+  ]
+]
+
+let desktopLoops = 2;
+
+desktopGroups.map((group, i) => {
+  let y = Array.from({ length: desktopLoops }, () => group);
+  console.log(y);
+} )
+
+Results::
+
+[
+  [
+    { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471449-chubb.svg' },
+    { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471451-liberty-mutual.svg' },
+    { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471452-national-general.svg },
+    { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471454-progressive.svg' }
+  ],
+  [
+    { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471449-chubb.svg' },
+    { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471451-liberty-mutual.svg' },
+    { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471452-national-general.svg },
+    { format: 'svg', url: 'https://www.datocms-assets.com/42599/1613471454-progressive.svg' }
+  ]
+]
+
+
 DIFFERENCE BETWEEN PRE-INCREMENT AND POST INCREMENT:
 ==================================================
 e.g b++ /++b
