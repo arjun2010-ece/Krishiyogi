@@ -1,3 +1,20 @@
+
+  MAKE THE BACKGROUND IMAGE AS RESPONSIVES::
+  ========================================
+  
+    background-image: url(${image?.fluid?.src});
+    ${tw`h-full`};
+    background-position: ${bgPosition ? bgPosition : 'center'};
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    HERE "background-position" is what can make it responsive. Its value "center" does not automatically make it to the viewport width always.
+    But manipulating with values like "60% 0" or "70% 0", increase or decrease can make it responsive.
+    
+    ITS VERY IMPORTANT TIPS:::::
+
+
+
 CSS Media queries::
 ==================
 Although there are varied breakpoints in screen sizes but the most popular screens 
