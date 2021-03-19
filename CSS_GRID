@@ -30,6 +30,8 @@ Below "services" DIV has 6 "service" DIV as child so if we put "auto-fill" or "a
 
 
 
+BEST APPROACH::
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
 
 HTML::
