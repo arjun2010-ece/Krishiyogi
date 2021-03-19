@@ -1,4 +1,26 @@
 
+  USAGE OF WIDTH AND MAX-WIDTH TOGETHER::
+  =======================================
+  When we use width and max-width together then by default max-width takes priority.
+  But as the screen size is reduced or smaller than max-width then width takes preference.
+  
+  We can say that on large screen "max-width" takes preference and on smaller screen "width" takes preference.
+  
+  .container {
+    width: 90%;
+    max-width:1100px;
+    margin: 0 auto;
+    border: 2px solid;
+}
+
+when the screen resolution is bigger then max-width is the total width of the screen.
+As the screen size is reduced then width takes preference.
+
+VERY AMAZING APPROACH TO BE USED IN CSS::::
+
+  
+  
+  
   MAKE THE BACKGROUND IMAGE AS RESPONSIVES::
   ========================================
   
