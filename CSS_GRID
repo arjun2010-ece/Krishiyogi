@@ -1,3 +1,61 @@
+CSS GRID TEMPLATE COLUMNS, REPEAT, AUTO-FILL, AUTO-FIT, MINMAX
+==============================================================
+
+CSS:
+
+.services {
+    border: 3px solid black;
+    height: 300px; //need to define a specific height if we want it
+    display:grid;
+    
+    grid-template-columns: repeat(6, 1fr); // make 6 equal columns with each column is 1/6th of the viewport (100VW / 6)
+    grid-template-columns: repeat(6, 200px); // make 6 columns with each column width of 200px.
+    grid-template-columns: repeat(auto-fill, 200px); // make each columns of width 200px, as auto-fill means the number of child element i.e service class (6)
+    grid-template-columns: repeat(auto-fit, 200px); // make each columns of width 200px, as auto-fill means the number of child element i.e service class (6)
+                                                    // when screen size is reduced for responsivity then there will be empty space, also for auto-fill above scenario.
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                                    // make the required column (decided by number of child element i.e service class (6)) with min width of 300px and max width of 1fr.
+                                    // when the screen size is reduced for responsivity then there will be no additional empty spaces, which is ideal.
+}
+
+
+DIFFERENCE BETWEEN "auto-fill" vs "auto-fit"::
+----------------------------------------------
+Not much difference but if you check in firefox grid lines then "auto-fill" has more lines than the required lines
+BUT "auto-fit" has only required lines.
+
+MEANING OF "auto-fill" and "auto-fit":
+It simply means required number of child of parent as number of columns.
+Below "services" DIV has 6 "service" DIV as child so if we put "auto-fill" or "auto-fit" it means number of child of "services" DIV.
+
+
+
+
+
+HTML::
+<div class="services">
+        <div class="service service-1">
+            <h2>service 1</h2>
+        </div>
+        <div class="service service-2">
+            <h2>service 2</h2>
+        </div>
+        <div class="service service-3">
+            <h2>service 3</h2>
+        </div>
+        <div class="service service-4">
+            <h2>service 4</h2>
+        </div>
+        <div class="service service-5">
+            <h2>service 5</h2>
+        </div>
+        <div class="service service-6">
+            <h2>service 6</h2>
+        </div>
+    </div>
+
+
+-----------------------------------------------------------------------
 CSS GRID IS FOR 2 DIMENSIONAL STRUCTURE. AN ENHANCEMENT OF CSS FLEXBOX.
 
 display: grid
