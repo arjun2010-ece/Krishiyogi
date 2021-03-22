@@ -57,6 +57,22 @@ HTML::
     </div>
 
 
+    difference between repeat with minmax::
+    _______________________________________
+    
+    grid-template-columns: repeat(auto-fit, 33.33%); 
+    // create required number of columns with each columns FIXED WIDTH of 33.33%, auto-fit gives number of column by number of grid childs.
+    // when we reduce the screen size, still grid childs will not wrap to other rows.
+    
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    // auto-fit tells number of grid childs.
+    //Since we are using minmax() then as the screen size is reduced the grid childs will wrap to second row.
+    
+    That is the biggest difference between using minmax and not using it also.
+    
+
+
+
 -----------------------------------------------------------------------
 CSS GRID IS FOR 2 DIMENSIONAL STRUCTURE. AN ENHANCEMENT OF CSS FLEXBOX.
 
