@@ -1,6 +1,15 @@
 
-  USAGE OF WIDTH AND MAX-WIDTH TOGETHER::
-  =======================================
+When out of two images one image is of right size and other is of small size::
+=============================================================================
+In that case the UI will look bad so to make the small image takeup available space, we have to do::
+
+img {
+ width: 100%;
+}
+
+
+USAGE OF WIDTH AND MAX-WIDTH TOGETHER::
+=======================================
   When we use width and max-width together then by default max-width takes priority.
   But as the screen size is reduced or smaller than max-width then width takes preference.
   
