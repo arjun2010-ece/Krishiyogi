@@ -4,3 +4,111 @@ https://dev.to/afif/100-underline-overlay-animation-the-ultimate-css-collection-
 
 I need to copy these animations in codepen for future use.
 
+
+CSS ANIMATIONS MAJOR PROPERTIES::
+=================================
+
+1. transform: translate (x, y, z directions) : moving in either x axis (straight ), or y-axis or z-axis.
+2. transform: rotating (x, y, z directions) : rotating in either x axis (straight ), or y-axis or z-axis.
+3. transform: scale - increasing size in  (x, y, z directions) : increasing in either x axis (straight ), or y-axis or z-axis.
+
+
+DOING ANIMATIONS only on one element is very easy BUT if you want to simultaneously do animations on multiple elements together
+then you need to sync when they start or decide their sequence, like first one start immediately , second one after 5 second and third one after 10 seconds.
+AND that is decided by ANIMATION DELAY PROPERTY and that is used together with ANIMATION DURATION PROPERTY.
+
+
+example:
+ display multiple images one after other like, 3 sets of images with each set having some images and display each set one after other in fadeIN/fadeOut way.
+ 
+ 3 imgbox tells 3 different sets of images that need to display one after other.
+ 
+ HTML::
+ <div id="img1" class="imgbox">
+  <img src="https://www.datocms-assets.com/42599/1615901608-metlifelogo-1.svg">
+  <img src="https://www.datocms-assets.com/42599/1617278812-geovera.svg">
+  <img src="https://www.datocms-assets.com/42599/1615901608-metlifelogo-1.svg">
+  <img src="https://www.datocms-assets.com/42599/1617278812-geovera.svg">
+  <img src="https://www.datocms-assets.com/42599/1615901608-metlifelogo-1.svg">
+  <img src="https://www.datocms-assets.com/42599/1617278812-geovera.svg">
+</div>
+
+<div id="img2" class="imgbox">
+  <img src="https://www.datocms-assets.com/42599/1617278812-geovera.svg">
+  <img src="https://www.datocms-assets.com/42599/1615901608-metlifelogo-1.svg">
+  <img src="https://www.datocms-assets.com/42599/1617278812-geovera.svg">
+  <img src="https://www.datocms-assets.com/42599/1615901608-metlifelogo-1.svg">
+  <img src="https://www.datocms-assets.com/42599/1617278812-geovera.svg">
+  <img src="https://www.datocms-assets.com/42599/1615901608-metlifelogo-1.svg">
+</div>
+  
+<div id="img3" class="imgbox">
+    <img src="https://www.datocms-assets.com/42599/1617278812-geovera.svg">
+  <img src="https://www.datocms-assets.com/42599/1615901608-metlifelogo-1.svg">
+</div>
+
+CSS:::
+=======
+
+.imgbox{
+  display: flex; 
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-position: center center;
+  background-size: cover; 
+}
+.imgbox img{
+  width: 100px;
+  height: 100px;
+  margin: 32px;
+}
+#img1{
+  position: absolute;
+  z-index: 3;
+  animation: xfade 15s -0s infinite;
+  animation-timing-function: ease-in-out;
+}
+
+#img2{
+  position: absolute;
+  z-index: 2;
+  animation: xfade 15s -5s infinite;
+  animation-timing-function: ease-in-out;
+}
+
+#img3{
+  position: absolute;
+  z-index: 1;
+  animation: xfade 15s -10s infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes xfade{
+    0% {opacity: 0;}
+    20% {opacity: 1;}
+    33% {opacity: 1;}
+    53% {opacity: 0;}
+    100% {opacity: 0;}
+}
+
+here xfade animations has multiple stages for smooth fadeing effect, infact the more stages the more smooth effect happens.
+
+If you observe #img1, #img2 and #img3 then you find that all the 3 different sets of images are implementing animation.
+
+BUT the big BUT lies in when each animation starts and that is decided by animation delay property.
+
+#img1{
+  animation: xfade 15s -0s infinite; // here -0s/0s tells start the animation ( and visible too immediately) immediately that will last for 15s.
+  animation-timing-function: ease-in-out;  // bcoz of (-0s) animation delay it will start and visible immediately.
+}
+
+#img2{
+  animation: xfade 15s -5s infinite; // animation will start much before (but will remain invisible) the starting time but will be visible only 
+  animation-timing-function: ease-in-out; // after 5s of animation time/duration has passed bcoz of (-5s) animation delay.
+}
+
+#img3{
+  animation: xfade 15s -10s infinite; // animation will start much before (but will remain invisible) the starting time but will be visible only 
+  animation-timing-function: ease-in-out; // after 10s of animation time/duration has passed bcoz of (-10s) animation delay.
+}
