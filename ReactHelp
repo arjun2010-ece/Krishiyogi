@@ -3,8 +3,62 @@ https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-
 
 
 
-REACT APPLICATION TO DISPLAY 6 IMAGES at a TIME::
-===============================================
+REACT APPLICATION TO ANIMATE(FADE IN FADE OUT) ONLY 6 ELEMENT out of A LIST OF 19 ELEMENTS
+=========================================================================================
+
+import chunk from 'lodash/chunk'
+import PropTypes from 'prop-types'
+import React, { useState, useEffect } from 'react'
+import tw, { css } from 'twin.macro'
+import { StyleType } from '../utils/prop-types'
+import Image from './image'
+
+const LogoGrid = ({ logos, style }) => {
+  const [group, setGroup] = useState(0)
+  const groupings = chunk(logos, 6)
+
+  return (
+    <div css={[tw`relative h-56 mt-8 lg:(h-72 mt-0)`, style, tw`px-0`]}>
+      {groupings.map((grouping, i) => (
+        <div
+          css={[
+            tw`w-full absolute grid grid-cols-3 grid-rows-2 gap-12
+            lg:(gap-x-16 gap-y-12 mt-26) xl:gap-x-32`,
+            css`
+            @keyframes xfade {
+              0% {opacity: 0;}
+              20% {opacity: 1;}
+              33% {opacity: 1;}
+              53% {opacity: 0;}
+              100% {opacity: 0;}
+            }
+            animation: xfade 20s ease-in-out infinite;
+            animation-delay: ${i === 0 ? '-0s' : `${i === 1 ? '-5s' : `${i == 2 ? '-10s' : `${i === 3 ? '-15s' : '-20s'}`}`}`};
+            &:hover {
+              animation-play-state: paused;
+            }
+            `,
+          ]}
+          key={i}
+        >
+          {(grouping || []).map((logo, index) => (
+            <div key={index} css={tw`h-12`}>
+              <Image image={logo} />
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+w-full is to handle a special scenario when grid is less than the parent container.
+
+
+
+
+REACT APPLICATION TO DISPLAY 6 IMAGES at a TIME OUT OF A LIST OF 19 ELEMENTS::
+=============================================================================
 
 import chunk from 'lodash/chunk'
 import PropTypes from 'prop-types'
