@@ -3,6 +3,83 @@ https://medium.com/bb-tutorials-and-thoughts/how-to-implement-different-layouts-
 
 
 
+REACT APPLICATION TO DISPLAY 6 IMAGES at a TIME::
+===============================================
+
+import chunk from 'lodash/chunk'
+import PropTypes from 'prop-types'
+import React, { useState, useEffect } from 'react'
+import tw from 'twin.macro'
+import { StyleType } from '../utils/prop-types'
+import Image from './image'
+
+const LogoGrid = ({ logos, style }) => {
+  const [group, setGroup] = useState(0)
+  const groupings = chunk(logos, 6)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setGroup((group + 1) % groupings.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [groupings, group])
+
+  return (
+    <div css={[tw`relative`, style]}>
+      {groupings.map((grouping, i) => (
+        <div
+          css={[
+            tw`opacity-0 grid-cols-3 grid-rows-2 gap-12
+            lg:(gap-x-16 gap-y-12 mt-26) xl:gap-x-32`,
+            group !== i
+              ? tw`absolute`
+              : tw`grid transition transition-opacity duration-300 ease-in-out opacity-100`,
+          ]}
+          key={i}
+        >
+          {(grouping || []).map((logo, index) => (
+            <div key={index} css={tw`h-12`}>
+              <Image image={logo} />
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default LogoGrid
+
+
+const groupings = chunk(logos, 6) // logos is an array of elements around 19 or more.
+// lodash chunk converts a single array in number of other arrays, 
+// chunk(logos, 6) makes arrays of array with 6 element in each array atleast
+// group !== i	? tw`absolute`
+              : tw`grid transition transition-opacity duration-300 ease-in-out opacity-100`,
+
+// when the array is iterated and if current group is equal to current index then its opacity is "opacity-100" (visible), otherwise its "opacity-0" (invisible).
+
+// at the same time if we do not make (group !== i) elements absolute then 6 elements will not appear in the same place always
+
+ONCE HTML IS RENDERED then by default useEffect will run once and since useEffect has a calllback with timer of 5 seconds and inside that timer since 
+we are having setState inside it so it will make the HTML/REACT COMPONENT re-render and show hide game will run and since useEffect has a "group" 
+state as dependency and since it got updated so after render of HTML then useeffect will again run.
+
+THE LOGIC::
+
+setGroup((group + 1) % groupings.length)
+
+(group + 1) % groupings.length :::
+
+small number % big Number gives values from 0 to big Number (remainder).
+
+1 % 7 ==> 1
+2 % 7 ==> 2
+3 % 7 ==> 3
+4 % 7 ==> 4
+.......
+.......
+.......
+7 % 7 ===> 0
 
 
 
