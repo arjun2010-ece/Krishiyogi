@@ -1,10 +1,48 @@
 
 Target 1: make the UI design as in attached image and then move the element slowly on scroll.
 
+import { gsap } from 'gsap'
+import first from 'lodash/first'
+import last from 'lodash/last'
+import Button from '../../components/button'  
+  
 
 const leftColumn = useRef(null)
   const middleColumn = useRef(null)
   const rightColumn = useRef(null)
+
+  useEffect(() => {
+    gsap.to(leftColumn.current, {
+      y: -64,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#learn-how',
+        start: 'top center',
+        end: 'top top+=80px',
+        scrub: true,
+      },
+    })
+    gsap.to(middleColumn.current, {
+      y: -128,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#learn-how',
+        start: 'top center',
+        end: 'top top+=80px',
+        scrub: true,
+      },
+    })
+    gsap.to(rightColumn.current, {
+      y: -64,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#learn-how',
+        start: 'top center',
+        end: 'top top+=80px',
+        scrub: true,
+      },
+    })
+  }, [])
 
   useEffect(() => {
     gsap.to(leftColumn.current, {
