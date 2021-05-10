@@ -1,0 +1,108 @@
+
+Target 1: make the UI design as in attached image and then move the element slowly on scroll.
+
+
+const leftColumn = useRef(null)
+  const middleColumn = useRef(null)
+  const rightColumn = useRef(null)
+
+  useEffect(() => {
+    gsap.to(leftColumn.current, {
+      y: -64,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#learn-how',
+        start: 'top center',
+        end: 'top top+=80px',
+        scrub: true,
+      },
+    })
+    gsap.to(middleColumn.current, {
+      y: -128,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#learn-how',
+        start: 'top center',
+        end: 'top top+=80px',
+        scrub: true,
+      },
+    })
+    gsap.to(rightColumn.current, {
+      y: -64,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#learn-how',
+        start: 'top center',
+        end: 'top top+=80px',
+        scrub: true,
+      },
+    })
+  }, [])
+  
+
+<section id="learn-how" css={tw`relative py-48 bg-primary-500`}>
+        <div
+          css={tw`hidden lg:(absolute inset-0 grid grid-cols-6 divide-x divide-primary-400 divide-opacity-40)`}
+        >
+          {Array.from({ length: 6 }, (x, i) => (
+            <div key={i} />
+          ))}
+        </div>
+        <div style={{ border: "4px solid black" }} css={[global`layout.container`, global`layout.grid`, tw`relative`]}>
+          <div css={tw`flex flex-col items-start xl:col-span-6`}>
+            <Heading
+              content={get(page, 'learnHowHeader.titleNode')}
+              headingType="h3"
+              style={tw`text-white`}
+            />
+            <Button
+              type="primary"
+              theme="yellow-cyan"
+              style={tw`mt-16`}
+              size="sm"
+              label={get(page, 'learnHowHeader.callToAction.label')}
+              link={get(page, 'learnHowHeader.callToAction.link')}
+              hideCaret
+            />
+          </div>
+          <div
+            css={tw`flex flex-row flex-nowrap lg:(items-start space-x-4) xl:(col-start-8 col-end-17)`}
+          >
+            {get(page, 'learnHowItems').length > 0 && (
+              <div css={tw`bg-primary-400 w-1/3 lg:(px-6 pt-10 pb-12)`} ref={leftColumn}>
+                <Heading
+                  headingStyle="h5"
+                  content={first(get(page, 'learnHowItems')).textNode}
+                  style={tw`text-2xl text-white leading-h3`}
+                />
+              </div>
+            )}
+
+            {get(page, 'learnHowItems').length > 2 && (
+              <div css={tw`flex flex-col w-1/3 pt-16 space-y-6`} ref={middleColumn}>
+                {get(page, 'learnHowItems')
+                  .slice(1, get(page, 'learnHowItems').length - 1)
+                  .map((item, i) => (
+                    <div css={tw`bg-secondary-500 lg:(px-6 pt-10 pb-12)`} key={i}>
+                      <Heading
+                        headingStyle="h5"
+                        content={item.textNode}
+                        style={tw`text-2xl text-primary-500 leading-h3`}
+                      />
+                    </div>
+                  ))}
+              </div>
+            )}
+
+            {get(page, 'learnHowItems').length > 1 && (
+              <div css={tw`bg-primary-400 w-1/3 lg:(px-6 pt-10 pb-12)`} ref={rightColumn}>
+                <Heading
+                  headingStyle="h5"
+                  content={last(get(page, 'learnHowItems')).textNode}
+                  style={tw`text-2xl text-white leading-h3`}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
