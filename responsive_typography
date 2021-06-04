@@ -4,5 +4,100 @@ https://levelup.gitconnected.com/dynamic-element-scaling-in-css-7e35ed9a3914
 
 
 
+FORMULA::
+
+calc([min size]px + ([max size] — [min size]) * ((100vw — [min vw width]px) / ([max vw width] — [min vw width])))
+
+
+[min size]px
+We want to set a minimum size for our element, so whatever element we want to scale doesn’t end up with a size of 0px. If we wanted an element to be at least 25px, we can plug that value into the first part of calc():
+[min size]px = 25px
+
+
+This is kind of useless on its own, but not when we look at the left side of the equation:
+
+([max size] — [min size]) * ((100vw — [min vw width]px) / ([max vw width] — [min vw width])))
+
+Let’s break this down as well:
+([max size] — [min size])
+
+
+This is where we can set a range through the minimum and maximum size we want an element to be, and it will act as a multiplier. 
+If we wanted an element to be at least 25px and at most 50px, we can plug those values in:
+
+([max size] — [min size]) = (50 - 25)
+
+
+The third part is the most complex:
+((100vw — [min vw width]px) / ([max vw width] — [min vw width]))
+
+
+
+Here, we can set a range through the minimum and maximum size we expect the browser’s resolution to be. On desktop, I always go by the rule of thumb of 
+1920px (the horizontal resolution for 1080p) and 500px (the smallest resolution Chrome allows to scale down to without ChromeDevTools).
+
+Plugging those values in, and the left most side of the equation looks like this:
+
+((100vw — [min vw width]px) / ([max vw width] — [min vw width])) = ((100vw — 500px) / (1920–500)))
+
+
+This creates a ratio based off the size of the browser’s viewport property. Anything outside the range of 500px and 1920px will continue to scale up or 
+down respectively, but at a linear rate. We could also write a media query for mobile devices or extra wide monitors, or write those exceptions into the calc() 
+function itself.
+
+Let’s start simplifying things, and plug some numbers into this function and see it in action. We can replace 100vw with any resolution we would like, 
+and see the ratio we are setting for our element’s size:
+
+
+
+((1920px — 500px) / (1920–500)) = 1
+((1565px — 500px) / (1920–500)) = 0.75
+((1210px — 500px) / (1920–500)) = 0.5
+((855px — 500px) / (1920–500)) = 0.25
+((500px — 500px) / (1920–500)) = 0
+
+
+
+If we then take the element’s size multiplier we set earlier and multiply it by this ratio, we get a dynamic value for our element’s
+size based off the size of the browser’s viewport:
+
+(50–25) * ((1920px — 500px) / (1920–500)) = 25px
+(50–25) * ((1565px — 500px) / (1920–500)) = 18.75px
+(50–25) * ((1210px — 500px) / (1920–500)) = 12.5px
+(50–25) * ((855px — 500px) / (1920–500)) = 6.25px
+(50–25) * ((500px — 500px) / (1920–500)) = 0px
+
+
+Finally, if we then add the minimum size of our element to this multiplier, we get the final size of our element:
+
+25 + (50–25) * ((1920px — 500px) / (1920–500)) = 50px
+25 + (50–25) * ((1565px — 500px) / (1920–500)) = 43.75px
+25 + (50–25) * ((1210px — 500px) / (1920–500)) = 37.5px
+25 + (50–25) * ((855px — 500px) / (1920–500)) = 31.25px
+25 + (50–25) * ((500px — 500px) / (1920–500)) = 25px
+
+
+So, if we want our element to be 25px when our browser’s width is at 500px, and 50px when our browser’s width is at 1920px, 
+the entire function would look like this:
+
+
+calc(25px + (50–25) * ((100vw — 500px) / (1920–500)))
+
+
+Complicated? Yes.
+
+Useful? Very Yes.
+
+calc([min size]px + ([max size] — [min size]) * ((100vw — [min vw width]px) / ([max vw width] — [min vw width])))
+
+
+
+
+
+
+
+
+
+
 
 
