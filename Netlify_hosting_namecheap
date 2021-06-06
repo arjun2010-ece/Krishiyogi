@@ -1,0 +1,17 @@
+BEST RESOURCE TO  HOST NAMECHEAP DOMAIN ON NETLIFY::
+
+https://dev.to/easybuoy/setting-up-domain-with-namecheap-netlify-1a4d
+
+
+FOR HAVING "HTTPS" in domain, either use free SSL of netlify or use custom SSL certificate purchased on namecheap and upload on netlify.
+
+
+FOR FREE SSL on netlify::
+
+Go to Domain Management ==> HTTPS :
+
+and click on whatsoever is mentioned there, probabley after 2-5minute it will fix;
+
+
+
+
