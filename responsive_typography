@@ -93,7 +93,47 @@ calc([min size]px + ([max size] — [min size]) * ((100vw — [min vw width]px) 
 
 
 
+TRICK 2::
+USE FLUID MARGIN WITH RESPECT TO CSS GRID OF DIFFERENT COLUMNS::
 
+scenarion 1::
+===========
+
+grid is 12 column width with each column 64px::::::::::
+
+margin: 0 calc(((var(--vw, 1vw) * 100) - (12 * 64px) - (11 * 1rem)) / 4);
+
+explanation:
+ 1. division by 4 is bcoz as the screen size is increased by 1px, margin-left and right increase by 0.25px.
+ 2. var(--vw, 1vw) * 100 gives total screen size but 1vw value increases when screen sizes increases and vice-vers.
+ 3. (var(--vw, 1vw) * 100) - (12 * 64px) gives the space that is left outside of the grid. 
+ 4. If we want min margin outside grid then we use ::
+      12 (total grid column) : min margin: (12 *1rem) = 79.75px;
+      11 (one less than total grid column) : margin: (11 *1rem) = 83.75px;
+      10 (two less than total grid column) : margin: (10 *1rem) = 87.75px;
+      9 (three less than total grid column) : margin: (9 *1rem) = 91.75px:
+      
+      All these values are on 1279px as this grid column is applied in the breakpoint from 1024 to 1279.
+      
+     
+ scenario 2:::
+ =============
+ 
+ grid is 16 column width with each column 64px::::::::::
+ 
+margin: 0 calc(((var(--vw, 1vw) * 100) - (16 * 64px) - (15 * 1rem)) / 4);
+
+explanation goes same as above but breakpoint is in the range of 1280 to 1600px.
+
+
+ scenario 3:::
+ =============
+ 
+ grid is 16 column width with each column 80px::::::::::
+ 
+margin: 0 calc(((var(--vw, 1vw) * 100) - (16 * 80px) - (15 * 1rem)) / 4);
+
+explanation goes same as above but breakpoint is in the range of 1601 to 1920px.
 
 
 
