@@ -1,0 +1,78 @@
+case 1:
+On right side of 2 columns grid you want div to exceed the container and grid by a margin right of negative margin meaning div will be more near 
+the edges of browsers.
+
+
+<div css={[global`layout.container`, global`layout.grid`, tw`lg:gap-y-16 xl:gap-y-0`]}>
+  <div css={tw`flex flex-col items-start col-span-4 md:col-span-8 xl:col-span-6`}>
+    <Heading
+      content={get(page, 'capabilitiesCta.titleNode')}
+      headingType="h2"
+      style={[global`base.bold-to-medium`, tw`xl:mt-20`]}
+    />
+  </div>
+  <div style={{ border: "9px solid black" }}
+    css={tw`col-span-4 mt-20 mb-24 md:col-span-8
+    lg:(-mr-container-lg my-0 col-span-12) xl:(col-start-9 col-end-17 -mr-container-xl) xxl:(-mr-container-xxl)`}
+  >
+    <HorizontalAccordion tabs={get(page, 'capabilities')} />
+  </div>
+ </div>
+
+SInce Inside COntainer we are using grid of 12 column for lg screen, 16 column for xl and xxl screen.
+
+each column for lg, xl and xxl screens::
+
+xxl: 'repeat(16, 80px)',
+xl: 'repeat(16, 64px)',
+lg: 'repeat(12, 64px)',
+ 
+'container-xxl': 'calc(((var(--vw, 1vw) * 100) - (16 * 80px) - (15 * 1rem)) / 2)',
+'container-xl': 'calc(((var(--vw, 1vw) * 100) - (16 * 64px) - (15 * 1rem)) / 2)',
+'container-lg': 'calc(((var(--vw, 1vw) * 100) - (12 * 64px) - (11 * 1rem)) / 2)',
+
+
+'container-xxl': 'calc(((var(--vw, 1vw) * 100) - (16 * 80px) - (15 * 1rem)) / 2)' :::::::::::
+_________________________________________________________________________________
+
+On screen of 1920px::
+1vw: 19.20px;
+19.20 * 100 = 1920
+16 * 80 =  1280px
+15 * 16  = 240px
+1920 - 1280 - 240
+=200px  
+
+on screen of 1919px::
+1vw: 19.19px;
+19.19 * 100 = 1919
+16 * 80 =  1280px
+15 * 16  = 240px
+1919 - 1280 - 240
+=199.5px  (since division by 2 in the formula makes each px increase/decrease margin increase/decrease by +/- 0.5px)
+
+
+Same goes for other formulas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
