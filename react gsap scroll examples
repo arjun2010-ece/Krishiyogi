@@ -1,0 +1,65 @@
+example 1::
+slowly move the div forward on scroll down.
+=================================================
+
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import React, { useRef, useEffect } from 'react'
+
+const firstRef = useRef(null)
+
+useEffect(() => {
+    const query = `(min-width: ${theme`screens.lg`})`
+    ScrollTrigger.matchMedia({
+      [query]: () => {
+        gsap.to(firstRef.current, {
+          y: -250,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#ecosystems',
+            start: 'top center',
+            scrub: true,
+          },
+        })
+      },
+    })
+
+<div ref={firstRef}
+  css={tw`relative flex flex-col lg:(row-start-1 row-end-4 col-start-1 col-end-4) xl:(mt-20 row-end-6 col-start-1 col-end-4) xxl:(mt-24)`}
+>
+    <Heading
+        headingType="h4"
+        content={first(layers).titleNode}
+        style={css`
+            ${tw`text-primary-500 font-bold`}
+            strong {
+            ${tw`font-medium`}
+            }
+        `}
+    />
+    <Text
+        content={first(layers).descriptionNode}
+        style={[global`typography.body-md` ,tw`mt-7 font-normal`]}
+    />
+    <Image 
+      image={firstLine} 
+      style={tw`h-full relative lg:(w-3/5 left-64 top-50 rotate-12) xl:(w-4/5 left-64 -top-20)`}
+    />
+</div>
+
+=====================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
