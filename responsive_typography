@@ -1,7 +1,14 @@
 
 FLUID TYPOGRAPHY ::
 https://levelup.gitconnected.com/dynamic-element-scaling-in-css-7e35ed9a3914
+https://www.madebymike.com.au/writing/fluid-type-calc-examples/
 
+2 concepts in fluid typography::
+
+16px ===>  28px normal increment
+45px ====> 19px reversetypography
+
+both concepts are there in above "madebymike" link.
 
 
 FORMULA::
