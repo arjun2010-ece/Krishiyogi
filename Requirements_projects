@@ -1,0 +1,31 @@
+NOTES::
+=======
+
+1. For generation subtitles in many languages it is a good options. this site is really good and cheap::
+    https://gotranscript.com/
+
+
+
+
+
+Frontend specialists Requirements::
+======================================
+
+1. There is admin login as well as user logins
+2. Admin can create course, update delete, read courses.
+3. Each Courses should have atleast name, ID, author, price, sections.
+4. Each section should have names, content(videos, images, texts, zip files etc).
+5. Users can see the courses and its contents without logging in but need to login to enrol and pay the money to access the courses.
+6. The system should have a payment provider for almost the whole world to transact the money from their debit card itself.
+7. The system should display the cost of courses in different currencies in different countries.
+8. There should be a way to apply discounts on all the courses from admin panels.
+9. User should get an email when a course is successfully purchased.
+10. User dashboard should display all the list of courses purchased.
+11. Admin should be able to see from where its customers are coming.
+12. User should be able to access the purchased courses and its courses, on clicking on video content it should load quickly too.
+
+
+
+
+
+
