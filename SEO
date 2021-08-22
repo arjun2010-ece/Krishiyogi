@@ -1,0 +1,14 @@
+For better SEO purpose we need to do 2 things::
+
+1. First in the head htmnl tag of each page we need to implement meta tags for better SEO with helmet package.
+
+2. We need to generate a sitemap.xml inside the project with some packages like::
+
+    "gatsby-plugin-sitemap": "3.3.0" 
+    
+    example in gatsbyjs and it generates only in staging/production server, not on localhost so that google bots can read these links and display in google 
+    search.
+    And we need to submit this sitemap URL, ex:: https://bolttech.io/sitemap.xml to google console so that google bots can read it.
+    
+    
+    
