@@ -1,3 +1,20 @@
+IMPORTANT NOTES::
+===============
+
+iF You delete a lot of files from a project which is already git initialised then you delete some files and git status shows a lot of changed files 
+that you simply want gone as you are starting from scratch and do not want anything then you need to remove .git folders from the project and re-initialise
+git.
+
+rm -rf .git* 
+git init
+
+
+==========================
+
+
+
+
+
 git log --graph --all  --decorate --oneline 
 // this is important to check commits on recent branch
 
