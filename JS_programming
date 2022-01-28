@@ -125,6 +125,31 @@ var sum_pairs = function(ints, s) {
 }
 
 -----------------------------------------------------------------------------------------
+https://www.codewars.com/kata/513fa1d75e4297ba38000003/train/javascript
+
+function flatten(...input) {
+  return input.reduce(function(acc, curr){
+    return acc.concat(
+      Array.isArray(curr) ? flatten(...curr) : curr
+    )
+  }, []);
+}
+
+flatten(1, [2, 3], 4, 5, [6, [7]]) // returns [1, 2, 3, 4, 5, 6, 7]
+flatten('a', ['b', 2], 3, null, [[4], ['c']]) // returns ['a', 'b', 2, 3, null, 4, 'c']
+
+
+--------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
 
 
 
