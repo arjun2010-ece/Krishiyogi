@@ -139,6 +139,22 @@ flatten(1, [2, 3], 4, 5, [6, [7]]) // returns [1, 2, 3, 4, 5, 6, 7]
 flatten('a', ['b', 2], 3, null, [[4], ['c']]) // returns ['a', 'b', 2, 3, null, 4, 'c']
 
 
+Smart way:
+
+var flatten=function(...arr){
+  return arr.toString().split(",");
+}
+
+
+KNOWLEDGE::
+
+1. Arrrays, howsoever nested it is ex, (1, [2, 3], 4, 5, [6, [7]]), when applied '.toString()' method removes all the array brackets.
+     for ex::
+        let arr = [ 1, [ 2, 3 ], 4, 5, [ 6, [ 7 ] ] ] ;
+          console.log(arr.toString());  // '1,2,3,4,5,6,7'
+
+     Then we can split it based on coma separator to put it back into an array.
+
 --------------------------------------------------------------------------------------------
 
 
