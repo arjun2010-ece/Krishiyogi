@@ -82,6 +82,24 @@ when we are on below branch
 we need to fire :
 git pull origin master
 
+====================
+Git move to last/previous commit:::
+---------------------------------
+If you have a working code that you committed(identified by commit ID) and then you make changes and then everything breaks down
+and you want to clean everything that you made after last commit.
+It is done by this command::
+
+git reset --hard HEAD
+
+
+
+
+
+
+
+
+
+
 
 or second way or long way::
 
