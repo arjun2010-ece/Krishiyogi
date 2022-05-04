@@ -1,0 +1,77 @@
+typescript definations for very basic data types are available like::
+
+1. number
+2. string
+3. boolean.
+
+e.g::
+let x: number;
+let x: string;
+let x: boolean;
+
+
+
+Typescript defination for an object is defined like this::
+=========================================================
+interface IVoteItem {
+  id?: string;
+  title?: string;
+  description?: string;
+  expirationDate?: string;
+}
+
+let voteItem : IVoteItem;
+// where voteItem s an object with the properties defined in IVoteItem.
+
+
+Typescript defination for an array of object is defined like this::
+===========================================================
+
+
+interface IwalletVote {
+  id?: string;
+  pollId?: string;
+  wallet?: string;
+  vote?: boolean;
+  amount?: number;
+}
+
+interface IVoteItem {
+  id?: string;
+  votes: IwalletVote[];  //array of objects;
+}
+
+Here the votes in IVoteItem interface is an array of objects. so the object defination is defined in IwalletVote.
+
+
+
+Typescript defination for a callback function is defined like this::
+=====================================================================
+
+const handlevote = (status: string, votedToHome: () => void ) => {
+  //logic
+  votedToHome();
+}
+
+//call
+handlevote('yes', () => navigate('/'));
+
+
+Typescript defination for a setState props is defined like this::
+================================================================
+
+in parent::
+  const [walletVoteChange, setWalletVoteChange] = useState(false);
+
+in child::
+
+nterface IVoteItem {
+  id?: string;
+  setWalletVoteChange: (data: boolean) => void;
+}
+
+
+TYPESCRIPT IS EXTREMELY SIMPLE;
+
+
+
