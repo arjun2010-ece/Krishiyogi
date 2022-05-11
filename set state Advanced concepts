@@ -1,0 +1,44 @@
+case 1::
+=========
+Its not so common.
+
+state = {
+    foo: "abc",
+    bar: 123
+  };
+  
+when a single state object with two key-values are updated one after other. we do with a callback function in setState() like this:::
+And you get the results almost immediately in the UI as can be in tested in json stringify method.
+
+const App = () => {
+  const [state, setState] = useState({
+    foo: "abc",
+    bar: 123
+  });
+
+  const handleClick = () => {
+    setState(prevState => {
+      return {
+        ...prevState,
+        foo: "def"
+      };
+    });
+    
+    setState(prevState => {
+      return {
+        ...prevState,
+        bar: 456
+      };
+    });
+  }
+
+  return (
+    <div>
+      <h1>App</h1>
+      <button onClick={handleClick}>Add</button>
+      <p>{JSON.stringify(state)}</p>
+    </div>
+  )
+}
+
+=========================================
