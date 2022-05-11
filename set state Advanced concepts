@@ -42,3 +42,48 @@ const App = () => {
 }
 
 =========================================
+
+case 2::
+=======
+Its used but not very commonly.
+
+When you have a single state and jsut after doing setstate, if you want to perform some actions then it needs to be done in useEffect with that state 
+in dependency array like this::
+
+
+export default function App() {
+
+ const [animal, setAnimal] = useState(null); //single state
+
+ function changeAnimal(newAnimal) {
+  setAnimal(newAnimal);
+  // here 'animal' is not what you would expect
+  console.log("1", animal);    // animal ===> null
+ }
+
+// after setstate in above function we can do next tasks in useEffect with that state as dependency.
+
+ useEffect(() => {
+  if (animal) {
+   console.log("2", animal);     // animal ===> dog
+  }
+ }, [animal]);
+
+ return (
+  <div className="App">
+  <button onClick={() => changeAnimal("dog")}> ADD </button>
+ </div>
+ );
+}
+
+===============================================
+
+
+
+
+
+
+
+
+
+
