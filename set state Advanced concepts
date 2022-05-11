@@ -78,7 +78,75 @@ export default function App() {
 
 ===============================================
 
+case 3::
+======
+Its one of good usecase of using 2 different usestate variable and calling them one after other.
+BUT this is where one boolean and other array of objects are used and we use callback in array of objects case like this::
 
+
+import React, { useState } from "react";
+import { Modal, Button } from "antd";
+
+const App = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);  // boolean and next state is array of object where callback is used in setState.
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      name: "Jack"
+    },
+    {
+      id: 2,
+      name: "Tom"
+    }
+  ]);
+
+  const fetch = () => {
+    setUsers(s => [...s, { id: 3, name: "John" }]);
+  };
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  // THIS FUNCTION IS EXTREMEMLY IMPORTANT
+  // as it callls 2 setState functions and they get the desired result also.
+  // i.e modal closes and users updated on UI.
+  const handleOk = () => {
+    setIsModalVisible(false);
+    fetch();
+  };
+
+  const handleCancel = e => {
+    setIsModalVisible(false);
+  };
+
+  return (
+    <div>
+      {users.map(user => {
+        return (
+          <div>
+            <span>{user.id} </span>
+            <span> {user.name}</span>
+          </div>
+        );
+      })}
+      <Button type="primary" onClick={showModal}>
+        Open Modal
+      </Button>
+      <Modal
+        title="Basic Modal"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <p>Please click OK !</p>
+      </Modal>
+    </div>
+  );
+};
+
+
+===================================================
 
 
 
