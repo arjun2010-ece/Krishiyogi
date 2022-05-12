@@ -158,6 +158,9 @@ or
 If you need to handle more complex state.
 or
 If you use a lot of useState hooks then it can be replaced with useReducer hook as we use usestate for only very few state values.
+
+or
+If you use a LOT OF SETSTATE FUNCTION CALL INSIDE an event handler.
 ****
 
 Complex state EXAMPLE::::
