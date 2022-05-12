@@ -161,7 +161,16 @@ If you use a lot of useState hooks then it can be replaced with useReducer hook 
 
 or
 If you use a LOT OF SETSTATE FUNCTION CALL INSIDE an event handler.
+
+or
+Updating MULTIPLE state values in response to a single event.
+
 ****
+
+You’re free to call useState as many times as you want, once for each piece of state you need React to manage. But a SINGLE COMPONENT may need to 
+hold MANY VALUES in STATE, and often those pieces of state are RELATED; you may want to update multiple pieces of state in response to a single user 
+action. You don’t want to leave some pieces of state unattended to when they should really be tidied up.
+
 
 Complex state EXAMPLE::::
 ---------------------------
