@@ -150,10 +150,91 @@ const App = () => {
 
 ===================================================
 
+THE BIG BIG CONCEPT OF useReducer()::
+-------------------------------------
+****
+The useReducer hook is extremely helpful when DIFFERENT STATES DEPEND ON EACH OTHER.
+or
+If you need to handle more complex state.
+or
+If you use a lot of useState hooks then it can be replaced with useReducer hook as we use usestate for only very few state values.
+****
+
+Complex state EXAMPLE::::
+---------------------------
+Let's say you're fetching some data, and you want to display:
+
+"loading..." while it's fetching
+the data once you have it
+or an error if there is one
+
+You'll want all three of these to be in SYNC with each other. If you get the data, you want to make sure it's not loading and 
+there's no error. If you get an error, it's not loading and there's no data.
 
 
 
+import React, { useReducer } from 'react';
 
+const initialState = {
+  loading: false,
+  data: null,
+  error: null
+}
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'fetchDataStart':
+      return {
+        ...state,
+        loading: true,
+        data: null,
+        error: null
+      }
+    case 'fetchDataSuccess':
+      return {
+        ...state,
+        loading: false,
+        data: action.data,
+        error: null
+      }
+    case 'fetchDataFail':
+      return {
+        ...state,
+        loading: false,
+        data: null,
+        error: 'whoops =/'
+      }
+    default: return state
+   }
+}
+
+const App = () => {
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  
+  const fetchData = () => {
+  
+     dispatch({type: 'fetchDataStart'}); // loading: true, error:null, data: null
+     
+     fetch('ourbackend.com/data')
+     .then(res => {
+        dispatch({                      // loading: false, error:'whoops;, data: null
+          type: 'fetchDataSuccess',
+          data: res.data
+        })
+     })
+     .catch(error => {
+        dispatch({type: 'fetchDataFail'});  // loading: false, error:null, data: null
+     })
+   }
+   return (
+   <>
+      <h1>App Component</h1>
+      <p>{state.loading}</p>
+      <p>{state.data}</p>
+      <p>{state.error}</p>
+   <>
+   )
+}
 
 
