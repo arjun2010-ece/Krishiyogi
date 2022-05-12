@@ -1,0 +1,73 @@
+How to use FORWARD REF in react.
+=================================
+
+If you want to invoke child component OR a feature/UI of child component from a PARENT component.
+Then we use FORWARD REF ( 'forwardRef' ) in CHILD component and 'useImperativeHandle' hook also in the child.
+
+SINCE useImperativeHandle takes 2 VALUES :: one ref and second is callback function.
+The callback function returns an object in which we write the function that we will call from the parent like this::  
+
+buttonRef.current.alterToggle() ;
+
+example::
+
+Parent:::
+-------
+
+import React, { useRef } from 'react';
+import Button from './Button';
+
+const App = () => {
+  const buttonRef = useRef(null);
+
+  return (
+    <div>
+      <button onClick={() => {
+        buttonRef.current.alterToggle()
+      }}>
+        Button from Parent
+      </button>
+      
+      <Button ref={buttonRef} />
+    </div>
+  )
+}
+
+export default App;
+
+// In normal case you can not pass a 'ref' from parent to a child component.
+// you can pass only when child component is wrapped in forwardref() and useImperativeHandle() is executed there.
+
+
+
+CHILD:::
+--------
+
+
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
+
+const Button = forwardRef((_, ref) => {
+    const [toggle, setToggle] = useState(false);
+
+    useImperativeHandle(ref, () => ({
+        alterToggle(){
+            setToggle(!toggle);
+        }
+      }))
+    
+    return (
+        <div>
+            <button>Button From Child</button>
+            <br/>
+            { toggle && <p>Toggle text....</p>}. // this feature i want to trigger from parent component
+        </div>
+    )
+})
+
+export default Button;
+
+// If you want to render a child component from parent button click or some event then we 
+// need forwardRef in child.
+
+=============================================
+
