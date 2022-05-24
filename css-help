@@ -5,6 +5,28 @@ BEST ARTICLE::
 https://ishadeed.com/article/clip-path/
 
 
+=======================================
+SCENARIO DURING A HEADER , SIDEBAR AND MAIN CONTENT:::
+
+    position: relative;
+    top: 80px;
+
+
+
+    header::
+
+    position: fixed;
+
+
+
+    whenever there is a sidebar then header is always fixed position and sidebar is margintop: size of header height.
+
+    and the main content is::
+
+    position: relative;
+    top: 80px;
+
+===========================
 
 
 When out of two images one image is of right size and other is of small size::
