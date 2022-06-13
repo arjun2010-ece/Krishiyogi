@@ -1,3 +1,16 @@
+If you have a lot of files in PR or commits which is already present in master/staging :
+========================================================================================
+
+the way to fix is::
+
+git fetch origin
+git checkout feature-01
+git rebase origin/master
+git push -f
+
+After this PR will have only your commits .
+
+
 IMPORTANT NOTES::
 ===============
 
