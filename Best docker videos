@@ -1,3 +1,9 @@
 https://www.youtube.com/watch?v=-pTel5FojAQ
 
 // this videos contains complex NGINX configuration also for docker
+
+
+https://www.youtube.com/watch?v=gm_L69NHuHM
+
+//docker for devand production, split docker-compose code in dev and production environment, overrride the START CMD in different ENV files
+// NPM INSTALLL command in dev and production script too, NODE_ENV file.
