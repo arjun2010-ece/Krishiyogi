@@ -4,6 +4,28 @@ CSS CLIP-PATH::
 BEST ARTICLE::
 https://ishadeed.com/article/clip-path/
 
+================================================================
+
+WHENEVER YOU SEE A CENTERED WRAPPER THEN USE MAX-WIDTH AND MARGIN PROPERTY::
+
+
+iN THE FIGMA IF YOU SEE A WIDTH OF ELEMENT THEN IT IS ALWAYS "MAX-WIDTH" and not the width and it will center the wrapper after 1200px but below 
+that it will be full width.
+
+
+
+<div class="wrapper">
+  thisis a wrapper component
+</div>
+
+
+.wrapper{
+  max-width: 1200px;
+  margin: auto;
+}
+
+
+
 
 =======================================
 SCENARIO DURING A HEADER , SIDEBAR AND MAIN CONTENT:::
@@ -20,11 +42,13 @@ SCENARIO DURING A HEADER , SIDEBAR AND MAIN CONTENT:::
 
 
     whenever there is a sidebar then header is always fixed position and sidebar is margintop: size of header height.
+    
+    sidebar:: margin-top: 80px; 
 
     and the main content is::
 
     position: relative;
-    top: 80px;
+    top: 80px; // height of header
 
 ===========================
 
