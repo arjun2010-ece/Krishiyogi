@@ -6,6 +6,53 @@ https://ishadeed.com/article/clip-path/
 
 ================================================================
 
+
+RESPONSIVE IMAGES::
+-------------------
+features::
+1. images do not skew, object-fit
+2. responsive:: width 100%
+3. images width/height for all the images with different height become same height.
+
+To make the image width and height same for all the images::
+
+.box {
+ width: 32%; // parent should have some width so that image can stay inside it.
+}
+
+.box img {
+  width: 100%;
+  aspect-ratio: 1/1;  /// make all images of same width and height.
+  object-fit: cover
+}
+
+
+
+
+To make image stay inside its parent container we do good old way::
+
+.box {
+ width: 32%;
+}
+
+.box img {
+  width: 100%,
+}
+
+
+
+object-fit usage::
+-----------------
+If the default width and height of image is not good.
+If the image width/height is given some manual value
+or if the image is SKEWED, looks like its compressed on both sides then we use property::
+
+object-fit: cover
+
+
+
+
+=====================================================================
 WHENEVER YOU SEE A CENTERED WRAPPER THEN USE MAX-WIDTH AND MARGIN PROPERTY::
 
 
