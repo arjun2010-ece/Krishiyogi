@@ -8,7 +8,11 @@ react-sortable-hoc
 
 attaching tags like in stackoverflow
 ====================================
-react-tagsinput
+react-tagsinput  // not updated in last 5 years so should not use it.
+
+react-tag-input-component  // latest one and works fine.
+LINK : https://github.com/hc-oss/react-tag-input-component#readme
+
 
 React Dates library::
 =====================
