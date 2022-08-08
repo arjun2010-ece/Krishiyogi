@@ -4,6 +4,11 @@ A package with a lot of re-usable hooks i.e a React hooks library in typescript.
 Link : https://usehooks-ts.com/
 
 
+modal/dialog library
+====================
+react-responsive-modal
+Link:: https://www.npmjs.com/package/react-responsive-modal
+
 react pagination library
 ========================
 https://github.com/isaurssaurav/react-pagination-js
