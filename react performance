@@ -1,0 +1,55 @@
+For performance purpose we use following things in reactjs.
+===========================================================
+
+1.  memo
+2. useMemo()
+3.  useCallback()
+
+
+All are used for memoization purposes in different scenarios::
+
+1. memo() ::
+
+when any of the the parent state changes then by default CHILD component is also re-renders which is not at all ideal.
+CHILD component should rerender ideally only whn its props changes.
+
+If the CHILD component receives primitive prop (string, number, boolea), then simple memo  optimises the performance.
+but if it receives Arrays/objects then simple memo is not sufficient but one more extra callback is required.
+
+React does shallow comparision of props because deep comparision will take a lot of time.
+Boolean, string, number are going to be compared by value
+but Arrays and objects are going to be compared by reference.
+
+case 1::
+========
+CHILD component Switch receives primitive props.
+
+If you observe here, we have multiple states, one "count" on which CHILD/Switch does not depend.
+And we have other "name" on which  CHILD/Switch depends.
+
+But
+
+const App = (props) => {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState("");
+  
+  const handleCount = () => setCount(count + 1);
+  const handleName = () => setName("artic");
+  
+  return (
+  <div>
+    <h1>Hello, App</h1>
+     <button onClick={handleCount}>Click count</button>
+     <button onClick={handleName}>Change Name</button>
+    <Switch name={name} />
+  </div>
+  )
+}
+
+
+const Switch = ({name}) => {
+  return <h1>new Name : {name}</h1>;
+}
+
+export default memo(Switch)
+
