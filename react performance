@@ -22,10 +22,14 @@ but Arrays and objects are going to be compared by reference.
 
 case 1::
 ========
-CHILD component Switch receives primitive props.
+CHILD component Switch receives primitive props (string, number, boolea).
+
+HERE name is an STRING PROPS (primitive props).
 
 If you observe here, we have multiple states, one "count" on which CHILD/Switch does not depend.
 And we have other "name" on which  CHILD/Switch depends.
+BUTTTT evn when count/name both or either changes i.e setState then CHILD/Switch will always re-render which should not happen
+so we need to memoise Switch as memo(Switch) to enhance performance.
 
 But
 
@@ -52,4 +56,157 @@ const Switch = ({name}) => {
 }
 
 export default memo(Switch)
+
+
+case 2::
+========
+CHILD component Switch receives non-primitive props (ARRAYS, OBJECTS).
+
+HERE "params" is an OBJECT PROPS (non-primitive props).
+
+If you observe here, we have multiple states, one "count" on which CHILD/Switch does not depend.
+And we have other "name" on which  CHILD/Switch depends.
+BUTTTT evn when count/name both or either changes i.e setState then CHILD/Switch will always re-render which should not happen
+so we need to memoise Switch as memo(Switch) with a parameter function for doing object check.
+
+Simple memo() will not work in this case bcoz everytime CHILD rerender it will create a new object with new reference even when the props has same value
+and it will not be enough because shallow comparision that memo does is not sufficient and you can not do deep comparision as it will take forever.
+
+So the solution is second function which will decide whther to rerender the child or not.
+It will rerender when params is different and not rerender when params are same.
+SO it will fix the issue as now we wre looking inside the object and doing primitive comparision.
+
+const isEqual = (prevProps, nextProps) => {
+ return prevProps.params.name === nextProps.params.name
+}
+
+memo(Switch, isEqual)
+
+const App = (props) => {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState("");
+  
+  const handleCount = () => setCount(count + 1);
+  const handleName = () => setName("artic");
+  
+  return (
+  <div>
+    <h1>Hello, App</h1>
+     <button onClick={handleCount}>Click count</button>
+     <button onClick={handleName}>Change Name</button>
+    <Switch params={{name}} />
+  </div>
+  )
+}
+
+
+const Switch = ({params}) => {
+  return <h1>new Name : {params.name}</h1>;
+}
+
+const isEqual = (prevProps, nextProps) => {
+ return prevProps.params.name === nextProps.params.name
+}
+
+export default memo(Switch, isEqual)
+
+
+
+case 3::
+========
+CHILD component Switch receives non-primitive props (ARRAYS, OBJECTS).
+
+HERE "params" is an OBJECT PROPS (non-primitive props).
+
+If you observe here, we have multiple states, one "count" on which CHILD/Switch does not depend.
+And we have other "name" on which  CHILD/Switch depends.
+BUTTTT evn when count/name both or either changes i.e setState then CHILD/Switch will always re-render which should not happen
+so we need to memoise Switch as memo(Switch) with a parameter function for doing object check.
+
+Simple memo() will not work in this case bcoz everytime CHILD rerender it will create a new object with new reference even when the props has same value
+and it will not be enough because shallow comparision that memo does is not sufficient and you can not do deep comparision as it will take forever.
+
+So the solution is to use "useMemo()" hook and put the object inside it and then pass this object as props.
+NOTE:: we can use "useMemo" hook for arrays and objects and then pass them as props. ///VERY VERY IMPORTANT.
+
+if name string/state does not change on useMemo() so params will return the same object always and hence simple memo will work.
+
+
+const App = (props) => {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState("");
+  
+  const handleCount = () => setCount(count + 1);
+  const handleName = () => setName("artic");
+  
+  const params = useMemo(() => ({name}), [name])  // if name string/state does not change so params will return the same object always.
+  
+  return (
+  <div>
+    <h1>Hello, App</h1>
+     <button onClick={handleCount}>Click count</button>
+     <button onClick={handleName}>Change Name</button>
+    <Switch params={params} />
+  </div>
+  )
+}
+
+
+const Switch = ({params}) => {
+  return <h1>new Name : {params.name}</h1>;
+}
+
+export default memo(Switch)
+=============================================
+
+2. useCallback()::
+===================
+
+The ISSUES with ARRAYS/OBJECTS are called REFERENTIAL INTEGRITY also with function props.
+
+If you pass a function as props into child component then we use useCallback().
+
+useMemo() deals with arrays and objects and gives you same values everytime you call it with same arrays/objects.
+useCallback() gives you same function by reference everytime you call it otherwise will create a new function everytime on each rerender.
+
+
+const App = (props) => {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState("");
+  
+  const handleCount = () => setCount(count + 1);
+  const handleName = () => setName("artic");
+  
+  const params = useMemo(() => ({name}), [name])  // if name string/state does not change so params will return the same object always.
+  
+  const handleClick = useCallback() => {}, [])
+  return (
+  <div>
+    <h1>Hello, App</h1>
+     <button onClick={handleCount}>Click count</button>
+     <button onClick={handleName}>Change Name</button>
+    <Switch params={params} handleClick={handleClick} />
+  </div>
+  )
+}
+
+
+const Switch = ({params}) => {
+  return <h1>new Name : {params.name}</h1>;
+}
+
+export default memo(Switch)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
