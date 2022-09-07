@@ -1,3 +1,13 @@
+How to avoid unnecessary usage of React.js useEffect::
+======================================================
+
+From reacts official doc::
+https://beta.reactjs.org/learn/you-might-not-need-an-effect
+
+medium::
+https://danteyoon.medium.com/never-use-useeffect-recklessly-3f6314d234b1
+
+
 How to use FORWARD REF in react.
 =================================
 
