@@ -1,3 +1,20 @@
+IMPORTANT GITHUB LINKS FOR PERFORMANCE::
+=========================================
+https://github.com/pkellner/pluralsight-designing-react-components-course-code
+SPECIFICALLY::
+https://github.com/pkellner/pluralsight-designing-react-components-course-code/blob/master/07-perf-error-etc-final/clip-05-fix-overrender-problem/src/components/Speaker.js
+
+
+Note::
+1. If in a component even if we do not receive a prop, still it CAN cause RE-RENDER if in the component we use useContext, e.g::
+  const {
+    speaker: { id, first, last },
+  } = useContext(SpeakerContext);
+  
+  because whenever anywhere in the code contexts change, it will cause all the components using it to re-render.
+We can fix it by using "memo" in the components.
+
+
 For performance purpose we use following things in reactjs.
 ===========================================================
 https://www.youtube.com/watch?v=DEPwA3mv_R8
