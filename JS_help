@@ -2,9 +2,31 @@ List of JS projects for study::
 ================================
 https://code-projects.org/c/languages/project/jsprojects/
 
+IF 2 STRINGS ARE SAME WITH MINIMAL DIFFERENCE::
+===============================================
+
+const url1 = "/api/activity"
+const url2 = "/api/activity/list"
+const url3 = "/api/activity/sale"
+const url4 = "/api/activity/offer"
+const url5 = "/api/activity/mint"
+const url6 = "/api/activity/claim"
+
+IF we see all these URL strings "/api/activity" is common in all and only "list" or "sale" or "offer" or "mint" or "claim" is additional if present.
+So to write these urls in a single string is like these::
+
+const url = ['api', 'activity', activityType].filter(Boolean).join('/')
+// it means "activityType" is a variable which if empty will not be considered.
+// But if its present like activityType = "sale", then it will be considered.
+// ".filter(Boolean)" is what filters "activityType" if its empty and doesnot filter if its some string.
+// and finally .join("/") makes an array like "/api/activity" or "/api/activity/list".
+
+THUS SINGLE LINE URL FORMS.
+
+
+
 FORM DATA OBJECT::
 ==================
-
 e.g::
 let formData = new FormData();
 formData.append('key1', 'value1');
