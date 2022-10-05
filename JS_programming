@@ -6,10 +6,17 @@ https://github.com/railsstudent/codewars/tree/master/js
 JAVASCRIPT REDUCE USECASES
 ===========================
 
+https://chrispennington.blog/blog/reduce-method-javascript/
+https://blog.webdevsimplified.com/2021-05/reduce/
+https://jrsinclair.com/articles/2019/functional-js-do-more-with-reduce/
+https://www.youtube.com/watch?v=5BFkp8JjLEY
+
+
 1. COunt the number of times a fruit appears in array.
 2. Group objects based on common age.
+3. Remove duplicates from an array.
 
-1.
+1. Answers::
 
 const num = ["apple", "apple", "apple", "mango", "mango", "papaya"];
 
@@ -25,7 +32,7 @@ const obj = num.reduce((acc, curr) => {
 // { apple: 3, mango: 2, papaya: 1 }
 
 
-2.
+2. Answers::
 
 const people = [
   { name: 'Kyle', age: 26 },
@@ -54,6 +61,17 @@ const obj = people.reduce((acc, curr) => {
   '31': [ { name: 'John', age: 31 } ],
   '42': [ { name: 'Sally', age: 42 }, { name: 'Jill', age: 42 } ]
 }
+
+
+3. Answers::
+
+const numbers = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
+
+const unique = numbers.reduce((acc, num) =>
+  acc.indexOf(num) > -1 ? acc : [...acc, num],
+[]);
+
+[ 1, 2, 3, 4, 5 ]
 
 ================================================
 
