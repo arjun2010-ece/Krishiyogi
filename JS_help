@@ -2,6 +2,30 @@ List of JS projects for study::
 ================================
 https://code-projects.org/c/languages/project/jsprojects/
 
+
+FILTER ONLY INTEGER VALUE FROM AN ARRAY OF NUMBER AND STRINGS::
+================================================================
+let filtNumArr = [3, 1, 6,7, "ardy"].filter(Number)  // This way is common for Number and Boolean but does not work for strings.  
+or 
+let filtNumArr = [3, 1, 6,7, "ardy"].filter(el => typeof el == "number")
+
+// [ 3, 1, 6, 7 ] , only integers
+
+
+FILTER ONLY STRING VALUE FROM AN ARRAY OF NUMBER AND STRINGS::
+================================================================
+let filtStrArr = [3, 1, 6,7, "ardy"].filter(el => typeof el == "string")
+
+// [ 'ardy' ]  , only strings
+
+
+FILTER ONLY VALID VALUE FROM AN ARRAY OF NUMBER, STRINGS, NaN, null or "" ::
+============================================================================
+let filtArr = [3, 1, 6,7, "ardy", "", NaN, null].filter(Boolean)  // This way is common for Number and Boolean but does not work for strings. 
+
+// [ 3, 1, 6, 7, 'ardy' ]  , only valid values
+
+
 IF 2 STRINGS ARE SAME WITH MINIMAL DIFFERENCE::
 ===============================================
 
