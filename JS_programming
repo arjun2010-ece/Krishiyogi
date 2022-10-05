@@ -1,6 +1,62 @@
 https://github.com/railsstudent/codewars/tree/master/js
             ------javascript list of questions
 
+
+
+JAVASCRIPT REDUCE USECASES
+===========================
+
+1. COunt the number of times a fruit appears in array.
+2. Group objects based on common age.
+
+1.
+
+const num = ["apple", "apple", "apple", "mango", "mango", "papaya"];
+
+const obj = num.reduce((acc, curr) => {
+  if(acc[curr] === undefined) {
+    acc[curr] = 0;
+  }
+  acc[curr] = acc[curr] + 1
+
+  return acc;
+}, {})
+
+// { apple: 3, mango: 2, papaya: 1 }
+
+
+2.
+
+const people = [
+  { name: 'Kyle', age: 26 },
+  { name: 'John', age: 31 },
+  { name: 'Sally', age: 42 },
+  { name: 'Jill', age: 42 },
+]
+
+const obj = people.reduce((acc, curr) => {
+  
+  let age = curr.age;
+  
+  if(acc[age] === undefined) {    // checking if some key present in object with undefined
+    acc[age] = [];
+  }
+  
+  acc[age].push(curr)
+  
+  return acc;
+  
+}, {})
+
+
+{
+  '26': [ { name: 'Kyle', age: 26 } ],
+  '31': [ { name: 'John', age: 31 } ],
+  '42': [ { name: 'Sally', age: 42 }, { name: 'Jill', age: 42 } ]
+}
+
+================================================
+
 Most used logics(Must practice)
 ================================
 1. sort an array of objects(obviously based on some field like price or id)
