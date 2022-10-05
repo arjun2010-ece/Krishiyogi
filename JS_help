@@ -2,6 +2,23 @@ List of JS projects for study::
 ================================
 https://code-projects.org/c/languages/project/jsprojects/
 
+FORM DATA OBJECT::
+==================
+
+e.g::
+let formData = new FormData();
+formData.append('key1', 'value1');
+formData.append('key2', 'value2');
+
+Get Value out of formdata by easiest way::  [...formData]   using spread operator and 
+it will give us an ARRAY of ARRAYS.
+
+CONVERT ARRAY OF ARRAYS INTO OBJECTS::
+------------------------------------
+z ==== array of arrays.
+Object.fromEntries(z) // gives us objects with key values.
+
+
 UNIQUELY GENERATING A UUID without 3rd party package, only with WINDOWS
 =======================================================================
 window.crypto.randomUUID(); // in js/ browser
