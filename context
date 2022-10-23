@@ -1,5 +1,10 @@
 Example of Card Provider context in typescript and reactjs
 ============================================================
+1. cardProvider - a providers for sharing some data
+2. Usage of provider in a app component by wrapping inside an APP component.
+3. Usage of cardContext inside cardMenu component
+4. And a dialog component to display different component inside dialog.
+
 
 scenario 1::
 ===========
