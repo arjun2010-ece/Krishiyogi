@@ -50,3 +50,321 @@ const CardProvider: FC<CardProviderProps> = ({ children }) => {
   )
 }
 export default CardProvider
+
+---------------------------
+USAGE OF PROVIDERS::
+
+<CardProvider>
+  <App />
+</CardProvider>
+
+-------------------------------------
+
+USAGE IN A COMPONENT::
+-----------------------
+cardMenu.tsx
+-------------
+
+
+import React, { useState, MouseEvent, FC, useContext } from 'react'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import IconButton from '@mui/material/IconButton'
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
+import { styled } from '@mui/material/styles'
+import { Box } from '@mui/material'
+import { Product } from '@model/Product'
+import CardDialog from './dialog'
+import { CardContext } from '../../contexts/cardProvider'
+import ShareContent from './dialog/content/share'
+import ReportContent from './dialog/content/report'
+import MakeOfferContent from '../forms/makeOffer'
+
+const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
+  ...theme.typography.caption_bold,
+  padding: theme.spacing(2),
+}))
+
+const StyledMoreHorizIcon = styled(MoreHorizIcon)(({ theme }) => ({
+  color: theme.palette.text.primary,
+}))
+
+type ComponentProps = {
+  handleClick?: () => void
+}
+
+type CARD_ACTIONS_TYPE = {
+  label: string
+  component: FC<ComponentProps>
+  dialogTitle: string
+  visible: boolean
+  hideDivider: boolean
+  modalWidth: string
+}
+
+type CardMenuComponentProps = {
+  product: Partial<Product>
+}
+
+const CardMenuComponent: FC<CardMenuComponentProps> = ({ product }) => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement>()
+  const { dialog, setState } = useContext(CardContext)
+  const { open, content, title } = dialog
+
+  const handleOpen = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(undefined)
+  }
+
+  const handleOpenModal = (
+    content: FC,
+    title: string,
+    modalWidth: string,
+    hideDivider: boolean
+  ) => {
+    handleClose()
+    setState(({ dialog, ...oldcontext }) => ({
+      ...oldcontext,
+      dialog: {
+        ...dialog,
+        open: true,
+        content,
+        title,
+        modalWidth,
+        hideDivider,
+      },
+    }))
+  }
+
+  const handleCloseModal = () => {
+    setState(({ dialog, ...oldcontext }) => ({
+      ...oldcontext,
+      dialog: {
+        ...dialog,
+        open: false,
+        modalWidth: '',
+        hideDivider: false,
+        title: '',
+        subtitle: '',
+        content: undefined,
+      },
+    }))
+  }
+
+  const CARD_ACTIONS: CARD_ACTIONS_TYPE[] = [
+    {
+      label: 'CUSTOMIZE',
+      component: ShareContent,
+      dialogTitle: 'CUSTOMIZE',
+      modalWidth: '375px',
+      hideDivider: false,
+      visible: !!product?.customizations?.length,
+    },
+    {
+      label: 'MAKE OFFER',
+      component: MakeOfferContent,
+      visible: true,
+      modalWidth: '700px',
+      hideDivider: false,
+      dialogTitle: 'Make an offer',
+    },
+    {
+      label: 'SHIPPING DETAILS',
+      component: ShareContent,
+      visible: true,
+      modalWidth: '375px',
+      hideDivider: false,
+      dialogTitle: 'Shipping Details',
+    },
+    {
+      label: 'SHARE',
+      component: ShareContent,
+      dialogTitle: 'Share Item',
+      modalWidth: '375px',
+      hideDivider: false,
+      visible: true,
+    },
+    {
+      label: 'REFRESH METADATA',
+      component: ShareContent,
+      modalWidth: '375px',
+      visible: true,
+      hideDivider: false,
+      dialogTitle: 'Refresh Metadata',
+    },
+    {
+      label: 'REPORT',
+      component: ReportContent,
+      visible: true,
+      modalWidth: '375px',
+      hideDivider: true,
+      dialogTitle: 'Report Item',
+    },
+  ]
+
+  return (
+    <Box>
+      <IconButton data-testid="nft-card-menu-button" onClick={handleOpen}>
+        <StyledMoreHorizIcon />
+      </IconButton>
+      <Menu
+        data-testid="nft-card-menu-drop-down"
+        anchorEl={anchorEl}
+        open={!!anchorEl}
+        onClose={handleClose}
+        transitionDuration={100}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        {CARD_ACTIONS.map(
+          (
+            { label, component, dialogTitle, modalWidth, hideDivider },
+            index
+          ) => (
+            <StyledMenuItem
+              key={index}
+              onClick={() =>
+                handleOpenModal(component, dialogTitle, modalWidth, hideDivider)
+              }
+            >
+              {label}
+            </StyledMenuItem>
+          )
+        )}
+      </Menu>
+
+      <CardDialog
+        open={open || false}
+        handleClose={handleCloseModal}
+        content={content}
+        title={title}
+      />
+    </Box>
+  )
+}
+export default CardMenuComponent
+
+-------------------------------------------
+
+cardDialog.tsx ::
+------------------
+
+import Dialog, { DialogProps } from '@mui/material/Dialog'
+import DialogContent from '@mui/material/DialogContent'
+import DialogActions from '@mui/material/DialogActions'
+import { FC, ReactNode, useContext, useEffect, useState } from 'react'
+import { Divider, IconButton, Stack, Typography } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
+import { styled } from '@mui/material/styles'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { CardContext } from '../../../contexts/cardProvider'
+
+type StyledDialogProps = DialogProps & {
+  modalwidth?: string
+}
+
+const StyledDialog = styled(Dialog)<StyledDialogProps>(({ modalwidth }) => ({
+  '& .MuiDialog-paper': {
+    padding: 0,
+    width: modalwidth || 'auto',
+  },
+}))
+
+const StyledArrowBackIcon = styled(ArrowBackIcon)(({ theme }) => ({
+  color: theme.palette.common.black,
+  cursor: 'pointer',
+}))
+
+const StyledCloseIcon = styled(CloseIcon)(({ theme }) => ({
+  color: theme.palette.common.black,
+}))
+
+type CustomDialogProps = {
+  open: boolean
+  handleClose: () => void
+  title?: string
+  subtitle?: string
+  content?: FC<{}>
+}
+
+type DialogStateProps = DialogProps & CustomDialogProps
+
+const CardDialog: FC<DialogStateProps> = ({
+  open,
+  handleClose,
+  title,
+  content: Content,
+  ...props
+}) => {
+  const [state, setState] = useState<{ content: ReactNode }>()
+  const { dialog, setState: setContext } = useContext(CardContext)
+  const { subtitle, modalWidth, hideDivider } = dialog
+
+  useEffect(() => {
+    setState({ content: Content && <Content /> })
+  }, [Content])
+
+  const handleGoBack = () => {
+    setContext(({ dialog, ...oldcontext }) => ({
+      ...oldcontext,
+      dialog: { ...dialog, subtitle: '' },
+    }))
+  }
+
+  return (
+    <StyledDialog
+      open={open}
+      onClose={handleClose}
+      modalwidth={modalWidth}
+      maxWidth="xl"
+      {...props}
+    >
+      <Stack
+        m={3}
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        {subtitle && subtitle.length > 0 && (
+          <StyledArrowBackIcon onClick={handleGoBack} />
+        )}
+
+        <Typography component="h4" variant="h4" mx="auto">
+          {subtitle && subtitle.length > 0 ? subtitle : title}
+        </Typography>
+        <IconButton aria-label="close" onClick={handleClose}>
+          <StyledCloseIcon />
+        </IconButton>
+      </Stack>
+      {!hideDivider && <Divider />}
+      <DialogContent>{state?.content}</DialogContent>
+      <DialogActions></DialogActions>
+    </StyledDialog>
+  )
+}
+
+export default CardDialog
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
