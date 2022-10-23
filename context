@@ -1,0 +1,52 @@
+Example of Card Provider context in typescript and reactjs
+============================================================
+
+scenario 1::
+===========
+
+import {
+  createContext,
+  ReactNode,
+  FC,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from 'react'
+
+type DialogProps = {
+  content?: FC<{}>
+  open?: boolean
+  title?: string
+  subtitle?: string
+  modalWidth?: string
+  hideDivider?: boolean
+}
+
+type CardContextProps = {
+  setState: Dispatch<SetStateAction<CardContextProps>>
+  dialog: DialogProps
+}
+
+const defaultContextValue: CardContextProps = {
+  dialog: {},
+  setState: () => {},
+  // since setState will make changes to an object as dialog is a object
+}
+
+export const CardContext = createContext<CardContextProps>(defaultContextValue)
+
+type CardProviderProps = {
+  children: ReactNode
+}
+
+// this is application global state provider that is extendible
+const CardProvider: FC<CardProviderProps> = ({ children }) => {
+  const [state, setState] = useState<CardContextProps>(defaultContextValue)
+
+  return (
+    <CardContext.Provider value={{ ...state, setState }}>
+      {children}
+    </CardContext.Provider>
+  )
+}
+export default CardProvider
