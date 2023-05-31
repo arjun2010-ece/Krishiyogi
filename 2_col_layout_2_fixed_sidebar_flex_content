@@ -1,0 +1,39 @@
+Goal::
+
+Make a 3 column layout with 2 fixed width sidebars and one flexible width contents.
+
+WHen you stretch or squeeze the width of UI, both the sidebars will always be of fixed width,
+but the content width will increase or decrease in size.
+
+
+import { FC } from 'react';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: flex;
+`;
+
+const Sidebar = styled.div`
+  flex: 0 0 400px;
+  min-width: 300px;
+  max-width: 400px;
+`;
+
+const Content = styled.div`
+  flex: 1;
+`;
+
+type LayoutProps = {
+  children: React.ReactNode;
+};
+
+const Layout: FC<LayoutProps> = ({ children }) => {
+  return (
+    <Container>
+      <Sidebar>{/* Sidebar content */}</Sidebar>
+      <Content>{children}</Content>
+      <Sidebar>{/* AdSidebar content */}</Sidebar>
+    </Container>
+  );
+};
+
