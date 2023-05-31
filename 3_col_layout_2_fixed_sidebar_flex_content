@@ -32,8 +32,21 @@ const Layout: FC<LayoutProps> = ({ children }) => {
     <Container>
       <Sidebar>{/* Sidebar content */}</Sidebar>
       <Content>{children}</Content>
-      <Sidebar>{/* AdSidebar content */}</Sidebar>
+      <AdSidebar>{/* AdSidebar content */}</Sidebar>
     </Container>
   );
 };
+
+
+Make the sidebar component SCROLLABLE::
+===========================================
+
+Since the COntainer is a flex conteiner and Sidebar and AdSidebar is a flex child, this is a extrememely SPECIAL scenario and
+you can allow independent scrolling inside flex childs only through a height property and overflow property like this::
+
+ overflow-y: auto;
+ height: calc(100vh - 64px);
+
+There is no other way.
+
 
