@@ -38,15 +38,67 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 };
 
 
-Make the sidebar component SCROLLABLE::
-===========================================
+Make the sidebar component vertically SCROLLABLE::
+==================================================
 
-Since the COntainer is a flex conteiner and Sidebar and AdSidebar is a flex child, this is a extrememely SPECIAL scenario and
+Since the Container is a flex conteiner and Sidebar and AdSidebar is a flex child, this is a extrememely SPECIAL scenario and
 you can allow independent scrolling inside flex childs only through a height property and overflow property like this::
 
  overflow-y: auto;
  height: calc(100vh - 64px);
 
 There is no other way.
+
+
+Make the Content component horizontally SCROLLABLE::
+=====================================================
+In the above Layout UI, the way to make Content component horiaontally scrollable is::
+
+Since, Content is a flex child,
+the combination of flex: 1 to fill the available space and overflow-x: auto to enable horizontal scrolling ensures that 
+the Content component expands to fit the parent container but still allows horizontal scrolling when needed. 
+
+const Content = styled.div`
+  flex: 1;
+  overflow-x: auto;
+`;
+
+Now a special scenario:
+What if a react component like CodeSnippet which is inside Content component or wrapped by above Content component,
+and the content inside that CodeSnippet component is too much so, how can we make that CodeSnippet component horizontally 
+scrollable.
+
+The way to do that is below::
+
+
+const StyledCodeContainer = styled.pre`
+  background-color: black;
+  color: white;
+  
+  overflow-x: auto; // This property makes any extra content still go horizontally but makes it scollable.
+`;                  // without this property it will not go beyond its parent component width.
+
+
+const CodeSnippet: FC<CodeSnippetProps> = ({ content }:string) => {
+  return <StyledCodeContainer>{content}</StyledCodeContainer>;
+};
+
+And the global parent of this CodeSnippet component that is Content component need below properties::
+
+const Content = styled.div`
+  flex: 1;
+  overflow-x: auto;
+`;
+
+So the way to do it is 2 ways::
+1. Make the global parent scrollable i.e overflow-x: auto.
+2. ANd the actual component where content exceeds, make it scrollable too i.e overflow-x: auto.
+
+Make the content break into next line (SPECIAL)
+================================================
+white-space: pre-wrap;
+
+
+
 
 
