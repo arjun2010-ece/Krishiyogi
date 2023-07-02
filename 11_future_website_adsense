@@ -1,5 +1,5 @@
 Current task:
-1. Popular website :: tutorialpoint like website
+1. Popular website:: tutorial point like website
 
 2. ** Website with figma designs pointed from webjsschl for improvement of css **
 
@@ -15,10 +15,20 @@ possible sites::
 
 4. Plagiarism Checker and fix plagiarism: https://www.grammarly.com/plagiarism-checker
     https://quillbot.com/
+5. SEO tools that find out::
+      <title>{title}</title>
+      <meta name="description" content={metaDescription} />
+      <meta name="keywords" content={metaKeywords} />
+      <meta property="og:title" content={metaOgTitle} />
+      <meta property="og:url" content={metaOgUrl} />
+      <meta property="og:image" content={metaOgImage} />
+      <meta property="og:description" content={metaDescription} />
+
+6. Need to find a sixth project idea.
 
 Need more motivation.
 
-Different ads network we can use ::
+Different ads network we can use::
 https://seochatter.com/how-much-money-do-websites-make-from-ads/?utm_content=cmp-true
 
 
