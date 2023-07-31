@@ -1,0 +1,62 @@
+Relative path STANDARDISED in Next.js :
+==========================+++++++++++++
+
+instead of using "./src/styles/theme" somewhere and other place using "./theme" for accessing the same file, the relative path is 
+not STANDARDISED.
+
+1. Create a next.config.js file in your project's root directory, if you don't have one already and paste the below code there:
+
+
+const path = require('path');
+
+module.exports = {
+  webpack: (config) => {
+    config.resolve.alias['@'] = path.resolve(__dirname, 'src/');
+    return config;
+  },
+};
+
+Here we've created an alias '@' for the 'src/' directory. __dirname gives you the current directory where the next.config.js 
+file is located.
+
+
+2. To fix eslint issue of @:
+
+npm install --save-dev eslint-import-resolver-alias
+
+Then add below code in ".eslintrc"::
+
+{
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [["@", "./src"]],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}
+
+
+3. Create a "jsconfig.json" file if not present in js project and paste below code:
+
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
+
+For typescript project, create tsconfig.json file.
+
+jsconfig.json is a configuration file for JavaScript projects that are used by many editors/IDEs, including Visual Studio 
+Code, to provide enhanced tooling capabilities. Essentially, it serves to guide the editor about the structure and behavior 
+of your JavaScript code.
+
+While jsconfig.json doesn't impact the actual runtime behavior of your Next.js application, it influences how your 
+editor interacts with your code and helps the editor provide functionalities like IntelliSense, autocompletion, type 
+checking (if you use JSDoc types), and path aliasing.
+
