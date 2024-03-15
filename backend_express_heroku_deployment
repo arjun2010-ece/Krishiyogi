@@ -1,0 +1,58 @@
+## Push to Heroku:
+
+1. git init
+2. add and commit to git
+3. optionally push to GITHUB
+
+4. Create heroku app on server (Thus, the redirected UI will display next steps as step 5+)
+5. "heroku login" on local machine 
+6. Push code to heroku app (git push heroku main)
+7. debug, then add, commit and next
+8. push again (git push heroku main)
+
+Note:
+GIT master is different from heroku master.
+
+ALways remember that your local GIT branch need to be "master" for typing below comd.
+git push heroku master
+
+else if it is "main" then type:
+git push heroku main
+
+
+## Find Deployment error:
+-------------------------
+1. Clicking on "Overview" tab and click on "Open app" and it will open a page where error displays
+
+
+## Debug Heroku deployment error
+-------------------------------
+
+1. Clicking on "Settings" tab.
+2. Go to "Config Vars" and select "Reveal config Vars" button, which is a place to verify   
+    ENVIRONMENT VARIABLES is good or not.
+3. Imagine you find some local code issue then you fix locally and then git add and commit.
+    Next, type : git push heroku master (considering your local branch is master, else it wil be issue)
+
+4. In index.js file, you find PORT variable as:
+    const PORT = process.env.PORT || 3000; 
+    // the first part of this PORT is from environment variable, and this is very important during deployment as deployment server will allott their available PORT only not the one provided from us.
+
+5.  In package.json, during development we had the start script as:
+    "start": "nodemon index.js" , 
+
+    But since nodemon is a dev dependency and it gets prunned or removed while doing deployment
+    so this script needs to be updated for it to work as:
+
+    "start": "node index.js"
+
+    Update above and do git add, commit and finally :
+    git push heroku master
+
+    to do deployment
+
+6. Now Everything will work fine.
+
+Note:
+1. We can push our backend code to github.
+2. But deployment is happening from local machine to heroku, although GIT server can also do so but we are doing previous one.
