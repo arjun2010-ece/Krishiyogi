@@ -106,3 +106,7 @@ git push heroku main
 Note:
 1. We can push our backend code to github.
 2. But deployment is happening from local machine to heroku, although GIT server can also do so but we are doing previous one.
+
+
+## Custom domain and SSL settings
+    In the settings tab, if you scroll down, then you can definately add custom domain and SSL certificates also there.
