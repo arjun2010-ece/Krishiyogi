@@ -4,20 +4,22 @@ USAGE OF MONGO DB DATABASE:
 a. https://cloud.mongodb.com/
 b. Click on "create" to create new clusters and select "shared" for free usage.
 
+DELETE inactive clusters and associated project
+-----------------------------------------------
 For inacttive clusters, which can not be resumed, we need to first delete the cluster then the associated project in it.
 
 on default project you see something like this:
 
 ARJUN'S ORG - 2019-07-26 > EVENT_BOOKING_APP
 
-and in the UI ,. you see ...(3 dots), click on that and select "Terminate".
+and in the UI , you see ...(3 dots), click on that and select "Terminate".
 This will terminate clusters (which is a group of servers having database and data).
 
 
 Next click on "ARJUN'S ORG - 2019-07-26" in above UI which will display lists of projects in that deleted cluster and then you can click on delete icon.
 
 
-And then click on any projects from above lists to go to its cluster again and then repat the process.
+And then click on any projects from above lists to go to its cluster again and then repeat the process.
 
 Just remember the hirarchy is:
  Organisation ---> Project ----> Cluster ----> DB -----> Tables.
