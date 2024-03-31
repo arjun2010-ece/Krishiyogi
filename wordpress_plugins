@@ -61,3 +61,65 @@ Learn WP Elementor: page builder:
 - drag and drop UI.
 - for creating custom pages.
 
+
+Relationship between theme(e.g astra) and WP page builder(Elementor)::
+-------------------------------------------------
+In WP, theme(astra) and WP builder(Elementor) both are important.
+Only when a theme or a design exists then only we can customise a specific part of that design with a page builder.
+Designing everything from scratch will be very tedious and long process, generally avoided.
+And we start working by first selecting a theme and then customise it with page builder.
+
+When a theme exists, then only we can customise various parts of theme (if it supports, obviously then),
+
+1. like header and or footer while keeping everything else remains the same as provided by theme.
+
+2. Or customise sidebar by page builder, while rests remains the same from the theme.
+
+3. Or keep header and footer from theme while customise main section, sidebar and comments section from page builder. (mostly in our case i guess we need like this.)
+
+4. Or we can design everything on page from WP page builder (Elementor).
+
+So a theme that motivates is extrememely important and can be our foundation.
+
+Example:
+Astra is one such popular theme.
+Elementor is one such popular WP page builder.
+
+# If using Elementor pro , then use astra free.
+# If using Elementor free , then use astra pro for effective webpages.
+
+
+Comparision b/w hostinger & Hostgator::
++++++++++++++++++++++++++++++++++++++
+
+1. hostinger plan(2.79 euros/mes) is almost same in cost as hostgator(2.75 euros/mes) but hostinger gives 2 months free compared to hostgator.
+Hostinger is better.
+
+2. hostinger plan for 100 websites per account but hostgator for only 1 website. Hostinger is better.
+
+3. Both plan for unlimited bandwidth.
+
+    ** It means we do not need to worry about monthly visitors and page size. These plans will adapt to every change for all kinds of traffic to our website. Auto scaling is present.
+
+    ** Also one free domain, SSL & 24*7 support available for both plans.
+
+4. Hostgator domain & SSL is free for only 1 year, same as hostinger.
+
+5. Hostinger gives 100GB storage space while hostgator gives 10 GB storage space. Hostinger is better.
+
+6. Hostinger renewal cost is reasonable and much cheaper after initial 12/36 months time period is over. Need to focus on finer details when buying.
+Bcoz you might pay 3.99 or something per month for initial bought 3 year period (48$ yearly).
+But when this 2/3 year period is over, then you have to pay around 143$ yearly. Those finer details cost you money and marketing tactics so keep in mind those things.
+
+7. Hostinger is better for starters for easy dashboard.
+
+8. Hostinger includes website builder in their plan while hostgator does not include. You need to buy it separately for hostgator.
+
+9. Avg load time in hostinger is amazing (little better than hostgator.)
+
+10. Hostinger gives you automatic backup but hostgator does not.
+11. Hostinger provides two factor authentication for extra layer of security.
+
+12. Hostinger is overall better compared to hostgator and is cheaper and beginner friendly.
+
+
