@@ -1,0 +1,67 @@
+Capcut tricks to speed up Editing (10 keystrokes in capcut for GOD EDITING)
+-----------------------------------
+
+Goal:
+Do not move the PLAYHEAD with your mouse as it consumes a lot of time, use below KEYSTROKES to
+SPEEDUP your editing.
+
+
+1. Keyboard shortcut for speeding up/down/stop.
+
+J (BACKWARD) --> to speed up player speed backward from -1x to -16x 
+K (STOP) --> to stop up player, can use spacebar too for it.
+L (FORWARD) --> to speed up player speed forward from 1x to 16x
+
+
+2. View the clips in "IMPORT" section in a speed up way forward/backward.
+  - Select "LIST" for making the clips in a little long & horizontal way to see how playhead is moving.
+
+3. Extract the specific section from the clips in "IMPORT" section.
+   - Press "L" key to make the playhead from video clip move forward.
+   - Then press "I" key to mark as starting/input point for the extraction.
+   - Then press "O" key to mark as ending/output point for the extraction.
+
+   - Then drag this section in timeline. Please ensure that your plahead in timeline should be in desired location
+   where you want to add.
+   - I and O key is just above J, K & L key in keyboard.
+
+4. Moving between bunch of clips (forward/backward) on your timeline in a faster way.
+   - UP Arrow: Don't scrub the plahead forward/backward with your mouse click, instead press UP Arrow to go to previous clips or.
+
+   - DOWN Arrow: Press DOWN Arrow to go to Next clips on your timeline.
+
+   Bonus Keystrokes:
+   -----------------
+   - RIGHT Arrow : To move the cursor 1s forward.
+   - LEFT Arrow : To move the cursor 1s backward.
+
+   - SHIFT + RIGHT Arrow : To move the cursor 10s forward.
+   - SHIFT + LEFT Arrow : To move the cursor 10s backward.
+
+   Note: If UP/DOWN ARROW not working then press one time RIGHT/LEFT arrow.
+
+
+5. Delete clips section/portion on both side of PLAYHEADS in a faster way
+   - Press Q key to delete left side section of playhead point.
+   - Press W key to delete right side section of playhead point.
+
+   - Both Q & W keystrokes are near to each other.
+
+6. Make a CUT on a clip in timeline in a faster way.
+   - Press CTRL + B to make a cut in timeline in exact the same place where playhead exists.
+   - It can be used to make 2 cuts in a clip to remove that portion which is not needed anymore
+   
+   Bonus Keystrokes:
+   -----------------
+   - A: to move to select tool 
+   - B: to move to Blade tool to cut or edit.
+
+
+7. See the entire timeline when you use a lot of clips and specifically when it is zoomed out in a faster way.
+   - Press SHIFT + Z for seeing the entire timeline and all the clips used in your video.
+
+   Bonus Keystrokes:
+   -----------------
+   - Press CTRL + rotating key in mouse to zoom in/out the timeline
+
+
