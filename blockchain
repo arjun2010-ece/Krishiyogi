@@ -5,3 +5,78 @@ Blokchain has 2 parts::
 
 
 
+Popular blockchain
+-------------------
+- ethereum (E)
+- solana (S)
+- polygon  (P)
+- algorand (A)
+- arbitrum  (A)
+
+(ESPAA)
+
+Blockchain(Ethereum) accounts:
+-----------------------------
+An Ethereum account is essentially your digital identity on the Ethereum blockchain. 
+Think of it like a bank account with a few key differences: it can hold value (Ether/ETH and other tokens), and it can perform actions (like sending/receiving funds or running programs).
+
+Every account has a unique address (a long string of characters, like an email address) that you share with others to receive funds.
+
+
+Types of Ethereum accounts:
+---------------------------
+There are two main types of Ethereum accounts:
+
+1. Externally Owned Accounts (EOAs):
+CAF
+- Control: These are accounts owned and controlled by people (users).
+
+- Access: They are controlled by a pair of cryptographic keys: a public key (used to generate your public address) and a private key (your secret password). You need the private key to sign 
+and authorize transactions.
+
+- Function: They are used to send and receive ETH and tokens, and to interact with smart contracts. This is the type of account you get when you create a wallet.
+
+2. Contract Accounts:
+
+Control: These are controlled by the code of a smart contract that is deployed onto the blockchain. They do not have a private key.
+
+Function: They can hold funds and tokens, but their actions are only executed when they receive a transaction call from an EOA, triggering their pre-written code.
+
+
+🔑 Accounts vs. Wallets
+-----------------------
+An Ethereum account is where your funds live on the blockchain. A wallet is the tool you use to manage your account(s).
+
+Account: The record on the blockchain (your address and balance). It is the container for your assets.
+
+Wallet: The interface (software or hardware) that stores your private key and uses it to sign transactions, giving you control over your account.
+
+In short: Your funds aren't literally "in" your wallet; they're on the blockchain, tied to your account address. Your wallet is the secure key ring that holds the private key required 
+to access and spend those funds.
+
+
+✉️ Transactions and Accounts in Ethereum
+-----------------------------------------
+A transaction is the only way to change the state of the Ethereum blockchain. Think of a transaction as a digital message that is cryptographically signed by an account and broadcast to the network.
+
+- Initiation: Only Externally Owned Accounts (EOAs) can initiate a transaction.
+
+- Action: A transaction can be an instruction to:
+
+	1. Transfer Ether (ETH) from one account to another.
+
+	2. Deploy a new smart contract (creating a new Contract Account).
+
+	3. Interact with an existing Contract Account (like swapping tokens or voting in a decentralized application).
+
+- Authorization: The account's private key is used to create a digital signature for the transaction. This signature proves that you are the owner of the account and authorize the action, which prevents anyone else from spending your funds.
+
+- Gas: Every transaction requires a small fee, called Gas, which is paid in ETH to compensate the network validators for processing the transaction.
+
+
+
+
+
+
+
+
