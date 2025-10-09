@@ -74,6 +74,84 @@ A transaction is the only way to change the state of the Ethereum blockchain. Th
 - Gas: Every transaction requires a small fee, called Gas, which is paid in ETH to compensate the network validators for processing the transaction.
 
 
+Digital signature in transaction
+---------------------------------
+A digital signature is like your unique "electronic signature" used to prove your identity on the blockchain.
+
+When you send a transaction:
+- Your private key creates the digital signature.
+- The blockchain checks this signature to make sure it’s really you who sent it as all the funds
+lives on blockchain itself and it has to act as the gatekeeper.
+Even in bank, the employee first checks your identity before allowing you to send/receive money.
+
+It ensures that:
+
+- Only you can spend your money.
+- No one can change or fake your transaction.
+
+
+Blockchain/Ethereum cryptocurrency and tokens
+-----------------------------------------------
+
+- A blockchain account can hold both: a cryptocurrency and tokens also.
+Both are digital "asset", one is native(cryptocurrency) and other is custom(tokens).
+
+* Asset:
+An asset is something "valuable" that you own.
+
+Examples in real life:
+
+- Your car is an asset.
+- Your money in the bank is an asset.
+- Your house is an asset.
+
+So in short:
+👉 Asset = something that has value and belongs to you.
+
+A cryptocurrency is "digital money" — it lives on the blockchain and blockchain lives on the internet, not in a bank.
+So yes — cryptocurrency is also an asset, just a digital one.
+
+Example:
+-------
+Bitcoin (BTC) is the money of the Bitcoin blockchain.
+Ether (ETH) is the money of the Ethereum blockchain.
+
+
+Tokens:
+Inside blockchain, we already have native currency(cryptocurrency, ether etc) that is used to run the blockchain like paying for gas or transaction fees.
+
+Blockchain also has another feature that is :
+- we can create our own custom coin/cryptocurrency inside it apart from ether.
+- or we can create our own items that will represent values inside our dapp.
+
+* above tokens are created by user using smart contract itself.
+
+Example:
+- If we build a dapp where we want the users to have  utility token(that gives usage rights)
+before they can store files on a website. Then we need Utility token. 
+So we need to create utility tokens first on smart contract itself.
+
+- A security/ownership token will give ownership of a share or a piece of real estate in which they are investing in.
+
+- If we own a special digital item then it represents NFT.
+
+Various Tokens(item) are generated for various purposes:
+
+Utility token – lets you use something.
+👉 Example: a token you need to store files on a website.
+
+Ownership token – shows you own a part of something.
+👉 Example: a token that means you own a share of a company or a building.
+
+Unique token (NFT) – shows you own a special digital item.
+👉 Example: a token for a piece of digital art or a game item.
+
+Stablecoin – acts like digital dollars.
+👉 Example: USDT or USDC, each one tries to always be worth 1 US dollar.
+
+* Tokens, by default, does not exists on blockchain(or account) , we need to custom create it on blockchain using smart contract itself.
+
+
 
 
 
