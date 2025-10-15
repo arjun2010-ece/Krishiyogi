@@ -152,6 +152,304 @@ Stablecoin – acts like digital dollars.
 * Tokens, by default, does not exists on blockchain(or account) , we need to custom create it on blockchain using smart contract itself.
 
 
+Ethereum, EVM, solidity, smart contract explanation:
+====================================================
+
+Refined explanation:
+--------------------
+
+👉 A blockchain = a network of computers + shared program they all run together.
+
+A blockchain is a system/network made up of:
+
+- Many computers (called nodes), and
+
+- A shared program (i.e, blockchain software) that all these computers agree to run together.
+
+
+* For ethereum, there is a shared program (software) — e.g., Geth or Nethermind — that defines Ethereum’s rules.
+And it is installed and run by all the computers in the network.
+
+Also, each computer has a copy of the same data and runs the same programs and thus follows the same rules.
+Any instruction sent by a single computer in a network is checked and verified by all to make sure that it is fair and correct.
+
+No single computer is the boss — they agree collectively on what’s true and this establishes the trust.
+
+
+Next, inside ethereum software, we have a subsystem called EVM (i.e engine + rulebook).
+it’s the engine that actually runs smart contracts and ensures every computer reaches the same results.
+It mostly defines rules for how the smart contract code runs inside that etherum system — execution, gas, and storage behavior.
+
+It defines:
+
+- How to read and execute Solidity code (the programming language),
+- How to calculate transaction fees (gas),
+- How to store and change data safely,
+- How to produce identical results on every node, no matter where in the world it runs.
+
+
+Solidity:
+---------
+It is the language developers use to write instructions for the EVM to tell ethereum what to do.
+These instructions describe how things should work — for example:
+"If someone sends 1 Ether, give them a digital ticket."
+
+The EVM then reads those instructions and executes them exactly.
+
+********
+Ethereum is a system whose brain is EVM. 
+we tell the EVM what specific tasks to perform inside the system — i.e., we write smart contracts that run within Ethereum’s existing system.
+And solidity is the language in which we write instrutions but instructions itself is called smart contract.
+******
+
+🧠 In One Line
+
+Ethereum is the body,
+the EVM is the brain,
+Solidity is the language the brain understands,
+and smart contracts are the actual thoughts (instructions) that the brain executes.
+
+
+Smart contract:
+--------------
+These are the instructions we write to perform specific tasks in ethereum blockchain.
+Like, If someone sends 1 Ether, give them a digital ticket.
+
+So it is like an agreement  meaning it defines what should happens when certain conditions are met.
+
+When those conditions become true, the code automatically executes the result —
+no one can stop it, delay it, or change it.
+
+💡 That’s what makes it “smart.”
+
+It can enforce itself without human help.
+
+They are called Smart Contracts because they act like contracts (define rules and agreements) but are smart enough to execute themselves automatically using code.
+
+| Concept            | Meaning                                                                    |
+| ------------------ | -------------------------------------------------------------------------- |
+| **Smart Contract** | A program on the blockchain that executes rules automatically when called  |
+| **Function Call**  | The trigger that starts execution (done manually or by another contract)   |
+| **Smartness**      | The code enforces rules *without human intervention* after being triggered |
+| **Manual Trigger** | Just the starting signal — not manual control over execution               |
+
+A smart contract:
+
+Automatically executes instructions once "triggered" manually by frontend/other smart contract.
+
+But does not spontaneously start itself (except if another contract or automated bot calls it).
+
+
+So, “smart” means:
+Once triggered, the contract acts on its own, following rules you wrote — no middlemen, no manual approvals, no bias.
+Everything happens based on code + math, not trust + people.
+
+It cannot be changed or stopped once deployed — it always does what it was programmed to do.
+
+We don’t tell the EVM how the Ethereum system works;
+we tell the EVM what specific tasks to perform inside the system — i.e., we write smart contracts that run within Ethereum’s existing system.
+
+
+🧩 Why There Are Two Sets of Rules:
+------------------------------------
+Ethereum is made up of layers, and each layer has its own job.
+Each layer needs its own rules so that everything works together in an organized way.
+
+It is like an analogy of a "city and the engine".
+Imagine Ethereum as a "city" and the EVM as the engine inside every "car" in that city.
+
+🔹 City Rules = Ethereum Rules (High level rules of how the system should work)
+
+These are the rules that govern how the whole city runs:
+
+- How roads are built (blocks)
+- How traffic moves (transactions)
+- How traffic lights work (consensus)
+- How citizens communicate (peer-to-peer network)
+- How people get rewards for maintaining the city (validators, staking)
+
+These are the system-level rules — the full structure that makes the city function safely and fairly.
+
+
+
+🔹 Engine Rules = EVM Rules (Smart contract level rules)
+
+Now, inside the city, all cars (smart contracts) run on the same type of engine (the EVM).
+The EVM has its own mechanical rules, such as:
+
+- How to start the engine (run a contract)
+- How much fuel it needs (gas fees)
+- How the engine turns inputs into movement (how code executes)
+- How every car behaves identically when given the same command (deterministic execution)
+
+These are code-execution-level rules, not city-wide rules.
+
+💡 The EVM is like a subsystem inside Ethereum, responsible specifically for running code.
+Both are rules of Ethereum, but they belong to different layers of the system.
+
+🧠 Simple Summary
+
+- Ethereum rules define how the blockchain as a whole works — blocks, transactions, consensus, communication, and rewards.
+
+- EVM rules define how the smart contract code runs inside that system — execution, gas, and storage behavior.
+
+- They are different because they serve different purposes:
+	- Ethereum rules keep the "network running" smoothly,
+	- EVM rules keep the "code running" correctly.
+
+
+
+All computers in ethereum has same data
+----------------------------------------
+* Ethereum is a big ledger or record book.
+
+It keeps track of things like:
+
+- Who owns how much Ether,
+- What smart contracts exist,
+- What transactions have happened.
+
+Every computer in the Ethereum network has a copy of this record book — from the very first page to the latest one.
+
+So if one computer’s record book gets damaged or someone tries to cheat,
+the others can say:
+
+“Wait, our copies don’t match yours — you’re wrong.”
+
+
+All computers in ethereum has same program
+------------------------------------------
+
+Ethereum isn’t just storing data — it also runs programs, which are the smart contracts.
+Every computer in Ethereum has the EVM (Ethereum Virtual Machine) inside it.
+When someone sends a transaction (for example, using a smart contract),
+all computers run the same program to check the result.
+
+Example:
+
+- A smart contract says: “If someone sends 1 Ether, give them 1 digital ticket.”
+- You send 1 Ether.
+- Every computer runs the same code (via the EVM).
+- They all get the same answer: “Yes, give Arjun 1 ticket.”
+- Because all computers agree, the action becomes official.
+
+All computers run the same code so they get the same results and agree on the truth.
+
+
+EVM supported chains
+---------------------
+- They all understand the same language(solidity) and programs as Ethereum.
+
+That means:
+
+- If you write a smart contract in Solidity (for Ethereum),
+- You can copy-paste it onto Polygon or BSC,
+- And it will work the same way, because they also use the EVM (Ethereum Virtual Machine).
+
+💡 Analogy:
+Think of Ethereum, Polygon, and BSC like different computers running the same operating system (like Windows).
+The programs (smart contracts) work the same on each because they understand the same “language”.
+
+💡 So, if you can build on Ethereum, you can easily build on Polygon or BSC — that’s why they’re called EVM-compatible chains.
+So frontend libraries(web3.js, ether.js, wagmi, viem etc ) and ethereum blockchain languages or libraries can work the same way in EVM supported chains also.
+
+
+
+🔸 Polygon and BSC — “Modified versions” of Ethereum
+=====================================================
+Original code:
+-------------
+Originally blockchain was written for ethereum. 
+
+Since it was open-source, so it was "Copied and modified" from Ethereum.
+
+Creators of polygon & BSC(binance smart chains) changed a few parts of that code to make it work differently. And thus we have different blockchains but they work the same way and are EVM supported.
+
+* Ethereum = thousands of computers running the “Ethereum rules.”
+
+* Polygon = hundreds of computers running a modified version of Ethereum’s rules (faster, cheaper).
+
+* BSC = computers (mainly run by Binance) running another modified version of Ethereum’s rules.
+
+💡 They’re different networks, but their “engines” (EVM) and “language” (Solidity) are the same — that’s why they’re compatible.
+
+Ethereum is the main network — the original, most trusted one.
+Polygon and BSC are side networks or alternative networks — they’re like helpers that make things cheaper and faster.
+You can move your money or tokens between them using a bridge.
+
+
+💡 Example:
+If a smart contract costs 5€ to run on Ethereum,
+it might only cost 5 cents on Polygon — but it’s slightly less secure.
+
+- Different speeds, prices, and levels of security for evm supported chains.
+
+Ethereum, Polygon vs BSC
+-------------------------
+💡 They’re different networks, but their “engines” (EVM) and “language” (Solidity) are the same — that’s why they’re compatible.
+
+
+EVM vs Non-EVM Supported chains
+================================
+
+* EVM Compatible:
+----------------
+e.g:
+Ethereum, Polygon, BSC, Avalanche (C-Chain), Fantom, Arbitrum, Optimism
+
+Language: Solidity (EVM)
+
+
+* Non-EVM Compatible:
+---------------------
+e.g:
+Solana, Cardano, Algorand, NEAR, Tezos, Cosmos
+
+Language: Rust, Haskell, TEAL, AssemblyScript, Michelson, CosmWasm
+
+Note:
+----
+Non-EVM blockchains are those that use different virtual machines, consensus models, and programming languages — meaning they cannot directly run Solidity smart contracts written for Ethereum.
+
+
+🧱 Major Non-EVM Blockchains :
+------------------------------
+1. Solana
+- Rust and C (runs on its own runtime called Sealevel) language
+- Extremely fast and parallel — processes thousands of transactions per second; totally different architecture from EVM.
+
+2. Cardano
+- Haskell / Plutus language
+
+
+3. Algorand
+- TEAL / PyTeal language
+- Designed for scalability and low fees; uses its own lightweight smart contract model.
+
+4. Cosmos
+- CosmWasm (WebAssembly smart contracts, often written in Rust)
+- Built for interoperability; each blockchain in the Cosmos network can have its own rules.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
