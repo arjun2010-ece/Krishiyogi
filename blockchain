@@ -537,11 +537,155 @@ Every wallet request goes through the user for security reasons:
 That’s why the dApp can request, but can’t do anything without user confirmation.
 
 
+* RainbowKit SDK is primarily designed for EVM-compatible chains.
+
+
+RPC provider:
+==============
+A RPC provider is a service that provides "rpc nodes" access to Dapp or an application via a rpc url.
+
+The RPC Provider manages the infrastructure and provides the access point (RPC URL/Endpoint).
+
+
+RPC NODE:
+---------
+A RPC Node is a computer that is running the blockchain client software (e.g., Geth for Ethereum). 
+
+This node synchronizes with the network, maintains a copy of the blockchain state (including EVM and smart contracts), and exposes an RPC interface to allow applications to interact with it.
+
+
+There can be multiple RPC nodes running a blockchain but we only need access of one for our Dapp to communicate.
+
+
+Note:
+----
+* If we do not have access of RPC URL then we might need to run our node with blockchain.
+
+=============================================
+
+        DeFi Learning:
+
+=============================================
+
+
+🧩 Part 1: What is DeFi?
+------------------------
+
+💡 DeFi = “Decentralized Finance”
+
+DeFi means financial applications built on blockchain that:
+
+- Don’t need banks or middlemen.
+- Use smart contracts (automated programs on blockchain) to manage money.
+- Let anyone lend, borrow, trade, or earn interest directly from their crypto wallet.
+
+Think of it as:
+“Financial apps (like banks or exchanges) that live completely on blockchain.”
+
+Example:
+
+- Instead of going to a bank → you can lend ETH and earn interest using a DeFi app.
+- Instead of using Binance → you ca
+
+
+⚙️ Part 2: Core Building Blocks of DeFi
+---------------------------------------
+
+1️⃣ Smart Contracts :
+
+- These are small programs stored on the blockchain.
+- They run automatically — no one can change or stop them once deployed.
+- They control how money moves between users.
+
+Example:
+A smart contract might say:
+
+“If Arjun sends 1 ETH, send him 2000 USDC.”
+
+And that will automatically happen once the condition is met.
+
+🧠 Think of smart contracts as bank rules written in code instead of by humans.
+
+
+2️⃣ Tokens :
+
+- Tokens are digital assets built on blockchains like Ethereum.
+
+- They represent things like:
+
+	- Money (e.g., USDC = 1 USD stablecoin)
+	- Utility (e.g., UNI = Uniswap governance token)
+	- Anything else (NFTs, points, etc.)
+
+Most tokens follow ERC-20 standard on Ethereum.
+
+
+3️⃣ Wallets :
+
+- Your account in DeFi.
+- Examples: MetaMask, Trust Wallet, Coinbase Wallet.
+- Wallets hold your private keys (your digital signature).
+- You connect your wallet to DeFi apps (like Uniswap) to interact with smart contracts.
+
+🧠 Think of your wallet as your login + bank account combined.
+
+
+4️⃣ DEX (Decentralized Exchange)
+
+- A DEX is a platform where you can swap one token for another.
+- Example: Uniswap, SushiSwap, PancakeSwap.
+- Unlike centralized exchanges (like Binance), there is no middleman — trades happen via liquidity pools (explained next).
+
+
+5️⃣ Liquidity Pool
+
+- A liquidity pool is a smart contract that holds two tokens (e.g., ETH + USDC).
+- It allows people to swap between those tokens.
+- Example: Pool(ETH/USDC) lets people swap ETH ↔ USDC.
+
+Who provides this liquidity?
+👉 Users like you! You can deposit equal values of ETH and USDC.
+
+You become a Liquidity Provider (LP).
+
+In return:
+
+- You get LP tokens (proof that you own part of the pool).
+- You earn a small fee every time someone swaps.
+
+🧠 Think of it as you renting out your money to earn trading fees.
 
 
 
+6️⃣ Swapping Tokens
+
+When you “swap” tokens:
+
+- You call a function like swapExactTokensForTokens().
+- The DEX smart contract finds the pool (e.g., ETH/USDC).
+- It calculates how much you’ll get, charges a small fee, and executes the trade.
+
+🧮 Example:
+
+You swap 1 ETH for 2000 USDC (minus 0.3% fee).
+The smart contract updates the pool balances automatically.
 
 
+
+7️⃣ Liquidity Mining / Yield Farming
+
+Once you provide liquidity, some protocols also reward you with extra tokens (like UNI or ALGB) for participating.
+
+It’s a way to earn passive income on your crypto.
+
+🧠 Think: “Deposit tokens → Earn trading fees + reward tokens.”
+
+
+8️⃣ Staking
+
+- Locking your tokens into a smart contract to support the network or earn rewards.
+- Different from liquidity providing (no swapping involved).
+- You can stake governance tokens (like UNI) to earn yield or vote on proposals.
 
 
 
