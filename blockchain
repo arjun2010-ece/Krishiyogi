@@ -1667,6 +1667,94 @@ It is ethers.js / web3.js / wagmi / viem (the SDK) that:
 
 
 
+Presence of tokens on a network
+===============================
+
+Our testnet did not have USDC but our devnet has USDC. I wanted to test some token related things on testnet. what does it mean >?
+How will we know what tokes are theri on our own custom raysls L1 testnet as a blockchain dev ?
+Do we simply need to ask our lead to confirm resence of any token on testnet or so ?
+
+
+✅ 1. Tokens do NOT automatically exist on every network
+
+A token (USDC, USDT, RXP, etc.) only exists on a network if its token smart contract is deployed on that network.
+
+Meaning:
+
+If the USDC contract is NOT deployed on your testnet → USDC does not exist on that testnet.
+
+If the USDC contract is deployed on your devnet → USDC exists on the devnet.
+
+Tokens don’t magically exist on all networks — someone must deploy the ERC-20 token contract there.
+
+
+
+✅ 2. What “your testnet does not have USDC” means
+
+It simply means:
+
+“The USDC token contract has NOT been deployed on your testnet.”
+
+So your testnet blockchain has no record, no contract, no balances, no metadata for USDC.
+
+If you call a USDC token address on that testnet → it won’t work
+(because that contract is not deployed on that chain).
+
+
+✅ 3. How do we know what tokens exist on our custom RAYLS L1 testnet?
+
+As a blockchain developer, you have three ways to know:
+
+Method 1 — Check your block explorer (if available)
+--------
+If your chain has an explorer (like Etherscan), you would see a list of deployed contracts, including tokens.
+
+But many custom testnets do NOT have explorers.
+
+
+Method 2 — Check deployment logs / registry
+--------
+If your testnet is custom, someone on your team must have deployed the tokens manually.
+
+
+Method 3 — Ask the lead / team member responsible
+--------
+- This is usually what happens in real teams.
+
+Your lead/devops/blockchain engineer decides:
+
+- What tokens exist on testnet
+
+- What contracts get deployed
+
+- Whether USDC, USDT, new tokens, etc., should exist
+
+
+If the team says:
+
+“Testnet does not have USDC.”
+
+It simply means:
+
+“We didn’t deploy the USDC token contract on testnet.”
+
+
+🧠 Important concept: Tokens do NOT come with the chain
+
+A blockchain (mainnet, testnet, devnet) does NOT come with any tokens by default.
+
+Every token must be manually deployed as a smart contract.
+
+Ethereum doesn’t ship with USDC.
+Polygon doesn’t ship with USDC.
+Your L1 testnet doesn’t ship with USDC.
+
+Circle (the company behind USDC) deploys the USDC contract on each network where they want USDC to exist.
+
+If they haven’t deployed it → USDC does not exist.
+
+
+
 
 
 
