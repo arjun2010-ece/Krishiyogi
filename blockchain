@@ -691,6 +691,981 @@ It’s a way to earn passive income on your crypto.
 
 
 
+USDT Token presence on a specific network:
+============================================
+•	A token like USDT exists on a network only if the corresponding smart contract (the ERC-20 contract that defines USDT’s logic) is deployed on that specific network.
+•	Each blockchain (Ethereum, Polygon, your custom EVM, etc.) needs its own deployment of the USDT contract.
+So:
+•	If the USDT contract is deployed on your devnet, then you can use USDT there.
+•	If it’s not deployed on devnet, then USDT “doesn’t exist” there — you’d either deploy a mock version or test on mainnet, where the contract is deployed.
+
+In short:
+
+Tokens are not “global”; they are bound to the smart contract that defines them on each specific network.
+
+Same goes for custom token like "RLS".
+This token is designed for a custom chain so for sure it will not be there on Ethereum Mainnet if the smart contract generating that token is not deployed on mainnet.
+
+But for sure there will be some custom tokens already deployed on Ethereum Mainnet.
+And each smart contract is identified by an address.
+
+
+Dynamic vs viem
+===============
+
+Viem is an ethereum library(a typescript one).
+And dynamic is a wrapper around ethereum or solana or sui blockchains meaning viem is used as peer dependency under the hood, no need to install it separately.
+
+
+Understand clients in viem first
+=================================
+In "viem", we have something called clients.
+
+- A Client provides access to a subset(or small set) of Actions while dealing with blockchains.
+
+There are three types of Clients in viem:
+where 2 are major, while third is used for testings.
+
+1. A Public Client which provides access to Public Actions, such as 
+	- retrieving getBlockNumber and getBalance.
+	- retrieving transactions & transactions receipts, reading from smart contracts
+	➡️ Think: safe blockchain reads that don’t require a wallet popup.
+
+
+
+2. A Wallet Client which provides access to Wallet Actions, such as 
+	- sendTransaction and signMessage.
+	•	It’s linked to your user’s wallet.
+
+	➡️ Think: safe blockchain reads that require a wallet popup.
+	➡️ Think: anything that requires wallet authorization — transactions, signatures, contract writes.
+
+
+3. A Test Client which provides access to Test Actions, such as mine and impersonate.
+
+
+
+
+Public Actions methods
+----------------------
+Category     Public Actions
+---------     --------------
+Access List -   createAccessList
+Account    -   "getBalance, getTransactionCount"
+Block      -   "getBlock, getBlockNumber, getBlockTransactionCount, simulateBlocks, watchBlockNumber,
+				 watchBlocks"
+
+Calls      -    "call, simulateCalls"
+Chain     -    getChainId
+EIP-712    -    getEip712Domain
+Fee        -    "estimateFeesPerGas, estimateGas, estimateMaxPriorityFeePerGas, getBlobBaseFee,
+				getFeeHistory, getGasPrice"
+
+
+Filters & Logs  -  "createBlockFilter, createEventFilter, createPendingTransactionFilter, 
+					getFilterChanges, getFilterLogs, getLogs, watchEvent, uninstallFilter"
+
+Proof       -  getProof
+Signature   -  "verifyMessage, verifyTypedData"
+
+Transaction -  "prepareTransactionRequest, getTransaction, getTransactionConfirmations,
+				 getTransactionReceipt, sendRawTransaction, waitForTransactionReceipt, watchPendingTransactions"
+
+
+Wallet Actions methods
+----------------------
+
+Category       Wallet Actions
+--------	   --------------
+Account    -   "getAddresses, requestAddresses"
+
+Assets     -   watchAsset
+
+Call Bundles - "getCallsStatus, getCapabilities, sendCalls, sendCallsSync, showCallsStatus,
+(EIP-5792)	    waitForCallsStatus"
+
+Chain       -  "addChain, switchChain"
+
+Data        -  "signMessage, signTypedData"
+
+Permissions -  "getPermissions, requestPermissions"
+
+Transaction  -  "prepareTransactionRequest, sendRawTransaction, sendRawTransactionSync, sendTransaction,
+				sendTransactionSync, signTransaction"
+
+
+Understand clients in dynamic.xyz(uses viem under the hood)
+=============================================================
+Dynamic.xyz or its packages like "@dynamic-labs/ethereum" or "@dynamic-labs/sdk-react-core" uses viem under the hood.
+And it exposes those clients to interact with blockchain either for doing public actions or wallet actions.
+
+
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import {isEthereumWallet} from "@dynamic-labs/ethereum";
+
+
+ const { primaryWallet } = useDynamicContext(); // It has only generic blockchain methods
+
+ if (isEthereumWallet(primaryWallet)) {
+      const walletClient = await primaryWallet.getWalletClient();
+      const publicClient = await primaryWallet.getPublicClient();
+      // ✅ Now TypeScript knows this wallet has that method
+    }
+
+
+Note:
+- This method :
+	if (isEthereumWallet(primaryWallet)){
+	} 
+enables all blockchain methods for either ethereum or all EVM supported chains as we are checking for @dynamic-labs/ethereum" EVM chains.
+
+- Same things we can do for other chains by using these packages: "@dynamic-labs/solana" or "@dynamic-labs/sui" by using different set of methods.
+
+•	The blockchain-specific methods (getWalletClient, etc.) live in chain-specific packages (@dynamic-labs/ethereum, @dynamic-labs/solana, etc.).
+
+
+We are talking about ethereum or EVM supported chains(like rayls) currently.
+Please remember for talking with Ethereum/EVM supported chains we can use "viem", but for solana or sui, we will not use it, we will use something different.
+
+
+Dynamic’s goal is to abstract away wallet-specific quirks (MetaMask, Coinbase Wallet, WalletConnect, etc.) and give you a consistent interface.
+
+So instead of manually connecting to an injected provider (window.ethereum), you:
+• Call getWalletClient() to talk to the wallet via a standardized, Dynamic-managed interface.
+• Call getPublicClient() for general blockchain reads (even before a wallet is connected).
+
+But for dynamic, we need wallet to be connected then only we can interact with blockchains:
+
+Look at this:
+
+const walletClient = await primaryWallet.getWalletClient();
+const publicClient = await primaryWallet.getPublicClient();
+
+
+Why There Are Two Clients, Not One ?
+
+The separation is intentional and rooted in Viem’s design:
+	•	You can query public blockchain data without needing a wallet connection.
+	•	You only use the wallet (and trigger user interactions) when writing or signing.
+
+This design encourages safe and efficient DApp architecture:
+	•	Your app loads and displays data quickly via PublicClient.
+	•	Only user-triggered actions (e.g. “Mint”, “Stake”, “Add Token”) use WalletClient.
+
+
+💡 In Your Case (Adding a Token)
+
+- wallet_watchAsset is a wallet-level RPC method, so you need the wallet client, not the public one.
+Also it needs popup for the user to approve for adding tokens.
+
+ const walletClient = await primaryWallet.getWalletClient();
+
+ const wasAdded = (await walletClient.request({
+        method: "wallet_watchAsset",
+        params: {
+          type: "ERC20",
+          options: {
+            address: tokenAddress,
+            symbol,
+            decimals,
+          },
+        },
+      })) as boolean;
+
+
+* Low-level RPC calls can be done using ".request() methods":
+client.transport.request({ method: 'eth_call', ... })
+
+
+
+.request() method of walletClient(), usage and application
+===========================================================
+
+- The .request() method is one of the most powerful and low-level tools you can use when working with wallets (MetaMask, WalletConnect, Dynamic, etc.).
+It exposes raw JSON-RPC access to the wallet’s provider — the same API the wallet itself uses to talk to the blockchain or perform wallet-specific actions.
+
+🧩 1. What .request() Actually Is
+
+It’s a generic way to send JSON-RPC calls directly to the wallet.
+
+When you call .request(), the wallet decides:
+	•	whether to prompt the user,
+	•	whether to send the request to the blockchain, and
+	•	what to return.
+
+Its signature is:
+
+provider.request({
+  method: string; // method string
+  params?: any[];
+}): Promise<any>;
+
+
+
+⚙️ 2. How .request() Works
+
+Each method string corresponds to a JSON-RPC method.
+Examples:
+	•	eth_chainId → returns current chain ID
+	•	eth_accounts → returns connected addresses
+	•	wallet_watchAsset → adds a token
+	•	wallet_switchEthereumChain → requests a chain change
+	•	personal_sign → signs a message
+
+It’s like a “manual override” that lets you use any supported wallet RPC command.
+
+
+🔧 3. Real Examples of What You Can Do
+
+Let’s go through practical use cases and examples 👇
+
+🪙 Add a Token
+
+(EIP-747 — used by MetaMask and compatible wallets)
+
+await provider.request({
+  method: "wallet_watchAsset",
+  params: {
+    type: "ERC20",
+    options: {
+      address: "0x1234...abcd",
+      symbol: "MYT",
+      decimals: 18,
+      image: "https://mytoken.com/icon.png",
+    },
+  },
+});
+
+💡 Wallet shows a popup asking to add the token.
+
+
+🔄 Switch Ethereum Chain
+
+(EIP-3326)
+
+await provider.request({
+  method: "wallet_switchEthereumChain",
+  params: [{ chainId: "0x89" }], // Polygon mainnet
+});
+
+💡 Wallet prompts user to switch network.
+
+
+➕ Add a New Chain
+
+(EIP-3085)
+
+await provider.request({
+  method: "wallet_addEthereumChain",
+  params: [
+    {
+      chainId: "0x13881", // Polygon Mumbai testnet
+      chainName: "Polygon Mumbai",
+      nativeCurrency: {
+        name: "MATIC",
+        symbol: "MATIC",
+        decimals: 18,
+      },
+      rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
+      blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+    },
+  ],
+});
+
+💡 Wallet asks to add the chain if not present.
+
+
+🧾 Request Accounts (Connect Wallet)
+
+const accounts = await provider.request({
+  method: "eth_requestAccounts",
+});
+console.log("Connected:", accounts[0]);
+
+💡 Wallet opens “connect” popup.
+
+
+🪶 Sign a Message
+
+💡 Wallet shows signature confirmation popup.
+
+const signature = await provider.request({
+  method: "personal_sign",
+  params: [
+    "0x48656c6c6f20576f726c64", // hex-encoded message
+    "0xYourAddressHere",
+  ],
+});
+console.log("Signature:", signature);
+
+
+🧱 Send a Transaction
+
+await provider.request({
+  method: "eth_sendTransaction",
+  params: [
+    {
+      from: "0xYourAddress",
+      to: "0xRecipientAddress",
+      value: "0x2386F26FC10000", // 0.01 ETH in hex
+    },
+  ],
+});
+
+💡 Wallet opens “Send Transaction” window.
+
+
+📋 Get Chain ID
+
+const chainId = await provider.request({ method: "eth_chainId" });
+console.log(chainId); // e.g. "0x1" for Ethereum mainnet
+
+💡 Useful for verifying correct network.
+
+
+🧍 Check Permissions
+
+const permissions = await provider.request({
+  method: "wallet_getPermissions",
+});
+console.log(permissions);
+
+💡 Lists what the DApp can currently access (accounts, chain, etc.).
+
+
+🚫 Request New Permissions
+
+await provider.request({
+  method: "wallet_requestPermissions",
+  params: [{ eth_accounts: {} }],
+});
+
+💡 Wallet may ask to approve new access permissions.
+
+
+⚠️ 5. Wallet-Specific Behavior
+
+Not every wallet implements all methods.
+For example:
+	•	MetaMask implements most of the wallet_* ones.
+	•	Coinbase Wallet, Rainbow, or WalletConnect may only support a subset.
+	•	Solana wallets use completely different methods.
+
+So always wrap in a try/catch and handle “method not supported” errors gracefully.
+
+
+Difference between signMessage, signTypedData, signTransaction, signAuthorization ?
+===================================================================================
+
+1. signMessage vs signTypedData :
+---------------------------------
+
+a. signMessage (EIP-191)
+-------------------------
+
+What it does: 
+Signs a plain text string. The wallet prepends a prefix and hashes it before signing (EIP-191).
+
+
+Characteristics:
+- Off-chain (no transaction)
+- No gas fees
+- Simple text display in the wallet
+
+
+Real-world DApp flow example: Sign-In with Ethereum (SIWE)
+-----------------------------
+Scenario: User connects wallet to your DApp
+
+
+1. User clicks "Connect Wallet" → MetaMask/WalletConnect opens
+2. Backend generates a unique nonce: "abc123xyz"
+3. DApp creates message:    "Welcome to MyDApp!\n\nSign this message to authenticate.\n\nNonce: abc123xyz"
+4. Wallet shows: "Sign this message?" (plain text)
+5. User clicks "Sign" → No transaction, no gas fee
+6. Backend verifies signature matches wallet address
+7. User is logged in → Session created
+
+Why use it: Fast, free authentication that proves wallet ownership without gas.
+
+Other examples:
+---------------
+- NFT marketplace: "Sign to verify you own this wallet before listing"
+- Gaming: "Sign to claim daily rewards" (off-chain verification)
+- DAO membership: "Sign to prove you're a token holder"
+
+
+
+b. signTypedData (EIP-712)
+---------------------------
+
+What it does: 
+Signs structured, typed data with a schema. The wallet shows a formatted, readable view.
+
+
+Characteristics:
+- Off-chain signature (can be used on-chain later)
+- No immediate gas (backend/relayer can submit later)
+- Structured display improves security
+
+Real-world DApp flow example: Gasless token swap authorization
+------------------------------
+Scenario: User wants to swap tokens without paying gas for approval
+
+
+
+1. User selects: "Swap 100 USDC for 0.05 ETH"
+2. Instead of two transactions (approve + swap), DApp uses permit:
+3. Wallet shows STRUCTURED data:
+
+"
+ Domain: Uniswap V3
+ Message:
+ 	Owner: 0x1234...abcd
+ 	Spender: 0x5678...efgh 
+ 	Value: 100 USDC 
+ 	Nonce: 42
+ 	Deadline: Dec 31, 2024
+
+"
+4. User sees clear details (not hex)
+
+5. User signs → Gets signature
+6. DApp includes permit signature in swap transaction
+7. Uniswap contract verifies permit and executes swap
+8. User pays gas ONLY for swap (not approval)
+
+
+Why use it: Better UX, clearer security, and can enable gasless flows.
+
+Other examples:
+- Aave lending: Sign permit to authorize borrowing (meta-transaction)
+- Attestations: Sign credential data before on-chain creation
+- Delegated voting: Sign vote authorization, execute later
+- Social recovery: Sign authorization to recover wallet
+
+
+
+
+2. signTransaction vs signAuthorization :
+----------------------------------------
+
+a. signTransaction
+-----------------
+
+What it does: 
+Signs a blockchain transaction that will be broadcast. Typically triggered by methods like sendTransaction or writeContract.
+
+
+Characteristics:
+- On-chain operation
+- Requires gas
+- Permanent state change
+
+Real-world DApp flow example: Minting an NFT
+--------------------------------
+
+Scenario: User wants to mint an NFT from a collection
+
+
+1. User clicks "Mint NFT" → Collection price: 0.1 ETH
+2. DApp prepares transaction:
+   - To: 0xNFTContract...
+   - Function: mint(uint256 tokenId)
+   - Value: 0.1 ETH
+   - Gas estimate: 150,000 gas
+
+3. Wallet shows:
+
+	Transaction Details:
+	Contract: 0xNFT...              
+	Method: mint(1234)              
+	Value: 0.1 ETH                  
+	Gas Fee: ~0.002 ETH
+	Total: 0.102 ETH  
+
+
+4. User approves → Transaction signed
+5. Transaction broadcast to network
+6. Miner includes it in a block
+7. NFT minted → Visible on OpenSea
+8. User's wallet balance: -0.102 ETH
+
+
+Why use it: 
+Required for any on-chain state change (transfers, contract calls, etc.).
+
+Other examples:
+- Sending ETH: Direct transfer to another address
+- Token swap: Executing swap on Uniswap (on-chain)
+- Staking: Locking tokens in a staking contract
+- DAO voting: Casting on-chain vote (if not using signature-based voting)
+
+
+
+Common Patterns in Modern DApps
+-------------------------------
+- Authentication: signMessage (SIWE) → Fast login
+
+- Token operations: signTypedData (permit) → Gasless approvals
+
+- On-chain actions: signTransaction → State changes
+
+- Meta-transactions: signTypedData → Relayer executes
+
+
+EIP vs ERC:
+===========
+
+In simple terms, an EIP (Ethereum Improvement Proposal) is the official process for suggesting any change to Ethereum, including the core software and rules. 
+
+An ERC (Ethereum Request for Comments) is a specific type of EIP that focuses on creating a standard for things built on top of Ethereum, like tokens and decentralized applications (dApps), to ensure they can all work together.
+
+
+
+
+Seed phrase vs wallets vs private/public key vs accounts
+=========================================================
+Seed phrase is specific to individual wallet.
+And metamask can have only one wallet instance created when we install it.
+But we can import other wallets by giving their individual seed phrases in metamask.
+
+From a single seed phrase, we can generate multiple private keys in a wallet.
+ANd from these individual private keys, we can generate multiple public keys and each public key 
+can form each individual accounts.
+
+				|---------Private key 1-------Public key 1------> Ethereum account 1
+				|	
+				|--------Private key 2-------Public key 2------> Ethereum account 2
+Seed phrase ----|
+				|--------Private key 3-------Public key 3------> Ethereum account 3
+				|
+				|--------Private key 4-------Public key 4------> Ethereum account 4
+
+
+* Private key is what we need to keep safe.
+And we sign transactions with this key only.
+
+
+
+======================
+
+Token Transfers: Wallet-to-Contract Interaction via MetaMask
+------------------------------------------------------------
+- Import tokens in metamask by putting tokens contract address.(Fetches tokens name, symbol & current supply). If token is imported first time in that specific wallet address, then token quantity will be 0.
+Meaning that wallet address has 0 RXP tokens.
+
+- Use some faucet to transfer some token into your specific wallet address to have some value/quantity of tokens. If faucet does not exists then check if some account(in wallet) has that token and get it transferred to you.
+
+- When your wallet address has some tokens quantity then only you can deposit/transfer it to other wallet address or any smart contract address. 
+Same is the case for swap functionality.
+
+
+If you do not import a token like FUSDTr or RXP or USDC or anything in your metamask wallet then you can not send or receive it to ther metamask wallet or smart contract wallet address.
+
+In mobile metamask app, i was not importing this token FUSDTr, so i was unable to deposit this token to vault smart contract address via our dapp.
+
+Example:
+Depositing Tokens in smart contract from dapp with metamask extension
+----------------------------------------------------------------------
+I logged in our dapp with metamask chrome extension. Then i went to "Invest--->Deposit" page.
+And clicked on "deposit button" that is transferring some token like "RXP" (or "FUSDTr") to a smart contract address. And this deposit will fail if metamask has not yet imported token "RXP" and have no quantity.
+So, we have to first import this "RXP" token by putting smart contract address and then transfer some token to our wallet address like 50 for example.
+And only then when we transfer to deposit till 50 "RXP" token then this task will be done sucessfully else it will fail.
+
+Depositing Tokens in smart contract from dapp with walletconnect metamask mobile app
+---------------------------------------------------------------------------
+Once we login to our dapp(on our desktop browser) with walletconnect + metamask mobile app in our android phone.
+Then if we try to deposit the token "RXP" from our dapp to some contract address then transactions popup will be triggered on metamask mobile app and it will fail as this mobile app has not been previously imported and added quantity.
+So first we need to import this token and then transfer some tokens to this wallet address.
+Then only when we try to deposit then that specific token can be deposited.
+
+
+ 
+Deposit tokens in smart contract using dynamic.xyz
+--------------------------------------------------
+
+- Below code works amazingly on Dapp with Metamask desktop extension.
+- Deposit Transaction popup will trigger on Metamask extension and will work as expected.
+
+* This code will not work for walletconnect + Metamask mobile app with Dapp as "transactions" popup will not trigger on mobile metamask app.
+* It seems dynamic is not perfect for mobile metamask app
+* Here dynamic is responsible for contract interaction by using under the hood "viem" 
+	or we can say "viem" does not work properly for walletconnect mobile.
+
+
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { isEthereumWallet } from "@dynamic-labs/ethereum";
+import { parseUnits } from "viem";
+
+const { primaryWallet } = useDynamicContext();
+
+const deposit = (assets: string, receiver?: string) => {
+	
+	// This check is important to activate "getPublicClient" or "getWalletClient"
+	// else "primaryWallet" will not have thise methods.
+	if (!primaryWallet || !isEthereumWallet(primaryWallet)) {
+        return null;
+      }
+
+    // Convert amount string to BigInt (assuming 18 decimals)
+    const assetAmount = parseUnits(assets, 18); 
+
+    // Initialize clients, also presents in "Viems" documentations also
+    // dynamic uses "viem" under the hood.
+    const publicClient = primaryWallet.getPublicClient();
+    const walletClient = primaryWallet.getWalletClient();
+
+    // Send transaction to smart contract address or calling "deposit" function
+    const hash = walletClient.writeContract({
+        address: vaultAddress as `0x${string}`,
+        abi: SIMPLE_VAULT_ABI,
+        functionName: "deposit",
+        args: [assetAmount, receiver ?? primaryWallet.address],
+        account: primaryWallet.address as `0x${string}`,
+    });
+
+    // Wait for confirmation
+    const receipt = publicClient.waitForTransactionReceipt({ hash });
+
+    // Note: The original function had an 'if (receipt.status === "success")' block
+    // which is a form of logic/state check. The base call code is simply the call itself.
+    return { hash, receipt };
+};
+
+
+Deposit tokens in smart contract using "ethers" package
+---------------------------------------------------------
+
+- Below code works amazingly on Dapp with Metamask desktop extension.
+- Deposit Transaction popup will trigger on Metamask extension and will work as expected.
+
+* This code will also work for walletconnect + Metamask mobile app with Dapp as "transactions" popup will  trigger sucessfully on mobile metamask app.
+* It seems this approach is "perfect for mobile metamask app" too.
+* Here we are using also dynamic.xyz's package "@dynamic-labs/ethers-v6". But we can replace it entirely with "ethers" package. And dynamic is not responsible for contract interaction just wallet related small stuffs.
+
+import { getSigner } from "@dynamic-labs/ethers-v6";
+import { Contract, parseUnits } from "ethers";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+
+const { primaryWallet } = useDynamicContext();
+
+const tokenAddress = "0x1234566666"; // token smart contract address
+
+const getTokenContract = async () => {
+    const signer = await getSigner(primaryWallet as any);
+
+    const tokenContract = new Contract(tokenAddress, SIMPLE_ERC20_ABI, signer);
+
+    return tokenContract;
+};
+
+const approveToken = async (amount: bigint): Promise<void> => {
+
+  const tokenContract = await getTokenContract();
+
+  // Call approve function
+  const tx = await tokenContract.approve(vaultAddress, amount);
+
+  // Wait for transaction confirmation
+  const receipt = await tx.wait();
+
+  console.log("Approval confirmed:", receipt.hash);
+};
+    
+// fn to deposit on smart contract address called vault.
+// "asset" is the USDTr token value like 1234045 (qty of token)
+const deposit = async (asset: string, receiver?: string) => {
+
+    // Get token contract to read decimals
+    const tokenContract = await getTokenContract();
+    const decimals = await tokenContract.decimals();
+
+    // converting token qty into decimal value which token should have: 18 or 10 etc
+    const assetAmount = parseUnits(asset, decimals);
+
+    // 1. Approve tokens for the vault
+    await approveToken(assetAmount);
+
+    // 2. Call deposit on the vault contract
+    const signer = await getSigner(primaryWallet as any);
+
+    const vaultContract = new Contract(
+      vaultAddress, // vault contract address where deposit is happening.
+      SIMPLE_VAULT_ABI,
+      signer
+    );
+
+    const tx = await vaultContract.deposit(
+      assetAmount,
+      receiver ?? primaryWallet.address // address of wallet de4positing.
+    );
+
+    // Wait for transaction confirmation
+    const receipt = await tx.wait();
+
+    if (receipt.status === 1) {
+      console.log("✅ Deposit confirmed on-chain:", receipt);
+      setSuccess(true);
+    } else {
+      console.error("❌ Deposit failed on-chain:", receipt);
+      setError("Transaction failed");
+    }
+};
+
+
+Blockchain Concept of MetaMask Deposit/Swap Transactions to a Smart Contract
+=============================================================================
+
+- Depositing/swapping tokens that is present on your wallet to a smart contract address can only be done if first that smart contract gets an approval from the user/wallet connected.
+
+- Once approval is given, then only smart contract can deposi token from your wallet address to smart contract itself.
+
+or
+
+A smart contract cannot pull tokens from your wallet unless you first give it approval.
+After approval, the contract can perform the deposit/transfer/swap using the approved allowance.
+
+------------------------------------------
+Remember: The DApp UI only displays the information — the actual blockchain transaction is triggered only when the user clicks the Deposit or Swap button.
+This trigger will open transactions popup on metamask wallets and once confirmed the request goes through.
+------------------------------------------
+
+E.g:
+In the above topic: "Deposit tokens in smart contract using "ethers" package",
+first approval is confirmed before smart contract pulls token from metamask wallet.
+
+1. Approval is given to smart contract vault i.e "vaultAddress".
+
+const tokenContract = new Contract(tokenAddress, SIMPLE_ERC20_ABI, signer);
+tokenContract.approve(vaultAddress, amount);
+
+2.  
+
+const signer = await getSigner(primaryWallet as any);
+
+const vaultContract = new Contract(
+  vaultAddress, // vault contract address where deposit is happening.
+  SIMPLE_VAULT_ABI,
+  signer
+);
+
+const tx = await vaultContract.deposit(
+  assetAmount,
+  receiver ?? primaryWallet.address // address of wallet depositing.
+);
+
+
+
+Token owner vs Metamask wallet
+===============================
+- Token is always hold by the token smart contract. It always lives there.
+Even when we transfer it, deposit it or withdraw it, it still lives under that token smart contract.
+It simply adds/updates a record inside that smart contract telling that this token is created by this wallet address, transferred by that wallet address or deposited or received by that wallet addresses.
+
+
+- Since token always lives inside smart contract, then this contract has to add/edit the record regarding movement of tokens. Also this token contract first needs to "approve" the token movement, like deposit, transfer, swap etc before allowing the actual transfer by any smart contract.
+
+- Your wallet does not control token movement — the token contract does
+
+
+Process to move tokens from one wallet address to a smart contract address:
+===========================================================================
+
+- Any token if imported in your wallet, is visible, does not live under the wallet address.
+It lives under that token smart contract by simply pointing to that wallet address through a record creation like a database table row/record.
+
+First, if "vault smart contract" want to move this token then this request has to be approved by token smart contract.
+
+// Call approve function
+const tx = await tokenContract.approve(vaultAddress, amount);
+
+
+
+Next, once approval is given above then vault contract can directly deposit this token under it along with the depositors address. 
+But please remember it is not an actual token movement but simply a mappings update inside tokens smart contract that this token now belongs to vault contract. 
+But it always lives inside tokens smart contract address.
+
+
+const tx = await vaultContract.deposit(
+  assetAmount,
+  receiver ?? primaryWallet.address // address of wallet depositor.
+);
+
+
+
+❓ Next question: Does the vault need permission again to move the tokens?
+==========================================================================
+1. Moving tokens FROM USER → VAULT
+
+- Requires approval from token contract.
+- That’s the standard ERC-20 approval process.
+
+2. Moving tokens FROM own VAULT → SOMEWHERE ELSE
+
+Does NOT require approval because:
+	- The vault is the owner of those tokens now.
+	- A contract can freely spend tokens it owns.
+
+So the vault can do:
+
+token.transfer(recipient, amount);
+
+without needing permission.
+
+Because approval is only needed to spend someone else’s tokens.
+
+
+🔍 Case 3 (Your Question): SuperVault wants to move tokens owned by Vault:
+
+❌ SuperVault cannot spend Vault’s tokens directly.
+
+Because they belong to Vault, not to SuperVault.
+
+So the rules apply:
+
+✔️ Vault must approve SuperVault
+
+if SuperVault wants to call:
+
+
+transferFrom(vaultAddress, xxx, amount)
+
+To allow that, Vault (the owner) must do:
+
+tokenContract.approve(superVaultAddress, amount);
+
+And now SuperVault can move Vault’s tokens.
+
+
+***
+The owner of the tokens must approve the spender.
+***
+
+
+
+=========
+✅ Why You Must Call the Token Contract for Approval (Not the Wallet)
+1. Your wallet does not control token movement — the token contract does
+
+Even though your wallet owns the tokens, your wallet cannot move them by itself.
+
+Why?
+
+Because ERC-20 tokens live inside the token smart contract, not in your wallet.
+
+Your wallet is only an identity (your address).
+
+The token contract is the bank that stores balances and processes transfers.
+
+Your wallet cannot grant permission, because it has no authority over the token logic.
+
+
+✅ 2. Only the token contract can change balances
+
+When tokens move:
+
+It is the token contract that updates balances.
+
+No other contract — not MetaMask, not the vault — is allowed to modify token balances.
+
+Therefore, the approval must be done on the token contract.
+
+
+Role of wallet's like metamask in above deposit/swap process:
+=============================================================
+
+- A wallet (MetaMask, etc.) is just a UI + key manager.
+- It shows your address, balances, tokens, and lets you sign transactions — nothing more.
+- The wallet cannot move tokens on its own.
+Tokens never live inside the wallet; they always live inside the token smart contract on the blockchain.
+
+- All token transfers, approvals, deposits, swaps, etc. are executed by the token contract, because it is the only place where:
+
+	- balances are stored
+	- allowances are stored
+	- transfer logic exists
+
+*****
+When you “send” or “deposit” tokens:
+
+Your wallet signs a transaction
+
+The token contract updates its internal record and moves the balance from your address to another.
+
+Even after movement, the tokens still remain inside the token smart contract, just under a different address in its internal mapping.
+*****
+
+
+===================
+"Tokens never live inside the wallet; they always live inside the token smart contract on the blockchain.""
+
+In the above context, then why do we have to import tokens in metamask wallet before using them ?
+Importing does not mean living inside the wallet, then what does it mean  ?
+---------------------------
+
+✅ Why Do We Import Tokens in MetaMask if Tokens Don’t Live in the Wallet?
+
+*Because “importing a token” only tells MetaMask:
+
+➡️ “Please display this token balance for my address.”
+It does NOT tell:
+✖️ “Store this token inside the wallet.”
+✖️ “Move the token into the wallet.”
+
+
+✅ What “Import Token” Actually Means
+✔️ 1. MetaMask does NOT automatically know every token in existence
+
+Ethereum has:
+- thousands of networks
+- millions of tokens
+
+MetaMask cannot automatically detect them all.
+
+So when you “import a token,” you are simply giving MetaMask the token contract address, so it can:
+
+- read your balance from that contract
+- show the balance in the UI
+- show you transfers related to that token
+- let you perform UI-based actions like send/swap
+
+It is only a display/visibility feature.
+
+Nothing happens on-chain when you import a token.
+
+
+✅ 2. Importing does NOT bring the token into your wallet
+
+Your tokens were already there (on the blockchain) under your address.
+Or by default all the tokens (millions) are on the blockchain and by default their balacnce for your address is zero.
+Like for this wallet , i have "RXP" token as 0 but "RXP" token exists on blockchain.
+
+Importing simply tell metamask or blockchain that you are interested to make deposit/swap etc transaction only on that specific token.
+
+MetaMask just wasn’t showing them because it didn’t know which token contract to query but importing makes it aware.
+
+
+✅ 3. Why MetaMask requires importing before interacting
+
+On any blockchain network there are millions of tokens, so we need to specify which token we are interested.
+And thats why we import it to give metamask information about that token.
+Also, we inform metamask, which contract to call when sending/approving tokens.
+
+
+✅ Does MetaMask “call” the smart contract or does the SDK/library call it?
+
+MetaMask is not a smart-contract caller. The SDK/library calls the smart contract — MetaMask only signs the transaction.
+And sends signed transactions to the blockchain.
+
+
+It is ethers.js / web3.js / wagmi / viem (the SDK) that:
+	- builds the transaction request
+	- And sends this request to metamask to sign it, once signed it is broadcasted on the blockchain.
+	The specific contract address which you specified in the sdk code will execute this transaction.
+
+
+
 
 
 
