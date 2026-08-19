@@ -1,3 +1,43 @@
+# Frontend Performance Interview Question
+
+## Question
+
+**"Our web app's initial load time is 6 seconds. How do you diagnose and fix it?"**
+
+Instead of guessing, I would walk through a systematic debugging workflow:
+
+1. **Auditing:** Run Lighthouse and the Chrome DevTools Performance tab to identify main-thread bottlenecks, long tasks, render-blocking resources, and network issues.
+
+2. **Code Splitting:** Implement dynamic `import()` and route-based chunking to reduce the amount of JavaScript required for the initial page load.
+
+3. **Asset Optimization:** Audit third-party scripts, optimize image formats such as WebP/AVIF, compress assets, and implement appropriate browser/CDN caching strategies.
+
+4. **Rendering Strategy:** Move suitable rendering work away from the initial client-side load by using Server-Side Rendering (SSR), Static Site Generation (SSG), or Incremental Static Regeneration (ISR) where appropriate.
+
+## Key Takeaway
+
+> Performance isn't an afterthought; it's a core architectural requirement.
+
+The important part of the answer is the sequence:
+
+```text
+Measure
+  ↓
+Identify bottleneck
+  ↓
+Reduce initial JavaScript
+  ↓
+Optimize assets/network
+  ↓
+Improve rendering strategy
+  ↓
+Measure again
+```
+
+
+
+
+
 **1. Core Web Vitals / Initial Load Performance**
 
 *Scenario:* "Our web app's initial load time is 6 seconds and LCP is failing Core Web Vitals. How do you diagnose and fix it?"
