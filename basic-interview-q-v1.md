@@ -27,6 +27,37 @@ A good interview phrase:
 
 ---
 
+### 2.1: Is Node.js single-threaded? How does it use multi-core systems?
+
+**A:** JavaScript *execution* in Node runs on a single thread — one call stack, one thing running at a time. But Node isn't purely single-threaded under the hood: it uses **libuv**, which maintains a background **thread pool** (default size 4) for operations like file system access, DNS lookups (`dns.lookup`), crypto (`pbkdf2`, `scrypt`), and zlib compression.
+
+To actually use multiple CPU cores, Node offers two separate mechanisms:
+- **Cluster module** — spawns multiple **Node processes** (not threads), each with its own event loop and memory space, typically load-balanced across cores.
+- **worker_threads** — true multi-threading within a single process, useful for CPU-bound work without spinning up full processes.
+
+---
+
+### 2.2: Does JavaScript have its own event loop? How is it different from Node's event loop?
+
+**A:** This is the key point: **JavaScript the language has no event loop at all** — it's not part of the ECMAScript spec. The JS engine (e.g., V8) only provides a call stack, heap, and execution model. The event loop is implemented by the **host environment** that embeds the engine.
+
+- **Browser event loop**: defined loosely by the WHATWG/HTML spec. Has macrotask queues (setTimeout, UI events) and microtask queues (Promises, MutationObserver), and interleaves rendering/paint steps between tasks.
+- **Node event loop**: implemented by **libuv**, structured into distinct **phases** per tick:
+  `timers → pending callbacks → idle/prepare → poll (I/O) → check (setImmediate) → close callbacks`
+  No rendering concerns, since there's no DOM.
+
+Same underlying concept (pull callbacks off queues once the call stack is empty), but genuinely different implementations and mechanics. Bonus point: in Node, `process.nextTick()` callbacks run *before* Promise microtasks, and both queues are fully drained between each event loop phase — a common source of "guess the output" trick questions.
+
+---
+
+### 2.3: If Node is async, why can it still get blocked?
+
+**A:** The event loop only helps with work that can be *delegated* — I/O, timers, and select operations handled via the libuv thread pool. It does nothing for synchronous, CPU-bound code. If you run a heavy loop, `JSON.parse` on a huge payload, or `fs.readFileSync`, that code executes directly on the main thread and blocks everything — no other callbacks, timers, or I/O events can fire until it finishes.
+
+Async doesn't mean "won't block" — it means the I/O portion is offloaded so the thread isn't idly waiting on it. CPU-bound work still blocks the single JS thread regardless of how "async" your code looks.
+
+---
+
 ### 3. Explain the Node.js event loop
 
 The event loop lets Node.js process asynchronous operations without blocking while waiting for them to finish.
