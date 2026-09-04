@@ -854,3 +854,14 @@ then the output at that position would be:
 
 This is exactly the kind of question where Critical TechWorks is testing **event loop + microtasks/macrotasks + closures + hoisting** together.
 
+# 7. Defination of done in AGile or in your project
+
+The Definition of Done (DoD) in Agile is a **shared checklist** of criteria that a team must meet before a work item or product increment is considered fully finished and ready for release.
+
+Common Checklist Examples
+- Code reviewed by a peer
+- All unit and automated tests passed
+- Acceptance criteria satisfied
+- Documentation or release notes updated
+- Deployed to a staging or production environment
+
