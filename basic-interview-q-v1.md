@@ -56,6 +56,12 @@ Same underlying concept (pull callbacks off queues once the call stack is empty)
 
 Async doesn't mean "won't block" — it means the I/O portion is offloaded so the thread isn't idly waiting on it. CPU-bound work still blocks the single JS thread regardless of how "async" your code looks.
 
+**Note:**
+- The above `fs.readFileSync` method is using `fs` package which should have been handled by **libuv thread pool** but it is a wrong way of thinking.
+- The `fs`/ `crypto` / `dns` / `zlib` module by default is not handed to the **libuv** threadpool but these modules **async, callback-based functions use the thread pool**.
+- All of above module has 2 types of methods, sync and async like `fs.readFileSync()`(sync) vs `fs.readFile()` (async). Sync is handled on main thread, while async is on **libuv thread pool**
+- Similarly, `zlib.gzip()`(async) vs `zlib.gzipSync()`(sync). Same in case of **crypto** module too.
+- **Sync** in the name is your signal that **libuv** is not involved at all but main thread is involved.
 ---
 
 ### 3. Explain the Node.js event loop
