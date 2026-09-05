@@ -235,7 +235,11 @@ What it gives you out of the box:
 
 ### 12. Explain modules, controllers and providers
 
-* **Module:**  Groups related things together like a department in a company (e.g. "Sales Department"). Groups related application capabilities.
+* **Module:**  A module bundles together everything needed to handle **one feature or one area of your app**. it includes:
+  	* The controller(s) for that feature (handle the requests)
+  	* The provider(s)/service(s) for that feature (do the logic)
+  	* The repository for that feature (talks to the DB)
+  	* Sometimes DTOs, entities, or other supporting classes for that feature
 * **Controller:** Takes incoming requests and returns responses.
 * **Provider:** Contains real business logic.
 * **Repository:** Talks to the database
@@ -248,6 +252,19 @@ What it gives you out of the box:
 })
 export class UsersModule {}
 ```
+
+Concrete example:
+
+If your app is an e-commerce site, you'd likely have:
+
+```
+UsersModule    → UsersController, UsersService, UsersRepository, User entity
+OrdersModule   → OrdersController, OrdersService, OrdersRepository, Order entity
+ProductsModule → ProductsController, ProductsService, ProductsRepository, Product entity
+
+```
+
+We use modules in general to organise the code better in a single place instead of scattering it throughout the codebase.
 
 I keep controllers thin and place business rules in services or domain-level components.
 
@@ -348,15 +365,24 @@ Authentication guards verify identity. Authorization guards check whether that i
 
 ### 17. What is an interceptor?
 
-An interceptor wraps controller execution and can act before and after the handler.
+An interceptor is a **checkpoint** that wraps around the **controller's handler** — it can run code before the handler executes and again after it returns, and it can change what goes in or what comes out.
 
-Typical uses include:
+```Request → Interceptor (before) → Controller handler → Interceptor (after) → Response ```
 
-* Response transformation
-* Execution-time measurement
-* Caching
-* Logging
-* Timeouts
+Because it sits on both sides of the handler, it's used for:
+
+* Reshaping the response before it's sent back (e.g. wrapping every response in a consistent { data: ... } structure)
+* Measuring execution time — start a timer before, log the duration after
+* Caching — return a cached result before the handler even runs, or store the result after
+* Logging what came in and what went out
+* Timeouts — cut off requests that take too long
+
+How it compares to the other checkpoints:
+
+* Guard → checkpoint on the route: decides if a request may access it at all.
+* Pipe → checkpoint on the incoming data: cleans and validates it before the controller sees it.
+* Interceptor → checkpoint around the handler itself: runs extra logic before and after it executes, and can reshape the result.
+
 
 Interceptors are conceptually similar to middleware around method execution, while guards primarily make access decisions.
 
@@ -364,9 +390,20 @@ Interceptors are conceptually similar to middleware around method execution, whi
 
 ### 18. What is an exception filter?
 
-An exception filter catches exceptions and converts them into controlled responses.
+An exception filter is a checkpoint that catches errors thrown anywhere in the request pipeline — guards, pipes, interceptors, controller, or service — and converts them into a single, consistent response before it reaches the client.
 
-A global filter can standardize errors:
+```
+Middleware → Guards → Interceptors → Pipes → Controller → Service
+                            ↓ (error thrown at any point)
+                      Exception Filter → Response
+
+```
+
+Without a filter, an error thrown deep inside a service would either :
+ * crash the app or 
+ * send the client a raw, unformatted error. 
+
+The filter sits at the end of the pipeline and reshapes any error into a predictable format, for example:
 
 ```json
 {
@@ -377,7 +414,10 @@ A global filter can standardize errors:
 }
 ```
 
-Expected errors should be safe for clients, while internal stack traces and sensitive details remain in server logs.
+**How it compares to the other checkpoints:** 
+
+- Guards, pipes, and interceptors all operate on the normal, successful path of a request. 
+- An exception filter only activates when something in that path throws an error — it's the single exit point for failures, so every part of the app returns errors in the same shape instead of each controller handling them differently.
 
 ---
 
