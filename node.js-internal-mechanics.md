@@ -78,6 +78,7 @@ This is the piece that makes it click: **the waiting is parallel (OS + thread po
 
 - **I/O-bound work** = work where the *waiting* is outsourced (step 5a or 5b) and your thread is free during it. This is what the whole libuv/event-loop machine is optimized for. Thousands of concurrent I/O ops cost you almost nothing on the main thread.
 - **CPU-bound work** = work where there's no "outsourcing" possible — a `for` loop crunching numbers *is* the work, it can't be handed to the OS to wait on, because nothing is being waited on, it's being computed. If you do this on the main thread, you block the one thread everything depends on. libuv's thread pool doesn't save you here either, because the thread pool is only used by Node's own built-in async APIs (fs, dns, some crypto) — your own custom CPU-heavy function never automatically goes there.
+    - Please keep in mind that node's own built-in APIs (fs, dns, crypto, zlib) has both **sync** and **async** methods. Only **async methods** is handled by **thread pool**, **sync methods** by **main thread** itself.
 
 ## Layer 9: Worker threads — giving yourself a second real thread
 
