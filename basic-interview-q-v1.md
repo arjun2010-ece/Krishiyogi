@@ -132,6 +132,8 @@ Those tasks can block the event loop. Possible solutions include:
 
 ### 6. What is the difference between CommonJS and ES modules?
 
+- They are two different systems used in JavaScript to **organize code into separate, reusable files**.
+
 CommonJS uses:
 
 ```js
