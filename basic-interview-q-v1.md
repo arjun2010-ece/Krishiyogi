@@ -183,8 +183,15 @@ async function getUser(id: string) {
   }
 }
 ```
+I do 3 things here:
 
-I avoid swallowing errors. I log useful context, convert expected errors into domain or HTTP errors, and let unexpected errors reach global exception handling.
+* **Never swallow errors silently** — an empty ```catch {}``` block (or a ```catch``` that just logs and returns ```undefined```) hides bugs and makes production issues nearly impossible to debug.
+
+* **Convert expected errors, don't hide them** — if ```findById``` fails because the user genuinely doesn't exist, that's an expected case. Convert it into a proper domain/HTTP error (e.g. throw a ```NotFoundException```) instead of leaking a raw database error to the client.
+
+* **Let unexpected errors bubble up** — errors you didn't anticipate (a DB connection drop, a bug) shouldn't be caught-and-hidden at every layer. Let them reach one **centralized error handler** (like a global exception filter) so they're handled consistently everywhere, not differently in every function.
+
+```I avoid swallowing errors. I log useful context, convert expected errors into domain or HTTP errors, and let unexpected errors reach global exception handling.```
 
 ---
 
