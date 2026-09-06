@@ -193,6 +193,12 @@ I do 3 things here:
 
 ```I avoid swallowing errors. I log useful context, convert expected errors into domain or HTTP errors, and let unexpected errors reach global exception handling.```
 
+### 8.1 What happens if you forget await inside the try block?
+
+If they follow up with: "What happens if you forget await inside the try block?"
+
+"That's actually one of the most common async bugs. If I forget await, the function returns the **pending promise** immediately — it doesn't wait for it to resolve or reject. So by the time that promise actually rejects, the try/catch has already exited, and the catch block never runs. The rejection just becomes an unhandled promise rejection instead."
+
 ---
 
 ### 9. What are streams?
