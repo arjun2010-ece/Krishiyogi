@@ -428,3 +428,107 @@ So the **14 main answers cover questions 1–45**, while these five are just sho
 5. **Memory leaks** — question 45
 
 You do not need a completely new big answer for those five; you only need a few clear sentences ready when the interviewer goes deeper.
+
+---
+
+Yes—these are usually follow-up questions after you have discussed architecture, performance, deployment, or frontend scalability.
+
+## 1. Feature flags
+
+**Question:** How do feature flags help with safe releases and migrations?
+
+> “A feature flag is basically an on/off switch for a feature.
+>
+> Instead of releasing a new feature to every user immediately, we can first enable it only for internal users, a small group of customers, or one environment. If something goes wrong, we can turn it off quickly without needing another deployment.
+>
+> They are also useful during a migration. For example, we can keep the old checkout flow and the new checkout flow behind a flag, test the new one gradually, and remove the old code only when we are confident.
+>
+> The important thing is not to leave flags forever. I would give them an owner and remove them after the rollout is finished.”
+
+**Simple idea:** Release slowly, watch it, and turn it off quickly if needed.
+
+---
+
+## 2. Frontend and backend compatibility
+
+**Question:** How do you handle backward compatibility when frontend and backend are released separately?
+
+> “The main risk is that the frontend expects a new API response before the backend has released it—or the backend removes something that an older frontend still needs.
+>
+> To avoid this, I prefer additive backend changes first. For example, add a new field to an API response instead of changing or removing the existing one. The frontend can start using the new field when it is available.
+>
+> For bigger changes, I would support both the old and new API versions for a short period. Once we know the new frontend is widely deployed and working, we can remove the old version.
+>
+> Good communication, API contracts, and gradual rollout are important here.”
+
+**Simple idea:** Add new things first; do not suddenly break the old frontend.
+
+---
+
+## 3. SSR, SSG, ISR, and client-side rendering
+
+**Question:** When would you use SSR, SSG, ISR, or client-side rendering?
+
+> “I choose based on what the page needs, not because one approach is always best.
+>
+> For pages that are almost the same for everyone and do not change often—like marketing pages or documentation—I would use static generation, or SSG. It is fast because the page is prepared before the user visits.
+>
+> If that kind of page changes occasionally, I would use ISR. It is still mostly static and fast, but it can refresh itself after a set time without rebuilding the whole application.
+>
+> For pages that depend on the current request or user, such as an SEO-important product page with personal information, I would consider SSR.
+>
+> For highly private and interactive areas like an account dashboard, client-side rendering is often fine. The user has already signed in, and the important part is fetching their live data and making interactions smooth.”
+
+| Approach | Think of it as                      | Common example                              |
+| -------- | ----------------------------------- | ------------------------------------------- |
+| SSG      | Build once in advance               | Marketing page, docs                        |
+| ISR      | Build in advance, refresh sometimes | Blog, product catalogue                     |
+| SSR      | Build on each request               | Page needing fresh request-specific content |
+| CSR      | Browser fetches and renders data    | Logged-in dashboard                         |
+
+**Simple idea:** Static when possible; server-render when the first page must be fresh; client-render for interactive private app areas.
+
+---
+
+## 4. Web Workers
+
+**Question:** When would you use a Web Worker, and what are its limitations?
+
+> “JavaScript normally runs on the same main thread that handles clicks, typing, and painting the page. If we run a very heavy calculation there, the screen can freeze.
+>
+> I would use a Web Worker for heavy work that does not need direct access to the page—for example processing a large CSV file, resizing or analysing data, complex calculations, or parsing a large amount of information.
+>
+> The worker runs in the background, and then sends the result back to the main page.
+>
+> The limitation is that it cannot directly access the DOM. It also adds some complexity because data needs to be sent back and forth, so I would not use it for normal small tasks.”
+
+**Simple idea:** If heavy JavaScript makes the UI freeze, move that heavy work away from the UI thread.
+
+---
+
+## 5. React memory leaks
+
+**Question:** What are common causes of memory leaks in React, and how do you find them?
+
+> “A memory leak usually means something keeps running or stays in memory after the user has left a page.
+>
+> Common examples are a timer that was not cleared, an event listener that was not removed, a WebSocket subscription still running, or an API request trying to update a component after it has unmounted.
+>
+> In React, I make sure `useEffect` cleans up after itself. For example, I clear intervals, remove event listeners, close subscriptions, and cancel requests when appropriate.
+>
+> To investigate, I would reproduce the problem, use browser memory tools, move between pages repeatedly, and check whether memory keeps growing instead of coming back down.”
+
+Example:
+
+```ts
+useEffect(() => {
+  const intervalId = window.setInterval(refreshData, 10_000);
+
+  return () => {
+    window.clearInterval(intervalId);
+  };
+}, []);
+```
+
+**Simple idea:** If you start something in `useEffect`, ask: “What should stop it when this component goes away?”
+
