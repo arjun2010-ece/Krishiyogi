@@ -513,60 +513,152 @@ The server stores the key and result atomically. A repeated request returns the 
 
 ### 24. How would you implement pagination?
 
-For small or stable datasets, offset pagination is simple:
+Pagination means returning data in **small chunks** instead of sending thousands of records in one response.
 
-```text
+**Offset pagination** means: “skip the first X records, then give me the next set.” It is simple and useful for small or mostly stable lists.
+
+```http
 GET /users?page=3&limit=20
 ```
 
-For large or frequently changing datasets, cursor pagination is safer:
+This means: skip the first 40 users and return the next 20.
 
-```text
+**Cursor pagination** means: “start after this specific record and give me the next set.” It is better for large lists or data that changes often.
+
+```http
 GET /users?cursor=eyJpZCI6MTIzfQ&limit=20
 ```
 
-Cursor pagination avoids increasingly expensive offsets and reduces skipped or duplicated records when rows are inserted during navigation.
+The cursor usually represents the last item from the previous page, such as its `id` and/or `createdAt` value.
+
+> “For small, stable datasets, I would use offset pagination because it is simple and supports jumping directly to page 5. For large or frequently changing datasets, I would use cursor pagination. It is usually faster at deep pages and avoids missing or repeating records when new rows are added while the user is moving through the list.”
+
+Example response for cursor pagination:
+
+```json
+{
+  "data": [{ "id": 124 }, { "id": 125 }],
+  "nextCursor": "eyJpZCI6MTI1fQ",
+  "hasMore": true
+}
+```
 
 ---
 
 ### 25. How do you version an API?
 
-Possible approaches include:
+API versioning lets us change an API without breaking older mobile apps, frontend deployments, or external clients that still use the old contract.
 
-* `/v1/users`
-* Header-based versions
-* Media-type versions
+The most common approach is putting the version in the URL:
 
-I introduce a new version only for breaking changes. Additive fields normally do not require a new version. I also define a deprecation period and monitor whether old clients still use the previous version.
+```http
+GET /api/v1/users
+GET /api/v2/users
+```
+
+It is easy to see, document, test, and support. Other approaches exist:
+
+* **Header versioning:** version is sent in a request header, for example `API-Version: 2`.
+* **Media-type versioning:** version is included in the `Accept` header. This is less common and usually unnecessary for normal applications.
+
+> “I introduce a **new API version** only for breaking changes—for example, renaming or removing a field, changing a response shape, or changing an endpoint’s behaviour. Adding an optional field normally does not need a new version because old clients can ignore it.”
+
+When releasing `v2`, I would:
+
+1. Keep `v1` working for an agreed deprecation period.
+2. Document what changed and how clients should migrate.
+3. Add deprecation warnings or response headers where appropriate.
+4. Monitor traffic to see which clients still use `v1`.
+5. Remove `v1` only after clients have migrated and the announced deadline has passed.
+
+A concise interview answer:
+
+> “I usually use URL versioning, such as `/api/v1/users`, because it is clear and easy for clients to adopt. I version only for breaking contract changes, not for additive changes such as a new optional response field. When introducing a new version, I run both versions during a defined deprecation period, communicate the migration path, monitor old-version usage, and remove it only when it is safe.”
+
 
 ---
 
 ### 26. How do you structure a large NestJS application?
 
-I prefer feature-based modules:
+> “For a large NestJS application, I organise code by business feature, not by technical file type. So everything related to orders stays inside an `orders` module, everything related to payments stays inside `payments`, and so on. This makes ownership, testing, and future changes easier.”
 
 ```text
 src/
   orders/
-    application/
-    domain/
-    infrastructure/
-    presentation/
+    orders.controller.ts
+    orders.service.ts
+    orders.repository.ts
+    dto/
+    entities/
     orders.module.ts
+
   payments/
+    payments.controller.ts
+    payments.service.ts
+    payments.repository.ts
+    payments.module.ts
+
   users/
+  auth/
+
   shared/
+    database/
+    config/
+    logger/
+    guards/
 ```
 
-The important principles are:
+The basic flow inside a feature is:
 
-* Organize around business capabilities.
-* Keep controllers thin.
-* Prevent database details from leaking everywhere.
-* Avoid a large generic `utils` or `common` dumping ground.
-* Expose narrow module APIs.
+```text
+Controller → Service → Repository → Database
+```
 
-I introduce full domain-driven layering only when the business complexity justifies it.
+* **Controller:** receives the HTTP request, validates input, and returns the response. Keep it thin.
+* **Service:** contains the business decision, for example “an order can only be paid once.”
+* **Repository:** reads and writes database data, so database queries do not spread across controllers and services.
+* **Module:** groups the feature and exposes only what other modules genuinely need.
+
+For more complex features, such as payments, balances, or order workflows, I may add clearer layers:
+
+
+```text
+payments/
+  presentation/                 # controllers, DTOs
+    payments.controller.ts      # HTTP request/response
+
+  application/                  # use cases, e.g. CreatePayment, refundPayment
+    create-payment.service.ts   # coordinates the payment flow
+    refund-payment.service.ts   # coordinates refund flow
+
+  domain/                       # business rules and domain models
+    payment.rules.ts            # e.g. "an order cannot be paid twice"
+
+  infrastructure/               # database, external payment provider
+    payment.repository.ts       # database queries
+    stripe-payment.provider.ts  # Stripe/external API calls
+
+  payments.module.ts
+```
+
+The flow is still the same idea:
+
+```text
+Controller → CreatePaymentService → Rules + Repository + Stripe provider
+```
+
+> “I would not force this deeper structure into every small CRUD feature. I start simple, with controller, service, repository, and module. 
+I introduce application/domain/infrastructure layers when the business rules become complex or the feature has external integrations. The goal is clarity, not creating folders for their own sake.”
+
+So the difference is only this:
+
+* **Simple feature:** one `OrdersService` handles the feature.
+* **Complex feature:** split one large service into small services based on actions, such as `CreatePaymentService` and `RefundPaymentService`.
+
+A simple interview answer:
+
+> “I start with feature-based modules and keep the usual controller, service, repository structure. If a feature becomes complex—for example payments with validation rules, database work, external providers, and refunds—I split the large service by responsibility. Controllers remain thin, use-case services coordinate the flow, business rules stay separate, and database or external API code stays in infrastructure. I add this structure only when it makes the feature easier to understand and test.”
+
 
 # Part 4 — Databases
 
