@@ -68,36 +68,40 @@ Async doesn't mean "won't block" — it means the I/O portion is offloaded so th
 
 ### 3. Explain the Node.js event loop
 
-The event loop lets Node.js process asynchronous operations without blocking while waiting for them to finish.
+Node.js runs JavaScript on a single thread, so the event loop is what lets it handle thousands of concurrent operations without blocking — it hands off slow work like file reads or network calls to the system, keeps running other code, and comes back once that work is done.
 
-Simplified order:
+**The priority order, every cycle:**
+1. Synchronous code runs first, top to bottom.
+2. `process.nextTick()` queue drains — highest priority of all.
+3. Promise microtask queue drains next.
+4. Then it moves into the event-loop phases.
 
-1. Execute synchronous code.
-2. Process `process.nextTick()` callbacks.
-3. Process Promise microtasks.
-4. Continue through event-loop phases such as timers, polling and `setImmediate()`.
-5. Repeat while work remains.
+**The six phases, in order:**
+1. **Timers** — runs expired `setTimeout`/`setInterval` callbacks.
+2. **Pending callbacks** — deferred system-level I/O callbacks from the last cycle.
+3. **Idle, prepare** — internal only.
+4. **Poll** — fetches new I/O events and runs their callbacks; waits here if idle, unless `setImmediate` is queued.
+5. **Check** — runs `setImmediate()` callbacks.
+6. **Close callbacks** — runs cleanup like `socket.on('close', ...)`.
 
-```js
+Critically, after **every single phase**, Node drains the microtask queue again before moving to the next phase — microtasks always cut in line ahead of the next phase.
+
+**Queue count, if asked directly:** 2 microtask queues (`nextTick`, then Promises) that run between every phase, plus one queue per phase for macrotasks — timers, poll/I/O, check, and close callbacks.
+
+**The classic proof-by-example:**
+```javascript
 console.log("A");
-
 setTimeout(() => console.log("B"), 0);
-
 Promise.resolve().then(() => console.log("C"));
-
 console.log("D");
 ```
-
-Output:
-
-```text
+```
 A
 D
 C
 B
 ```
-
-The Promise callback is a microtask, so it executes before the timer callback.
+"A" and "D" are synchronous, so they print first. `setTimeout` schedules "B" for the timer phase, while the Promise's `.then()` goes into the microtask queue — which always drains before Node even looks at the timer phase. So "C" beats "B", regardless of the `0`ms delay.
 
 ---
 
