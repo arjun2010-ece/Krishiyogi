@@ -837,7 +837,9 @@ Together, these four are what let me treat a transaction as a safe unit of work,
 
 ### 33. Optimistic versus pessimistic locking?
 
-**Optimistic locking** assumes conflicts are rare and detects them using a version number:
+Both are ways to handle the same problem — two requests trying to update the same record at the same time — but they take opposite approaches.
+
+Optimistic locking assumes conflicts are rare, so it doesn't lock anything upfront. Instead, it checks a version number at the moment of update:
 
 ```sql
 UPDATE products
@@ -845,27 +847,55 @@ SET stock = stock - 1, version = version + 1
 WHERE id = $1 AND version = $2;
 ```
 
-If zero rows are updated, another request changed the record first.
+I read the record along with its current version, and when I write back, I only update it if the version still matches what I read. If someone else updated it in between, the version has already moved on, my `WHERE` clause matches zero rows, and I know my update didn't go through — so I retry or throw a conflict error. Nothing was locked while I was thinking, so other requests were never blocked.
 
-**Pessimistic locking** locks the record before modification, such as `SELECT ... FOR UPDATE`.
+Pessimistic locking takes the opposite approach — it locks the record the moment I start working with it, before I even modify it, using something like `SELECT ... FOR UPDATE`. Any other transaction trying to touch that same row has to wait until my transaction finishes.
 
-Optimistic locking improves concurrency. Pessimistic locking is useful when conflicts are frequent and correctness requires serialized access.
+So the trade-off is: optimistic locking gives me better concurrency because nothing blocks, but it only works well when conflicts are actually rare, otherwise I'm retrying constantly. Pessimistic locking sacrifices concurrency — requests queue up and wait — but guarantees correctness even under heavy contention, so I use it when conflicts are frequent and I genuinely need serialized, one-at-a-time access to that record.
 
 ---
 
 ### 34. How do you prevent race conditions when updating stock?
 
-I do not read stock and later write a calculated value without protection.
+A race condition can happen when two customers try to buy the last item at the same time.
 
-Use an atomic conditional update:
+A risky approach is:
+
+1. Request A reads: stock = 1
+2. Request B reads: stock = 1
+3. Both think the item is available and both create an order.
+
+Instead, let the database check and reduce the stock in **one atomic query**:
 
 ```sql
 UPDATE products
 SET stock = stock - 1
-WHERE id = $1 AND stock > 0;
+WHERE id = $1
+  AND stock > 0;
 ```
 
-Then verify that exactly one row was updated. Depending on the broader workflow, I may also use a transaction, row lock, or optimistic version.
+Then check how many rows were updated:
+
+* **1 row updated** → stock was available; continue creating the order.
+* **0 rows updated** → product is out of stock; return an appropriate error, usually `409 Conflict` or `422 Unprocessable Content`.
+
+> “I avoid reading stock first and later saving a calculated value, because another request can change the stock in between. Instead, I use an atomic conditional update, where the database reduces stock only if stock is still greater than zero. I then check that exactly one row was updated.”
+
+If reducing stock and creating the order must either both succeed or both fail, use a **database transaction**:
+
+```text
+Start transaction
+  Reduce stock only if stock > 0
+  Create order
+Commit transaction
+```
+
+For more complex workflows, I may also use:
+
+* **Row lock:** temporarily lock that product row while updating it.
+* **Optimistic locking:** store a `version` field and update only if the version has not changed.
+
+But for a simple “buy one item” flow, the atomic conditional update is often the cleanest solution.
 
 # Part 5 — Authentication and security
 
