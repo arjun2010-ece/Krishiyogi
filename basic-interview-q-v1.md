@@ -16,9 +16,9 @@ Its event-driven, non-blocking I/O model makes it effective for applications han
 
 JavaScript execution is primarily single-threaded, but Node.js itself is not entirely single-threaded.
 
-* JavaScript runs on the main event-loop thread.
-* Some operations are handled by the operating system.
-* The libuv thread pool handles operations such as filesystem access, some DNS calls, and cryptography.
+**Why ?**
+Because node.js has one main thread for js execution, libuv thread pool(pool of threads, default size 4 threads) and some other internal V8 background threads (garbage collection, JIT compilation) — usually invisible to you, not part of "your" concurrency model.
+Also, it has:
 * Worker threads can execute CPU-intensive JavaScript in parallel.
 
 A good interview phrase:
