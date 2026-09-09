@@ -31,6 +31,8 @@ A good interview phrase:
 
 **A:** JavaScript *execution* in Node runs on a single thread — one call stack, one thing running at a time. But Node isn't purely single-threaded under the hood: it uses **libuv**, which maintains a background **thread pool** (default size 4) for operations like file system access, DNS lookups (`dns.lookup`), crypto (`pbkdf2`, `scrypt`), and zlib compression.
 
+* FCD - Zlib - F(file system), C(Crypto), D(DNS) & Zlib.
+
 To actually use multiple CPU cores, Node offers two separate mechanisms:
 - **Cluster module** — spawns multiple **Node processes** (not threads), each with its own event loop and memory space, typically load-balanced across cores.
 - **worker_threads** — true multi-threading within a single process, useful for CPU-bound work without spinning up full processes.
