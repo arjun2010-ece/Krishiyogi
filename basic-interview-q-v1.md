@@ -754,28 +754,30 @@ Are you currently working on a project where you expect the user profiles or dat
 
 ### 28. What is a database index?
 
-An index is an additional data structure that helps the database find records without scanning the entire table or collection.
+An index is basically a separate **lookup structure** the database keeps, so it doesn't have to scan every row to find what I'm asking for. Think of it like the index at the back of a book — instead of reading every page to find "transactions," I jump straight to the page number.
 
-Indexes improve reads but add:
+Without an index, if I query `WHERE customer_id = 5`, the database checks every single row in the table — that's a full table scan, and it gets slow as the table grows. With an index on `customer_id`, the database jumps almost directly to the matching rows.
 
-* Storage cost
-* Write overhead
-* Maintenance cost
+But this speed isn't free. Every index I add costs me in three ways: it takes extra storage since it's a whole separate structure, it slows down writes because every insert or update now has to update the index too, and it adds ongoing maintenance overhead. So I don't index every column — I index based on what I'm actually querying often, not what I might query someday.
 
-I design indexes using actual query patterns and verify them using tools such as PostgreSQL `EXPLAIN ANALYZE` or MongoDB `explain()`.
+To decide, I look at my real query patterns first, then I verify the index is actually being used with `EXPLAIN ANALYZE` in Postgres, or `explain()` in MongoDB — that tells me whether the database is using my index or still doing a full scan despite it existing.
 
 ---
 
 ### 29. What is a composite index?
 
-A composite index contains multiple fields:
+A composite index is one index built across multiple columns instead of just one, like this:
 
 ```sql
 CREATE INDEX idx_orders_customer_created
 ON orders(customer_id, created_at DESC);
 ```
 
-Column order matters. This index is useful for queries filtering by `customer_id` and ordering or filtering by `created_at`. It may not efficiently support queries using only `created_at`.
+The key thing to remember is that column order matters — it's not interchangeable. This index is built with `customer_id` first and `created_at` second, so the database can efficiently use it for queries that filter by `customer_id` alone, or filter by `customer_id` and then sort or filter by `created_at`. For example, "get all orders for customer 5, newest first" uses this index perfectly.
+
+But if I query using only `created_at` — like "get all orders created today" without mentioning `customer_id` — this index won't help much, because the database can only use a composite index efficiently starting from its leftmost column. It's similar to a phone book sorted by last name then first name: I can jump straight to "Smith," or "Smith, John," but I can't efficiently search by first name alone.
+
+So when I design a composite index, I put the column I filter on most often, or the one that narrows results the most, first.
 
 ---
 
