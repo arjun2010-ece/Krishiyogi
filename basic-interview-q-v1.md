@@ -783,35 +783,34 @@ So when I design a composite index, I put the column I filter on most often, or 
 
 ### 30. What is the N+1 query problem?
 
-It happens when the application performs one query for a list and then one additional query for every item.
+This happens when I fetch a list with one query, and then for every single item in that list, I fire off another query to get its related data. So if I fetch 100 orders with one query, and then loop through each order to fetch its customer separately, that's 1 query plus 100 more — 101 total queries where I could've done it in far fewer.
 
-```text
+```
 1 query for orders
-100 queries for their customers
+100 queries for their customers  → 101 queries total
 ```
 
-Solutions include:
+This is a real problem because it usually stays invisible in development, where I might only have 5 test records, but in production with thousands of records it silently kills performance.
 
-* Joins
-* Batch queries
-* Eager loading
-* DataLoader for GraphQL
-* Carefully chosen denormalization
+I fix it a few different ways depending on the situation. If I'm in SQL, I use a join to pull orders and customers in one query. If a join isn't ideal — say the related data is large — I batch it instead: collect all the customer IDs first, then run one query like `WHERE id IN (...)` instead of one query per order. In an ORM, this is usually called eager loading — I explicitly tell it to fetch the relation upfront instead of lazily on each access. And in GraphQL specifically, since a single request can trigger nested resolvers per item, I use DataLoader, which batches and caches those individual lookups within a single request. As a last resort, if the read pattern is extremely hot, I'll denormalize — literally store a copy of the needed field on the parent record — but I only do that when the read savings are worth the write complexity.
+
 
 ---
 
 ### 31. What is a transaction?
 
-A transaction groups operations so they succeed or fail as one unit.
+A transaction groups multiple database operations into one unit — either every operation in it succeeds, or none of them do. There's no in-between state where only half the operations went through.
 
-```ts
+```javascript
 await dataSource.transaction(async manager => {
   await manager.decrement(Account, senderId, "balance", amount);
   await manager.increment(Account, receiverId, "balance", amount);
 });
 ```
 
-Transactions protect database consistency. They do not automatically make external calls—such as sending messages—transactional.
+The classic example is a money transfer — I'm deducting from one account and adding to another. If the deduction succeeds but the addition fails halfway through, without a transaction I've just deleted money from the system. With a transaction, if any step fails, the database rolls back everything, so both accounts end up exactly as they were before I started.
+
+One thing I'm careful to flag: a transaction only protects the database. If my transaction block also sends an email or calls an external payment API, that call is not rolled back if the transaction fails afterward — the email already went out, the API call already happened. Transactions don't know how to undo things outside the database, so I keep external side effects out of the transaction, or handle them separately with their own retry/compensation logic.
 
 ---
 
@@ -821,6 +820,18 @@ Transactions protect database consistency. They do not automatically make extern
 * **Consistency:** Data remains valid according to defined constraints.
 * **Isolation:** Concurrent transactions do not improperly interfere.
 * **Durability:** Committed changes survive failures.
+
+ACID is the four guarantees a transaction gives me:
+
+**Atomicity** — all operations in the transaction happen, or none do. No partial completion. In the transfer example, the deduction and the addition either both go through or both get rolled back.
+
+**Consistency** — the database only moves from one valid state to another valid state. If I have a rule that balance can't go negative, a transaction that would break that rule gets rejected entirely, so the database never ends up in a state that violates its own constraints.
+
+**Isolation** — when multiple transactions run at the same time, they don't see each other's half-finished work. If two people transfer money from the same account simultaneously, one transaction doesn't read a "dirty" balance that the other hasn't committed yet — each transaction behaves as if it's running alone.
+
+**Durability** — once a transaction is committed, it's permanent. Even if the server crashes or loses power one second later, that committed change is safely on disk and survives the failure.
+
+Together, these four are what let me treat a transaction as a safe unit of work, without having to manually handle every possible failure scenario myself.
 
 ---
 
