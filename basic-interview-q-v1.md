@@ -906,6 +906,15 @@ But for a simple “buy one item” flow, the atomic conditional update is often
 
 A valid JWT proves identity but does not automatically mean the user may access every resource.
 
+These sound similar but answer two completely different questions.
+
+Authentication is: who is this user? It's the login step — verifying identity, usually with a username/password, or by validating a token that was issued after a successful login.
+
+Authorization is: now that I know who you are, what are you actually allowed to do? Can you view this order, delete this user, access this admin panel?
+
+The cross-question I watch out for here is people assuming a valid token means full access. It doesn't. If I have a valid JWT, that only proves authentication — the server knows I am who I claim to be. It says nothing about authorization. I could be a perfectly authenticated, logged-in user trying to access someone else's private data or an admin-only route, and authentication alone won't stop that — I still need a separate authorization check, like a role or permission check, before letting the request through.
+
+
 ---
 
 ### 36. How does JWT authentication work?
@@ -918,6 +927,17 @@ A valid JWT proves identity but does not automatically mean the user may access 
 
 JWT payloads are encoded, not encrypted. Sensitive information should not be placed inside them.
 
+
+Here's the flow, step by step:
+
+First, the user logs in with their credentials, and the server verifies them. Once verified, instead of the server keeping session state in memory, it issues a JWT — a short-lived access token — and hands it back to the client.
+
+From that point on, the client sends this token with every request, usually in the `Authorization` header. On each request, the server doesn't need to check a database or session store — it just validates the token itself: it checks the signature to confirm the token wasn't tampered with, checks the issuer to confirm it came from a source it trusts, checks the audience to confirm the token was meant for this service, and checks the expiry to make sure it hasn't gone stale. If all of that passes, the server treats the request as authenticated.
+
+Only after that does authorization kick in — the server looks at what this authenticated user is actually allowed to do for this specific request.
+
+One thing I'm careful about: a JWT payload is encoded, not encrypted. Anyone who gets hold of the token can decode it and read the payload directly — Base64 decoding it takes seconds. So I never put sensitive information like passwords, internal IDs I don't want exposed, or personal data inside the payload. It should only carry things like user ID, role, and expiry — data that's fine to be readable, just not fine to be tampered with.
+
 ---
 
 ### 37. Access token versus refresh token?
@@ -925,23 +945,27 @@ JWT payloads are encoded, not encrypted. Sensitive information should not be pla
 * Access tokens are short-lived and used for API access.
 * Refresh tokens live longer and obtain new access tokens.
 
-Refresh tokens should be stored securely, rotated after use, and revocable. For browser applications, secure, `HttpOnly`, appropriately configured cookies are often safer than storing long-lived tokens in JavaScript-accessible storage.
+These two exist because of a trade-off: I want tokens to expire quickly for security, but I don't want to force the user to log in again every few minutes.
+
+The access token is the one actually used on every API call — it's short-lived, usually minutes, so if it ever leaks, the damage window is small. The refresh token lives much longer — hours or days — and its only job is to get me a new access token once the old one expires, without making the user type their password again.
+
+Because the refresh token is long-lived, it's the more dangerous one if it leaks, so I treat it more carefully. I store it securely, not in a place JavaScript can casually read it. I rotate it after every use — meaning each time it's used to get a new access token, the old refresh token is invalidated and a new one is issued — so if an old one gets stolen and reused, I can detect that as suspicious and revoke it. And it needs to be revocable — I keep some record of valid refresh tokens server-side so I can kill a specific one if a device is compromised, unlike an access token, which I usually just let expire naturally.
+
+For browser apps specifically, I avoid storing tokens in `localStorage` or anywhere JavaScript can access, because that's exposed to XSS attacks — if an attacker injects a script, they can just read the token straight out of storage. Instead, I use a secure, `HttpOnly` cookie — `HttpOnly` means JavaScript can't read it at all, only the browser sends it automatically with requests, which closes off that XSS attack path.
+
 
 ---
 
 ### 38. How do you store passwords?
 
-Use a password-hashing algorithm such as Argon2 or bcrypt with a suitable work factor and a unique salt.
+I never store the password itself, not even encrypted, because encryption is reversible — if someone gets the encryption key, they get every password back in plain text. Instead, I hash it, using an algorithm built specifically for passwords, like Argon2 or bcrypt, not a general-purpose hash like SHA-256, because those are too fast and make brute-forcing feasible.
 
-Never store plain-text passwords or encrypt them reversibly.
+Two things matter in that hashing step. First, a work factor — this deliberately makes each hash computation slow, like a few hundred milliseconds, which is irrelevant for one login but makes brute-forcing millions of passwords impractically slow for an attacker. Second, a unique salt per password — this means even if two users pick the exact same password, their stored hashes look completely different, so an attacker can't precompute a single lookup table and use it against every user at once.
 
-Also consider:
+But password hashing alone isn't the whole story — I also think about the surrounding attack surface:
 
-* Login throttling
-* Account lockout policies
-* MFA
-* Password reset token expiry
-* Preventing user enumeration
+I add login throttling, so an attacker can't just hammer the login endpoint with thousands of guesses per second. I add account lockout policies after repeated failed attempts, so brute-forcing one specific account is slowed down. I support MFA, so even a correctly guessed or leaked password isn't enough on its own. I make password reset tokens expire quickly, so an old reset link sitting in an email inbox can't be used months later. And I'm careful to prevent user enumeration — meaning my login and signup error messages don't reveal whether a given email exists in my system or not, because "email not found" versus "wrong password" as different messages lets an attacker map out which emails are registered.
+
 
 ---
 
@@ -961,6 +985,23 @@ I use layered controls:
 * Patch dependencies and scan images.
 * Use least-privilege database and cloud credentials.
 
+
+There's no single fix here — it's layered, because if one layer fails, I want the next one to still catch the problem.
+
+I start at the edge, with input — every request body gets validated and sanitized, in NestJS using something like class-validator with DTOs, so malformed or malicious input gets rejected before it touches my business logic.
+
+Then every protected operation checks two things: is this a real, authenticated user, and is this specific user allowed to do this specific action — that's guards handling both authentication and authorization on the route.
+
+For the database layer, I never build SQL by concatenating strings — I use parameterized queries or a safe ORM like TypeORM or Prisma, so user input can never get interpreted as part of the SQL itself, which is what prevents SQL injection.
+
+For CORS, I don't leave it wide open — I explicitly list which origins are allowed to call this API, rather than allowing everything.
+
+I add rate limiting, so one client can't hammer an endpoint thousands of times a second, whether that's a brute-force attempt or just abuse. I set security headers — things like disabling `X-Powered-By`, adding `Content-Security-Policy`, forcing HTTPS with HSTS — using something like Helmet, which handles most of this for me in one line.
+
+Secrets like API keys and database passwords never go into source control — they live in environment variables or a secrets manager, not committed to Git. And in my logs, I make sure secrets and personal data like passwords or full card numbers are redacted, because logs often get less scrutiny than the database itself but can leak just as much.
+
+I also enforce request size limits and timeouts, so a huge payload or a hanging connection can't tie up server resources. I keep dependencies patched and scan container images, since a lot of real breaches come through a known vulnerability in some third-party package, not custom code. And my database and cloud credentials follow least privilege — the API's database user, for example, can't drop tables if it only ever needs to read and write rows.
+
 ---
 
 ### 40. What is the difference between CORS and CSRF?
@@ -970,6 +1011,14 @@ I use layered controls:
 **CSRF** tricks a browser into sending an authenticated request using automatically attached credentials, usually cookies.
 
 CORS alone is not complete CSRF protection. Cookie-based authentication may require `SameSite` cookies, CSRF tokens and origin validation.
+
+These two get confused because they both involve cross-origin requests, but they solve opposite problems.
+
+CORS is a browser-enforced policy that controls whether JavaScript running on one origin is allowed to read the response coming back from a different origin. So if my frontend on `app.com` calls an API on `api.com`, the browser checks whether `api.com` has explicitly allowed `app.com` to read that response. CORS is about protecting the response — stopping some other website's JavaScript from reading data it shouldn't be able to see.
+
+CSRF is a completely different attack. It tricks a user's browser into sending a request it didn't mean to send, to a site the user is already logged into — and the dangerous part is that the browser automatically attaches things like cookies to that request, so it looks like a legitimate, authenticated request even though the user never intended it. For example, if I'm logged into my bank in one tab, and a malicious site in another tab silently submits a form to my bank's transfer endpoint, my browser sends my session cookie along with it automatically. CSRF is about protecting the request — stopping an attacker from making my browser send actions on my behalf.
+
+So the mistake I avoid is assuming CORS protects me from CSRF — it doesn't, because CSRF doesn't need to read the response, it just needs the action to happen. For cookie-based auth specifically, I add `SameSite` cookies, which stop the browser from sending that cookie on cross-site requests in the first place, plus CSRF tokens, which are a value the attacker's page can't know or forge, and I validate the request's origin explicitly as an extra check.
 
 # Part 6 — Caching and Redis
 
