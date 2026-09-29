@@ -1493,6 +1493,11 @@ A version aligned with your actual experience:
 
 Only claim the areas you personally owned; describe other areas as team architecture.
 
+### 74. Explain the difference between Continous integration, continous delivery and continous deployment
+
+The best explanation is here:
+https://dev.to/linhgumiho/understand-continuous-integration-delivery-and-deployment-48le
+
 # Recommended preparation sequence
 
 Given your existing JavaScript and frontend strength, study in this order:
